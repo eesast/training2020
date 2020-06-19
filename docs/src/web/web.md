@@ -8,6 +8,8 @@
 - Restful API 与 Express
 - GraphQL + Hasura + Apollo
 - 数据库 MongoDB 和 PostgreSQL
+- Web测试 Mocha + Chai
+- CI/CD
 
 具体内容安排请参照各小节说明
 
@@ -29,3 +31,6 @@
 - [Apollo](https://www.apollographql.com/)
 - [MongoDB](https://www.mongodb.com/)
 - [PostgreSQL](https://www.postgresql.org/)
+- [Mocha](https://mochajs.org/)
+- [Chai](https://www.chaijs.com/)
+- [GitHub Actions](https://help.github.com/en/actions)
