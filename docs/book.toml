@@ -1,0 +1,10 @@
+[book]
+authors = ["EESAST"]
+language = "zh-cn"
+multilingual = false
+src = "src"
+title = "EESAST Training 2020"
+
+[output.html]
+git-repository-url = "https://github.com/eesast/training2020"
+git-repository-icon = "fa-github"
