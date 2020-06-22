@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="../linux/linux.html" class="active"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../OS/OS.html"><strong aria-hidden="true">5.</strong> Operating System</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html" class="active"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../OS/OS.html"><strong aria-hidden="true">5.</strong> Operating System</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -151,7 +151,124 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#linux" id="linux">Linux</a></h1>
+                        <h1><a class="header" href="#linux-入门实操" id="linux-入门实操">Linux 入门实操</a></h1>
+<blockquote>
+<p>基本上是翻译了下<a href="https://missing.csail.mit.edu/2020">missing-semester</a>的 1、3 讲</p>
+<p>写完这个发现 missing-semester 有<a href="https://missing-semester-cn.github.io/">中文版</a>orz</p>
+</blockquote>
+<h2><a class="header" href="#说明" id="说明">说明</a></h2>
+<p>此处的文档为本次课程的 linux 实操部分，其他课件请见<a href="https://github.com/eesast/training2020/blob/master/basic_tool/linux-webserver">此处</a></p>
+<h2><a class="header" href="#shell-基础" id="shell-基础">Shell 基础</a></h2>
+<h3><a class="header" href="#shell-使用" id="shell-使用">shell 使用</a></h3>
+<p>打开 shell 之后首先看到这样的提示符</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~$
+</code></pre>
+<p>用户名@设备名:当前路径，<code>~</code>代表 home 家路径</p>
+<p>此时就可以输入命令了</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~$ date
+Sat Jun 20 20:07:17 CST 2020
+zxdclyz@Lyz:~$
+</code></pre>
+<p>通过输入 date 运行了 date 这个打印日期和时间的程序，然后提示符重新出现，告诉我们可以输入下一条命令</p>
+<p>另一个十分基础的命令是 echo</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~$ echo hello world
+hello world
+</code></pre>
+<p>echo 的作用是直接打印它的参数，在 shell 中，命令是以空格隔断的，第一个词指定运行的程序，后面的是参数，如果想要在一个参数中包括空格，可以使用<code>'</code>或者<code>&quot;</code>，也可以用<code>\(space)</code></p>
+<pre><code class="language-shell">zxdclyz@Lyz:~$ echo 'hello world'
+hello world
+zxdclyz@Lyz:~$ echo hello\ world
+hello world
+</code></pre>
+<p>不过在 echo 中看不出区别 orz</p>
+<p>那么我们输入 date、echo 运行的是什么程序呢？shell 也是一个编程环境，类似 python，其中也有变量，如果输入了程序关键字之外的字段，shell 会去查找<code>$PATH</code>环境变量中的路径</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~$ echo $PATH
+/usr/local/sbin:/usr/local/bin
+</code></pre>
+<p>其中的路径用<code>:</code>分隔，可以用<code>which</code>命令查看运行的程序所在路径</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~$ which echo
+/bin/echo
+</code></pre>
+<p>如果程序所在路径不在环境变量里，也可以直接使用其完整路径来调用</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~$ /bin/echo eesast
+eesast
+</code></pre>
+<h3><a class="header" href="#文件系统" id="文件系统">文件系统</a></h3>
+<p>有关文件操作，<code>pwd</code>显示当前路径，<code>cd</code>改变路径，<code>ls</code>打印当前目录中的文件，<code>.</code>指当前目录，<code>..</code>指上级目录</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~/tutorial$ ls
+a.txt  b.py  c.js
+zxdclyz@Lyz:~/tutorial$ cd ../
+zxdclyz@Lyz:~$ pwd
+/home/zxdclyz
+zxdclyz@Lyz:~$
+</code></pre>
+<p>使用<code>cd -</code>可以跳转到刚才所在的路径，用<code>mkdir</code>创建文件夹，<code>mv</code>移动文件，<code>cp</code>复制文件，<code>rm</code>删除文件，<code>touch</code>创建文件</p>
+<p>有关文件权限，参考课件</p>
+<h3><a class="header" href="#查看命令参数" id="查看命令参数">查看命令参数</a></h3>
+<p>可以使用<code>man command</code>来进入手册页，也可以直接使用--help 参数查看</p>
+<pre><code class="language-shell">zxdclyz@Lyz:/bin$ ls --help
+...
+zxdclyz@Lyz:/bin$ man ls
+</code></pre>
+<h3><a class="header" href="#连接程序" id="连接程序">连接程序</a></h3>
+<p>在 shell 中，程序也有输入流和输出流，我们可以用<code>&gt; file</code>和<code>&lt; file</code>来重新引导流</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~/tutorial$ echo hello &gt; hello.txt
+zxdclyz@Lyz:~/tutorial$ echo bye &gt;&gt; hello.txt
+</code></pre>
+<p>使用<code>&gt;&gt;</code>可以进行追加写</p>
+<p>另一个十分有用的工具是 pipe<code>|</code>，它可以连接两个命令，将前一个命令的输出当做后一个命令的输入</p>
+<pre><code class="language-shell">zxdclyz@Lyz:~/tutorial$ cat hello.txt
+hello
+bye
+hello world
+zxdclyz@Lyz:~/tutorial$ cat hello.txt|grep world
+hello world
+</code></pre>
+<h2><a class="header" href="#vim-极简入门" id="vim-极简入门">Vim 极简入门</a></h2>
+<p>如果你在使用服务器并且想简单地对一个文件进行编辑，使用 vim 是十分方便的（大量编辑我倾向于使用 VSCode 等远程连接），vim 本身拥有十分强大的功能，但我自己也并不会，所以只在此展示最基础的用法</p>
+<p>使用<code>vim file</code>打开文件进行编辑</p>
+<p>刚进入时处于正常模式，而 vim 中有这些模式</p>
+<ul>
+<li><strong>Normal</strong>: for moving around a file and making edits</li>
+<li><strong>Insert</strong>: for inserting text</li>
+<li><strong>Replace</strong>: for replacing text</li>
+<li><strong>Visual</strong> (plain, line, or block): for selecting blocks of text</li>
+<li><strong>Command-line</strong>: for running a command</li>
+</ul>
+<p>我们在此用到 insert 模式，在正常模式下按<code>i</code>进入 insert 模式，此时可以像其他编辑器一样对文件进行编辑，然后按<code>ESC</code>退回到正常模式</p>
+<p>在正常模式下输入<code>:</code>会进入命令模式，最基础的命令有</p>
+<ul>
+<li><code>:q</code> quit (close window)</li>
+<li><code>:w</code> save (“write”)</li>
+<li><code>:wq</code> save and quit</li>
+</ul>
+<p>事实上 vim 还有许多十分强大的功能，感兴趣的同学可以自己了解</p>
+<h2><a class="header" href="#tmux" id="tmux">tmux</a></h2>
+<p>我们在使用 ssh 方法登录到服务器的时候是和服务器进行一次会话，而当我们从服务器断开的时候，会话结束，会话中的各个进程也会被终止，而 tmux 是用来解绑会话与打开的终端窗口的，可以让你启动的进程在断开连接之后继续运行</p>
+<p>直接输入 tmux 命令会新建一个只有编号的 tmux 窗口，我们可以这样来新建命名的窗口</p>
+<pre><code class="language-shell">$ tmux new -s &lt;session-name&gt;
+</code></pre>
+<p>在 tmux 窗口中，按下<code>Ctrl+b</code>，然后按<code>d</code>，可以从当前窗口分离，而窗口中的进程仍在后台运行</p>
+<p>可以查看所有 tmux 会话</p>
+<pre><code class="language-shell">$ tmux ls
+# or
+$ tmux list-session
+</code></pre>
+<p>然后使用<code>tmux attach</code>来重新接入会话</p>
+<pre><code class="language-shell"># 使用会话编号
+$ tmux attach -t 0
+
+# 使用会话名称
+$ tmux attach -t &lt;session-name&gt;
+</code></pre>
+<p>可以在会话中直接使用<code>Ctrl+d</code>或者输入<code>exit</code>来关闭，也可以在外部使用<code>tmux kill-session</code>命令杀死某个会话。</p>
+<pre><code class="language-shell"># 使用会话编号
+$ tmux kill-session -t 0
+
+# 使用会话名称
+$ tmux kill-session -t &lt;session-name&gt;
+</code></pre>
+<p>以上为 tmux 的最基础操作，更多可以参考<a href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">这里</a></p>
 
                     </main>
 
