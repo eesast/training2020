@@ -14,21 +14,3 @@
 - 网站开发技术栈
 
 具体内容还请参阅各章说明
-
-# Summary
-
-- [Introduction](./introduction.md)
-- [Git](https://github.com/eesast/training2020/blob/master/docs/src/git/git.md)
-  - [Git 课件 PPT](https://github.com/eesast/training2020/blob/master/basic_tool/git/git.pptx)
-  - [Git 可视化网站](https://learngitbranching.js.org/)
-  - [Git 课下练习](https://github.com/eesast/git-practice)
-- [Linux](https://github.com/eesast/training2020/blob/master/docs/src/linux-webserver/linux.md)
-  - [课件](https://github.com/eesast/training2020/blob/master/basic_tool/linux-webserver)
-  - [missing semester](https://missing.csail.mit.edu/2020)
-- WebServer
-  - [课件](https://github.com/eesast/training2020/blob/master/basic_tool/linux-webserver)
-  - [nginx 安装](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)
-  - [nginx 基础文档](https://nginx.org/en/docs/beginners_guide.html)
-- [Web](https://github.com/eesast/training2020/blob/master/docs/src/web/web.md)
-  - [React + antd 入门](https://github.com/eesast/training2020/blob/master/docs/src/web/react.md)
-- [Operating System](https://github.com/eesast/training2020/blob/master/docs/src/OS/OS.md)
