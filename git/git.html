@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>EESAST Training 2020</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>Git - EESAST Training 2020</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -13,21 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -37,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
         </script>
 
@@ -83,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html" class="active"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -118,7 +116,7 @@
                     <h1 class="menu-title">EESAST Training 2020</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         
@@ -153,96 +151,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<p>本文档为清华电子系学生科协 2020 年暑期培训<a href="https://github.com/eesast/training2020">仓库</a>中各部分内容介绍及相关依赖的简要安装说明。</p>
-<p>培训所用的文档、教学用 PPT 及相关仓库与依赖链接基本上可以在仓库中找到。</p>
-<blockquote>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">EESAST Training 2020</span> 由 <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/eesast/training2020" property="cc:attributionName" rel="cc:attributionURL">EESAST</a> 采用 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享 署名-相同方式共享 4.0 国际 许可协议</a>进行许可。
-多数内容将以 CC-BY-SA 4.0 进行许可，部分培训内容的作者可能会有特殊许可，若有需要还请注意。</p>
-</blockquote>
-<p>培训内容主要分为三个大部分：</p>
-<ul>
-<li>基础工具 Git, Docker</li>
-<li>队式开发技术栈</li>
-<li>网站开发技术栈</li>
-</ul>
-<p>具体内容还请参阅各章说明</p>
-<h1><a class="header" href="#git" id="git">Git</a></h1>
-<h1><a class="header" href="#web" id="web">web</a></h1>
-<p>这一章将基于 EESAST 目前网站方面使用的技术进行培训，内容主要为以下几个部分：</p>
-<ul>
-<li>Html, CSS, JavaScript/TypeScript 基础</li>
-<li>Node.js 与包管理</li>
-<li>React + antd</li>
-<li>Restful API 与 Express</li>
-<li>GraphQL + Hasura + Apollo</li>
-<li>数据库 MongoDB 和 PostgreSQL</li>
-<li>Web测试 Mocha + Chai</li>
-<li>CI/CD</li>
-</ul>
-<p>具体内容安排请参照各小节说明</p>
-<p>需要用到的工具及相关链接如下：</p>
-<ul>
-<li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-<li>Node.js
-<ul>
-<li><a href="https://nodejs.org/en/download/">官方网站</a></li>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/">清华 tuna 镜像</a>
-<ul>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/nodejs-release/">tuna 镜像帮助页面</a></li>
-</ul>
-</li>
-<li><a href="https://mirrors.bfsu.edu.cn/nodejs-release/">北京外国语大学镜像</a>
-<ul>
-<li><a href="https://mirrors.bfsu.edu.cn/help/nodejs-release/">北外镜像帮助页面</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="https://yarn.bootcss.com/docs/getting-started/">Yarn</a></li>
-<li><a href="https://react.docschina.org/">React</a></li>
-<li><a href="https://ant.design/index-cn">Ant Design</a></li>
-<li><a href="https://www.expressjs.com.cn/">Express</a></li>
-<li><a href="https://graphql.org/">GraphQL</a></li>
-<li><a href="https://hasura.io/">Hasura</a></li>
-<li><a href="https://www.apollographql.com/">Apollo</a></li>
-<li><a href="https://www.mongodb.com/">MongoDB</a></li>
-<li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-<li><a href="https://mochajs.org/">Mocha</a></li>
-<li><a href="https://www.chaijs.com/">Chai</a></li>
-<li><a href="https://help.github.com/en/actions">GitHub Actions</a></li>
-</ul>
-<h1><a class="header" href="#react--antd-入门教程" id="react--antd-入门教程">React + antd 入门教程</a></h1>
-<blockquote>
-<p>本节内容相关代码请访问<a href="https://github.com/duskmoon314/react-tutorial">react-tutorial</a>，<a href="https://duskmoon314.github.io/react-tutorial/chapter1/chapter_1.html">文档</a></p>
-</blockquote>
-<h2><a class="header" href="#说明" id="说明">说明</a></h2>
-<p>本节将使用 Yarn 作为包管理，用 Node.js 运行一个 React App，结合 antd 组件从头开始搭建一个小游戏作为入门。会介绍以下内容：</p>
-<ul>
-<li>什么是 Node.js？如何使用 Yarn 进行包管理？</li>
-<li>如何<strong>初始化</strong>一个使用 TypeScript 的 React 应用？</li>
-<li>React 和 antd 分别是干什么的？</li>
-<li>前端需要做些什么？</li>
-</ul>
-<blockquote>
-<p>小游戏借鉴了<a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">Rust 文档</a>。对优质文档和启发灵感表示感谢。</p>
-</blockquote>
-<h2><a class="header" href="#相关依赖" id="相关依赖">相关依赖</a></h2>
-<blockquote>
-<p>本节内容的详细文档提供了使用 CodeSandbox 的在线环境与各阶段代码，如果读者自行配置环境遇到困难，可以尝试使用。出于一些原因，CodeSandbox 中的代码会与文档有些微的区别，但不涉及到本节说要讲解内容的重点。</p>
-</blockquote>
-<ul>
-<li>Node.js 和 Yarn：请参阅<a href="https://duskmoon314.github.io/react-tutorial/chapter1/chapter_1.html">文档</a>进行安装</li>
-<li>React</li>
-<li>antd</li>
-</ul>
+                        <h1><a class="header" href="#git" id="git">Git</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="../web/web.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -252,7 +176,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="../introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a rel="next" href="../web/web.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -273,26 +205,18 @@
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
