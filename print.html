@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="OS/OS.html"><strong aria-hidden="true">5.</strong> Operating System</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="OS/OS.html"><strong aria-hidden="true">6.</strong> Operating System</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -361,6 +361,16 @@ $ tmux kill-session -t 0
 $ tmux kill-session -t &lt;session-name&gt;
 </code></pre>
 <p>以上为 tmux 的最基础操作，更多可以参考<a href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">这里</a></p>
+<h1><a class="header" href="#docker" id="docker">Docker</a></h1>
+<p><strong>Docker</strong> 使用 <code>Google</code> 公司推出的 <a href="https://golang.org/">Go 语言</a> 进行开发实现，基于 <code>Linux</code> 内核的 <a href="https://zh.wikipedia.org/wiki/Cgroups">cgroup</a>，<a href="https://en.wikipedia.org/wiki/Linux_namespaces">namespace</a>，以及 <a href="https://docs.docker.com/storage/storagedriver/overlayfs-driver/">OverlayFS</a> 类的 <a href="https://en.wikipedia.org/wiki/Union_mount">Union FS</a> 等技术，对进程进行封装隔离，属于 <a href="https://en.wikipedia.org/wiki/Operating-system-level_virtualization">操作系统层面的虚拟化技术</a>。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。最初实现是基于 <a href="https://linuxcontainers.org/lxc/introduction/">LXC</a>，从 0.7 版本以后开始去除 <code>LXC</code>，转而使用自行开发的 <a href="https://github.com/docker/libcontainer">libcontainer</a>，从 1.11 开始，则进一步演进为使用 <a href="https://github.com/opencontainers/runc">runC</a> 和 <a href="https://github.com/containerd/containerd">containerd</a>。</p>
+<img src="https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/media/docker-on-linux.png" width = "600" height = "400" alt="Docker 架构" align=center />
+<p><strong>Docker</strong> 在容器的基础上，进行了进一步的封装，从文件系统、网络互联到进程隔离等等，极大的简化了容器的创建和维护。使得 <code>Docker</code> 技术比虚拟机技术更为轻便、快捷。</p>
+<p>课件请见<a href="https://github.com/eesast/training2020/blob/master/basic_tool/docker">此处</a></p>
+<h2><a class="header" href="#参考链接-1" id="参考链接-1">参考链接</a></h2>
+<ul>
+<li><a href="https://vuepress.mirror.docker-practice.com/">Docker — 从入门到实践</a></li>
+<li><a href="https://docs.docker.com/">Docker官方文档</a></li>
+</ul>
 <h1><a class="header" href="#operating-system" id="operating-system">Operating System</a></h1>
 <p>本讲主要介绍操作系统的相关知识，帮助大家快速建立操作系统的宏观认识。需要注意的是，操作系统涉及处理机管理、存储管理、文件系统、IO设备等多个方面，而本讲主要涉及处理机管理中的进程间通信、进程的同步与互斥、死锁等内容，较少涉及其它部分。以下为本讲大纲，详细课件参见仓库。</p>
 <h2><a class="header" href="#进程与线程" id="进程与线程">进程与线程</a></h2>

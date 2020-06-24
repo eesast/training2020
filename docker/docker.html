@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Operating System - EESAST Training 2020</title>
+        <title>Docker - EESAST Training 2020</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html" class="active"><strong aria-hidden="true">6.</strong> Operating System</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html" class="active"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html"><strong aria-hidden="true">6.</strong> Operating System</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -151,94 +151,15 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#operating-system" id="operating-system">Operating System</a></h1>
-<p>本讲主要介绍操作系统的相关知识，帮助大家快速建立操作系统的宏观认识。需要注意的是，操作系统涉及处理机管理、存储管理、文件系统、IO设备等多个方面，而本讲主要涉及处理机管理中的进程间通信、进程的同步与互斥、死锁等内容，较少涉及其它部分。以下为本讲大纲，详细课件参见仓库。</p>
-<h2><a class="header" href="#进程与线程" id="进程与线程">进程与线程</a></h2>
-<h3><a class="header" href="#进程" id="进程">进程</a></h3>
-<p>进程（Process）是具有独立功能的程序在某个数据集合上的一次运行活动，可以理解为操作系统执行的一个程序的实例。</p>
-<p>三状态模型：运行、就绪、阻塞。</p>
-<h3><a class="header" href="#线程" id="线程">线程</a></h3>
-<p>线程（Thread）进一步减小了程序并发执行的时空开销，是轻量级进程。进程是资源分配的单位，线程是处理器调度的单位，同一个进程的多个线程共享资源。</p>
-<p>用户级线程 vs 内核级线程</p>
-<h3><a class="header" href="#处理器" id="处理器">处理器</a></h3>
-<p>处理器状态：核心态（Kernel mode）与用户态（User mode），通过陷入（Trap）与修改程序状态字（PSW）互相切换。</p>
-<p>CPU的一个核心上，同一时间片只能执行一个线程。操作系统在单核上实现并行的方式是通过处理器调度，使得各线程轮流执行，实现宏观并行。操作系统的调度需要陷入核心态，保存寄存器、堆栈，同时cache需要更新，因此有一定时间开销。</p>
-<p>调度的时刻（抢先vs非抢先）：</p>
+                        <h1><a class="header" href="#docker" id="docker">Docker</a></h1>
+<p><strong>Docker</strong> 使用 <code>Google</code> 公司推出的 <a href="https://golang.org/">Go 语言</a> 进行开发实现，基于 <code>Linux</code> 内核的 <a href="https://zh.wikipedia.org/wiki/Cgroups">cgroup</a>，<a href="https://en.wikipedia.org/wiki/Linux_namespaces">namespace</a>，以及 <a href="https://docs.docker.com/storage/storagedriver/overlayfs-driver/">OverlayFS</a> 类的 <a href="https://en.wikipedia.org/wiki/Union_mount">Union FS</a> 等技术，对进程进行封装隔离，属于 <a href="https://en.wikipedia.org/wiki/Operating-system-level_virtualization">操作系统层面的虚拟化技术</a>。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。最初实现是基于 <a href="https://linuxcontainers.org/lxc/introduction/">LXC</a>，从 0.7 版本以后开始去除 <code>LXC</code>，转而使用自行开发的 <a href="https://github.com/docker/libcontainer">libcontainer</a>，从 1.11 开始，则进一步演进为使用 <a href="https://github.com/opencontainers/runc">runC</a> 和 <a href="https://github.com/containerd/containerd">containerd</a>。</p>
+<img src="https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/media/docker-on-linux.png" width = "600" height = "400" alt="Docker 架构" align=center />
+<p><strong>Docker</strong> 在容器的基础上，进行了进一步的封装，从文件系统、网络互联到进程隔离等等，极大的简化了容器的创建和维护。使得 <code>Docker</code> 技术比虚拟机技术更为轻便、快捷。</p>
+<p>课件请见<a href="https://github.com/eesast/training2020/blob/master/basic_tool/docker">此处</a></p>
+<h2><a class="header" href="#参考链接" id="参考链接">参考链接</a></h2>
 <ul>
-<li>创建一个新进程后</li>
-<li>一个进程运行完毕后</li>
-<li>中断</li>
-<li>一个进程被阻塞</li>
-<li>时间片轮转</li>
-</ul>
-<p>对于计算密集型任务，频繁调度不划算；而对于IO密集型任务，调度是有较大收益的。</p>
-<p>原语（primitive）：由若干条指令构成的 “原子操作（atomic operation）” 过程 ，作为一个整体而不可分割——要么全都完成 ，要么全都不做 要么全都不做 要么全都不做 。许多系统调用都是原语。原语可以避免因调度而被打断。</p>
-<p>需要注意的是，C或其它编程语言的一条指令可能由多个汇编语句构成，而处理器执行汇编指令中都可能发生调度，因此同一条指令可能被打断，发生各种情况。</p>
-<h3><a class="header" href="#linux--windows--posix-中的进程与线程" id="linux--windows--posix-中的进程与线程">Linux / Windows / POSIX 中的进程与线程</a></h3>
-<p>Linux无线程概念，但可共享资源的进程可看作线程，相当于内核级线程。</p>
-<p>Windows进程是惰性的，无实际作用，线程是调度单位，内核级线程。</p>
-<p>POSIX未限定用户级/内核级线程。多线程编程接口标准pthread。</p>
-<h2><a class="header" href="#进程同步与互斥" id="进程同步与互斥">进程同步与互斥</a></h2>
-<ul>
-<li>
-<p>禁止中断</p>
-<p>进入临界区前执行关闭中断指令，离开临界区后执行开中断。</p>
-<p>简单但可靠性差，不适合多处理器。</p>
-</li>
-<li>
-<p>严格轮转法
-进程严格轮流进入临界区。
-忙等待，效率较低，且可能在临界区外阻塞别的进程。</p>
-</li>
-<li>
-<p>Petersen算法
-可以正常工作的解决互斥问题的算法，仍使用锁。
-忙等待，效率较低。</p>
-</li>
-<li>
-<p>硬件指令方法
-使用硬件提供不被打断的单条指令读写共享变量。
-适用于任意数目进程，且较简单，但仍有忙等待。</p>
-</li>
-<li>
-<p>信号量
-使用原语访问信号量管理资源。
-不必忙等，效率较高，但信号量的控制分布在整个程序中，正确性难以保证。</p>
-</li>
-<li>
-<p>管程
-信号量及其操作的高级语言封装。
-效率同信号量一样，易于管理开发。</p>
-</li>
-<li>
-<p>消息传递
-用以实现分布式系统的同步、互斥。
-支持分布式系统，但消息传递本身效率较低且不完全可靠。</p>
-</li>
-</ul>
-<p>忙等待不但浪费CPU时间，还会出现优先级反转问题（priority inversion problem）。</p>
-<h2><a class="header" href="#进程间通信" id="进程间通信">进程间通信</a></h2>
-<h3><a class="header" href="#linux进程间通信" id="linux进程间通信">Linux进程间通信</a></h3>
-<ul>
-<li>信号</li>
-<li>管道</li>
-<li>消息队列</li>
-<li>共享内存</li>
-<li>套接字</li>
-</ul>
-<h3><a class="header" href="#windows进程间通信" id="windows进程间通信">Windows进程间通信</a></h3>
-<ul>
-<li>管道</li>
-<li>共享内存</li>
-<li>邮件槽</li>
-<li>套接字</li>
-</ul>
-<h2><a class="header" href="#经典ipc问题" id="经典ipc问题">经典IPC问题</a></h2>
-<ul>
-<li>生产者-消费者问题</li>
-<li>读者-写者问题</li>
-<li>睡眠理发师问题</li>
-<li>哲学家进餐问题</li>
+<li><a href="https://vuepress.mirror.docker-practice.com/">Docker — 从入门到实践</a></li>
+<li><a href="https://docs.docker.com/">Docker官方文档</a></li>
 </ul>
 
                     </main>
@@ -246,11 +167,15 @@
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../docker/docker.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../linux-webserver/linux.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
+                        
+                            <a rel="next" href="../OS/OS.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -260,11 +185,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../docker/docker.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../linux-webserver/linux.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
+                
+                    <a rel="next" href="../OS/OS.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
