@@ -127,6 +127,7 @@ JavaScript有三种声明变量的方式。
 
 a // ReferenceError: a is not defined.
 b // 1
+
 ```
 
 有关变量提升，指的是
