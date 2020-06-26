@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>EESAST Training 2020</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>JS&amp;TS - EESAST Training 2020</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -13,21 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -37,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
         </script>
 
@@ -83,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="web/html&css.html"><strong aria-hidden="true">3.2.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="web/js&ts.html"><strong aria-hidden="true">3.3.</strong> JS&amp;TS</a></li></ol></li><li class="chapter-item expanded "><a href="linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="OS/OS.html"><strong aria-hidden="true">6.</strong> Operating System</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="../web/html&css.html"><strong aria-hidden="true">3.2.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="../web/js&ts.html" class="active"><strong aria-hidden="true">3.3.</strong> JS&amp;TS</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html"><strong aria-hidden="true">6.</strong> Operating System</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -118,7 +116,7 @@
                     <h1 class="menu-title">EESAST Training 2020</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         
@@ -153,261 +151,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<p>本文档为清华电子系学生科协 2020 年暑期培训<a href="https://github.com/eesast/training2020">仓库</a>中各部分内容介绍及相关依赖的简要安装说明。</p>
-<p>培训所用的文档、教学用 PPT 及相关仓库与依赖链接基本上可以在仓库中找到。</p>
-<blockquote>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">EESAST Training 2020</span> 由 <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/eesast/training2020" property="cc:attributionName" rel="cc:attributionURL">EESAST</a> 采用 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享 署名-相同方式共享 4.0 国际 许可协议</a>进行许可。
-多数内容将以 CC-BY-SA 4.0 进行许可，部分培训内容的作者可能会有特殊许可，若有需要还请注意。</p>
-</blockquote>
-<p>培训内容主要分为三个大部分：</p>
-<ul>
-<li>基础工具 Git, Docker</li>
-<li>队式开发技术栈</li>
-<li>网站开发技术栈</li>
-</ul>
-<p>具体内容还请参阅各章说明</p>
-<h1><a class="header" href="#git" id="git">Git</a></h1>
-<p>Git 是一个分布式版本管理系统，虽然设计上可能存在一些问题，但不妨碍其成为如今使用最广的地位。软件部的开发采取 Git 进行版本管理，也推荐大家将 Git 应用到各种需要版本管理的地方。</p>
-<p><a href="git/../../../basic%20tool/git.pptx">课件</a></p>
-<h2><a class="header" href="#参考链接" id="参考链接">参考链接</a></h2>
-<ul>
-<li><a href="https://github.com/pcottle/learnGitBranching">pcottle/learnGitBranching</a></li>
-<li><a href="https://github.com/k88hudson/git-flight-rules">k88hudson/git-flight-rules</a></li>
-</ul>
-<h1><a class="header" href="#web" id="web">web</a></h1>
-<p>这一章将基于 EESAST 目前网站方面使用的技术进行培训，内容主要为以下几个部分：</p>
-<ul>
-<li>Html, CSS, JavaScript/TypeScript 基础</li>
-<li>Node.js 与包管理</li>
-<li>React + antd</li>
-<li>Restful API 与 Express</li>
-<li>GraphQL + Hasura + Apollo</li>
-<li>数据库 MongoDB 和 PostgreSQL</li>
-<li>Web测试 Mocha + Chai</li>
-<li>CI/CD</li>
-</ul>
-<p>具体内容安排请参照各小节说明</p>
-<p>需要用到的工具及相关链接如下：</p>
-<ul>
-<li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-<li>Node.js
-<ul>
-<li><a href="https://nodejs.org/en/download/">官方网站</a></li>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/">清华 tuna 镜像</a>
-<ul>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/nodejs-release/">tuna 镜像帮助页面</a></li>
-</ul>
-</li>
-<li><a href="https://mirrors.bfsu.edu.cn/nodejs-release/">北京外国语大学镜像</a>
-<ul>
-<li><a href="https://mirrors.bfsu.edu.cn/help/nodejs-release/">北外镜像帮助页面</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="https://yarn.bootcss.com/docs/getting-started/">Yarn</a></li>
-<li><a href="https://react.docschina.org/">React</a></li>
-<li><a href="https://ant.design/index-cn">Ant Design</a></li>
-<li><a href="https://www.expressjs.com.cn/">Express</a></li>
-<li><a href="https://graphql.org/">GraphQL</a></li>
-<li><a href="https://hasura.io/">Hasura</a></li>
-<li><a href="https://www.apollographql.com/">Apollo</a></li>
-<li><a href="https://www.mongodb.com/">MongoDB</a></li>
-<li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-<li><a href="https://mochajs.org/">Mocha</a></li>
-<li><a href="https://www.chaijs.com/">Chai</a></li>
-<li><a href="https://help.github.com/en/actions">GitHub Actions</a></li>
-</ul>
-<h1><a class="header" href="#react--antd-入门教程" id="react--antd-入门教程">React + antd 入门教程</a></h1>
-<blockquote>
-<p>本节内容相关代码请访问<a href="https://github.com/duskmoon314/react-tutorial">react-tutorial</a>，<a href="https://duskmoon314.github.io/react-tutorial/chapter1/chapter_1.html">文档</a></p>
-</blockquote>
-<h2><a class="header" href="#说明" id="说明">说明</a></h2>
-<p>本节将使用 Yarn 作为包管理，用 Node.js 运行一个 React App，结合 antd 组件从头开始搭建一个小游戏作为入门。会介绍以下内容：</p>
-<ul>
-<li>什么是 Node.js？如何使用 Yarn 进行包管理？</li>
-<li>如何<strong>初始化</strong>一个使用 TypeScript 的 React 应用？</li>
-<li>React 和 antd 分别是干什么的？</li>
-<li>前端需要做些什么？</li>
-</ul>
-<blockquote>
-<p>小游戏借鉴了<a href="https://doc.rust-lang.org/book/ch02-00-guessing-game-tutorial.html">Rust 文档</a>。对优质文档和启发灵感表示感谢。</p>
-</blockquote>
-<h2><a class="header" href="#相关依赖" id="相关依赖">相关依赖</a></h2>
-<blockquote>
-<p>本节内容的详细文档提供了使用 CodeSandbox 的在线环境与各阶段代码，如果读者自行配置环境遇到困难，可以尝试使用。出于一些原因，CodeSandbox 中的代码会与文档有些微的区别，但不涉及到本节说要讲解内容的重点。</p>
-</blockquote>
-<ul>
-<li>Node.js 和 Yarn：请参阅<a href="https://duskmoon314.github.io/react-tutorial/chapter1/chapter_1.html">文档</a>进行安装</li>
-<li>React</li>
-<li>antd</li>
-</ul>
-<h1><a class="header" href="#htmlcss-入门" id="htmlcss-入门">HTML&amp;CSS 入门</a></h1>
-<blockquote>
-<p>这里介绍的知识非常基础，因为网站组的同学们在后面写网站的时候很少直接写 HTML&amp;CSS（尤其是 HTML），这里讲只是为了让大家简单了解下网页的机制</p>
-</blockquote>
-<blockquote>
-<p>本文档参考<a href="https://developer.mozilla.org/zh-CN/">MDN</a>完成，希望深入学习的同学可以参考</p>
-</blockquote>
-<h2><a class="header" href="#html" id="html">HTML</a></h2>
-<blockquote>
-<p>参考：https://developer.mozilla.org/zh-CN/docs/Web/HTML</p>
-</blockquote>
-<h3><a class="header" href="#基础" id="基础">基础</a></h3>
-<p>HTML (Hyper Text Markup Language) 不是一门编程语言，而是一种用来告知浏览器如何组织页面的标记语言。HTML 可复杂、可简单，一切取决于开发者。它由一系列的元素（elements）组成，这些元素可以用来包围不同部分的内容，使其以某种方式呈现或者工作。 一对标签（ tags）可以为一段文字或者一张图片添加超链接，将文字设置为斜体，改变字号，等等。</p>
-<p>最简单的一个内容是这样的</p>
-<p>欢迎大家加入科协</p>
-<pre><code class="language-html">&lt;p&gt;欢迎大家加入科协&lt;/p&gt;
-</code></pre>
-<p>这是一个段落(p)元素，一个 html 元素的组成分为</p>
-<ol>
-<li><strong>开始标签</strong>（Opening tag）：包含元素的名称，被左、右角括号所包围。表示元素从这里开始或者开始起作用</li>
-<li><strong>结束标签</strong>（Closing tag）：与开始标签相似，只是其在元素名之前包含了一个斜杠。这表示着元素的结尾 —— 在本例中即段落在此结束。初学者常常会犯忘记包含结束标签的错误，这可能会产生一些奇怪的结果。</li>
-<li><strong>内容</strong>（Content）：元素的内容，本例中就是所输入的文本本身。</li>
-<li><strong>元素</strong>（Element）：开始标签、结束标签与内容相结合，便是一个完整的元素。</li>
-</ol>
-<p>HTML 元素可以进行嵌套，比如</p>
-<p><em>欢迎</em>大家加入<strong>科协</strong></p>
-<pre><code class="language-html">&lt;p&gt;&lt;em&gt;欢迎&lt;/em&gt;大家加入&lt;strong&gt;科协&lt;/strong&gt;&lt;/p&gt;
-</code></pre>
-<h3><a class="header" href="#块级元素和内联元素" id="块级元素和内联元素">块级元素和内联元素</a></h3>
-<p>块级元素在页面中以块的形式展现 —— 相对于其前面的内容它会出现在新的一行，其后的内容也会被挤到下一行展现，例如上面的<code>&lt;p&gt;</code></p>
-<p>内联元素通常出现在块级元素中并环绕文档内容的一小部分，而不是一整个段落或者一组内容。内联元素不会导致文本换行：它通常出现在一堆文字之间例如超链接元素<code>&lt;a&gt;</code>或者强调元素<code>&lt;em&gt;</code>和<code>&lt;strong&gt;</code>。</p>
-<h3><a class="header" href="#空元素" id="空元素">空元素</a></h3>
-<p>不是所有元素都拥有开始标签，内容，结束标签，一些元素只有一个标签，通常用来在此元素所在位置插入/嵌入一些东西，比如<code>&lt;img&gt;</code></p>
-<h3><a class="header" href="#属性" id="属性">属性</a></h3>
-<p>使用属性来给元素设定额外信息，属性的基本写法为</p>
-<pre><code class="language-html">&lt;p class=&quot;foobar&quot;&gt;EESAST&lt;/p&gt;
-</code></pre>
-<p>用空格与元素名或前一个属性隔开，<code>属性名=&quot;值&quot;</code>（单引号双引号都可）</p>
-<p>比较典型的例子就是元素<code>&lt;a&gt;</code>，用来创建链接</p>
-<p><a href="https://eesast.com" title="科协官网">EESAST</a></p>
-<pre><code class="language-html">&lt;a href=&quot;https://eesast.com&quot; title=&quot;科协官网&quot;&gt;EESAST&lt;/a&gt;
-</code></pre>
-<h3><a class="header" href="#一个-html-文件的结构" id="一个-html-文件的结构">一个 HTML 文件的结构</a></h3>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot; /&gt;
-    &lt;title&gt;我的测试站点&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;这是我的页面&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<ul>
-<li><code>&lt;!DOCTYPE html&gt;</code>: 声明文档类型</li>
-<li><code>&lt;html&gt;&lt;/html&gt;</code>: <code>&lt;html&gt;</code>元素。这个元素包裹了整个完整的页面，是一个根元素。</li>
-<li><code>&lt;head&gt;&lt;/head&gt;</code>: <code>&lt;head&gt;</code>元素.</li>
-<li><code>&lt;meta charset=&quot;utf-8&quot;&gt;</code>: 元数据，在这里是设置文档使用 utf-8 字符集编码，也可以像<code>&lt;meta name=&quot;author&quot; content=&quot;Chris Mills&quot;&gt;</code>这样用 name 和 content 来设置其他信息，当然在不同的应用场景可以设置很多不同的元数据</li>
-<li><code>&lt;title&gt;&lt;/title&gt;</code>: 设置页面标题</li>
-<li><code>&lt;body&gt;&lt;/body&gt;</code>: <code>&lt;body&gt;</code>元素， 包含了你访问页面时所有显示在页面上的内容</li>
-</ul>
-<h3><a class="header" href="#在-html-中应用-css-和-javascript" id="在-html-中应用-css-和-javascript">在 HTML 中应用 CSS 和 JavaScript</a></h3>
-<p>对于 CSS，需要加入一个<code>&lt;link&gt;</code>元素，rel=&quot;stylesheet&quot;表明这是文档的样式表，而 href 包含了样式表文件的路径，这个元素一般放在<code>&lt;head&gt;</code>里</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;my-css-file.css&quot; /&gt;
-</code></pre>
-<p>对于 js 脚本，加入<code>&lt;script&gt;</code>元素，src 为脚本的路径。<code>&lt;script&gt;</code>部分没必要非要放在文档头部，实际上，把它放在文档的尾部<code>&lt;/body&gt;</code>标签之前是一个更好的选择，这样可以确保在加载脚本之前浏览器已经解析了 HTML 内容</p>
-<pre><code class="language-html">&lt;script src=&quot;my-js-file.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-<p>这里 script 元素没有内容，但他不是一个空元素，你也可以直接把脚本写在元素里</p>
-<h3><a class="header" href="#html-的基本布局" id="html-的基本布局">HTML 的基本布局</a></h3>
-<ul>
-<li><code>&lt;header&gt;</code>：页眉。</li>
-<li><code>&lt;nav&gt;</code>：导航栏。</li>
-<li><code>&lt;main&gt;</code>：主内容。主内容中还可以有各种子内容区段，可用<code>&lt;article&gt;</code>、<code>&lt;section&gt;</code> 和<code>&lt;div&gt;</code>等元素表示。</li>
-<li><code>&lt;aside&gt;</code>：侧边栏，经常嵌套在<code>&lt;main&gt;</code>中。</li>
-<li><code>&lt;footer&gt;</code>：页脚。</li>
-</ul>
-<p>关于完整的 html 元素和属性，可以参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Reference">这里</a></p>
-<h2><a class="header" href="#css" id="css">CSS</a></h2>
-<blockquote>
-<p>参考：https://developer.mozilla.org/zh-CN/docs/Web/CSS</p>
-</blockquote>
-<h3><a class="header" href="#基础-1" id="基础-1">基础</a></h3>
-<p>CSS 是一门基于规则的语言，他的基础结构为：由一个选择器开头，后接一对大括号，在大括号内部定义一个或多个形式为 <code>属性(property):值(value);</code> 的声明(declarations)。每个声明都指定了我们所选择元素的一个属性，之后跟一个我们想赋给这个属性的值。<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Reference">这里</a>可以查看所有属性。</p>
-<pre><code class="language-css">h1 {
-  color: red;
-  font-size: 5em;
-}
-
-p {
-  color: black;
-}
-</code></pre>
-<h4><a class="header" href="#元素选择器" id="元素选择器">元素选择器</a></h4>
-<p>使用元素选择器来直接匹配一种 html 元素</p>
-<pre><code class="language-css">p {
-  color: green;
-}
-</code></pre>
-<p>不同的选择器可以用<code>,</code>隔开来使用多个选择器</p>
-<pre><code class="language-html">p, li { color: green; }
-</code></pre>
-<p>这种直接指定元素类型的写法只能同时应用于所有同类元素，在实际使用的时候是十分不方便的，因此我们还可以使用类名来进一步指定作用的对象。前面说到 HTML 中的元素可以添加属性，这里的类名选择器就对应标签中的<code>class</code>属性，比如</p>
-<pre><code class="language-html">&lt;ul&gt;
-  &lt;li&gt;项目一&lt;/li&gt;
-  &lt;li class=&quot;special&quot;&gt;项目二&lt;/li&gt;
-  &lt;li&gt;项目 &lt;em&gt;三&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
-<pre><code class="language-css">.special {
-  color: orange;
-  font-weight: bold;
-}
-</code></pre>
-<p>这里指定了属于 special 类的元素进行设置，在在选择器的开头加<code>.</code>即为指定类，当然可以同时指定元素和类</p>
-<pre><code class="language-css">li.special,
-span.special {
-  color: orange;
-  font-weight: bold;
-}
-</code></pre>
-<p>此外，我们还可以根据元素的位置来进行选择，在选择器中使用<code>空格</code>来表示包含（嵌套）关系，用<code>+</code>来表示相邻关系，例如</p>
-<pre><code class="language-css">li em {
-  color: rebeccapurple;
-}
-</code></pre>
-<p>表示选择嵌套在<code>&lt;li&gt;</code>内部的<code>&lt;em&gt;</code></p>
-<pre><code class="language-css">h1 + p {
-  font-size: 200%;
-}
-</code></pre>
-<p>表示选择跟在<code>&lt;h1&gt;</code>后面的<code>&lt;p&gt;</code></p>
-<p>可以尝试下解读这个选择器</p>
-<pre><code class="language-css">body h1 + p .special {
-  color: yellow;
-  background-color: black;
-  padding: 5px;
-}
-</code></pre>
-<h3><a class="header" href="#盒模型" id="盒模型">盒模型</a></h3>
-<blockquote>
-<p>参考：https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/The_box_model</p>
-</blockquote>
-<p>在 CSS 中，所有的元素都被一个个的“盒子（box）”包围着，理解这些“盒子”的基本原理，可以帮助我们使用 CSS 实现准确布局、处理元素排列。</p>
-<p>CSS 中组成一个块级盒子需要:</p>
-<ul>
-<li><strong>Content box</strong>: 这个区域是用来显示内容，大小可以通过设置 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width"><code>width</code></a> 和 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/height"><code>height</code></a>.</li>
-<li><strong>Padding box</strong>: 包围在内容区域外部的空白区域； 大小通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding"><code>padding</code></a> 相关属性设置。</li>
-<li><strong>Border box</strong>: 边框盒包裹内容和内边距。大小通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border"><code>border</code></a> 相关属性设置。</li>
-<li><strong>Margin box</strong>: 这是最外面的区域，是盒子和其他元素之间的空白区域。大小通过 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin"><code>margin</code></a> 相关属性设置。</li>
-</ul>
-<p>如下图：</p>
-<p><img src="web/./images/box-model.png" alt="box" /></p>
-<p>在标准模型中，如果你给盒设置 <code>width</code> 和 <code>height</code>，实际设置的是 <em>content box</em>。 padding 和 border 再加上设置的宽高一起决定整个盒子的大小</p>
-<pre><code class="language-css">.box {
-  width: 350px;
-  height: 150px;
-  margin: 25px;
-  padding: 25px;
-  border: 5px solid black;
-}
-</code></pre>
-<p>可以尝试计算一下这个盒子的大小</p>
-<h1><a class="header" href="#javascripttypescript" id="javascripttypescript">JavaScript&amp;TypeScript</a></h1>
+                        <h1><a class="header" href="#javascripttypescript" id="javascripttypescript">JavaScript&amp;TypeScript</a></h1>
 <h2><a class="header" href="#javascript" id="javascript">JavaScript</a></h2>
 <blockquote>
 <p>参考：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript</p>
@@ -1032,230 +776,21 @@ export default &quot;123&quot;;
 </code></pre>
 <pre><code class="language-typescript">import num from &quot;./OneTwoThree&quot;;
 </code></pre>
-<h1><a class="header" href="#linux-入门实操" id="linux-入门实操">Linux 入门实操</a></h1>
-<blockquote>
-<p>基本上是翻译了下<a href="https://missing.csail.mit.edu/2020">missing-semester</a>的 1、3 讲</p>
-<p>写完这个发现 missing-semester 有<a href="https://missing-semester-cn.github.io/">中文版</a>orz</p>
-</blockquote>
-<h2><a class="header" href="#说明-1" id="说明-1">说明</a></h2>
-<p>此处的文档为本次课程的 linux 实操部分，其他课件请见<a href="https://github.com/eesast/training2020/blob/master/basic_tool/linux-webserver">此处</a></p>
-<h2><a class="header" href="#shell-基础" id="shell-基础">Shell 基础</a></h2>
-<h3><a class="header" href="#shell-使用" id="shell-使用">shell 使用</a></h3>
-<p>打开 shell 之后首先看到这样的提示符</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~$
-</code></pre>
-<p>用户名@设备名:当前路径，<code>~</code>代表 home 家路径</p>
-<p>此时就可以输入命令了</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~$ date
-Sat Jun 20 20:07:17 CST 2020
-zxdclyz@Lyz:~$
-</code></pre>
-<p>通过输入 date 运行了 date 这个打印日期和时间的程序，然后提示符重新出现，告诉我们可以输入下一条命令</p>
-<p>另一个十分基础的命令是 echo</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~$ echo hello world
-hello world
-</code></pre>
-<p>echo 的作用是直接打印它的参数，在 shell 中，命令是以空格隔断的，第一个词指定运行的程序，后面的是参数，如果想要在一个参数中包括空格，可以使用<code>'</code>或者<code>&quot;</code>，也可以用<code>\(space)</code></p>
-<pre><code class="language-shell">zxdclyz@Lyz:~$ echo 'hello world'
-hello world
-zxdclyz@Lyz:~$ echo hello\ world
-hello world
-</code></pre>
-<p>不过在 echo 中看不出区别 orz</p>
-<p>那么我们输入 date、echo 运行的是什么程序呢？shell 也是一个编程环境，类似 python，其中也有变量，如果输入了程序关键字之外的字段，shell 会去查找<code>$PATH</code>环境变量中的路径</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~$ echo $PATH
-/usr/local/sbin:/usr/local/bin
-</code></pre>
-<p>其中的路径用<code>:</code>分隔，可以用<code>which</code>命令查看运行的程序所在路径</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~$ which echo
-/bin/echo
-</code></pre>
-<p>如果程序所在路径不在环境变量里，也可以直接使用其完整路径来调用</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~$ /bin/echo eesast
-eesast
-</code></pre>
-<h3><a class="header" href="#文件系统" id="文件系统">文件系统</a></h3>
-<p>有关文件操作，<code>pwd</code>显示当前路径，<code>cd</code>改变路径，<code>ls</code>打印当前目录中的文件，<code>.</code>指当前目录，<code>..</code>指上级目录</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~/tutorial$ ls
-a.txt  b.py  c.js
-zxdclyz@Lyz:~/tutorial$ cd ../
-zxdclyz@Lyz:~$ pwd
-/home/zxdclyz
-zxdclyz@Lyz:~$
-</code></pre>
-<p>使用<code>cd -</code>可以跳转到刚才所在的路径，用<code>mkdir</code>创建文件夹，<code>mv</code>移动文件，<code>cp</code>复制文件，<code>rm</code>删除文件，<code>touch</code>创建文件</p>
-<p>有关文件权限，参考课件</p>
-<h3><a class="header" href="#查看命令参数" id="查看命令参数">查看命令参数</a></h3>
-<p>可以使用<code>man command</code>来进入手册页，也可以直接使用--help 参数查看</p>
-<pre><code class="language-shell">zxdclyz@Lyz:/bin$ ls --help
-...
-zxdclyz@Lyz:/bin$ man ls
-</code></pre>
-<h3><a class="header" href="#连接程序" id="连接程序">连接程序</a></h3>
-<p>在 shell 中，程序也有输入流和输出流，我们可以用<code>&gt; file</code>和<code>&lt; file</code>来重新引导流</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~/tutorial$ echo hello &gt; hello.txt
-zxdclyz@Lyz:~/tutorial$ echo bye &gt;&gt; hello.txt
-</code></pre>
-<p>使用<code>&gt;&gt;</code>可以进行追加写</p>
-<p>另一个十分有用的工具是 pipe<code>|</code>，它可以连接两个命令，将前一个命令的输出当做后一个命令的输入</p>
-<pre><code class="language-shell">zxdclyz@Lyz:~/tutorial$ cat hello.txt
-hello
-bye
-hello world
-zxdclyz@Lyz:~/tutorial$ cat hello.txt|grep world
-hello world
-</code></pre>
-<h2><a class="header" href="#vim-极简入门" id="vim-极简入门">Vim 极简入门</a></h2>
-<p>如果你在使用服务器并且想简单地对一个文件进行编辑，使用 vim 是十分方便的（大量编辑我倾向于使用 VSCode 等远程连接），vim 本身拥有十分强大的功能，但我自己也并不会，所以只在此展示最基础的用法</p>
-<p>使用<code>vim file</code>打开文件进行编辑</p>
-<p>刚进入时处于正常模式，而 vim 中有这些模式</p>
-<ul>
-<li><strong>Normal</strong>: for moving around a file and making edits</li>
-<li><strong>Insert</strong>: for inserting text</li>
-<li><strong>Replace</strong>: for replacing text</li>
-<li><strong>Visual</strong> (plain, line, or block): for selecting blocks of text</li>
-<li><strong>Command-line</strong>: for running a command</li>
-</ul>
-<p>我们在此用到 insert 模式，在正常模式下按<code>i</code>进入 insert 模式，此时可以像其他编辑器一样对文件进行编辑，然后按<code>ESC</code>退回到正常模式</p>
-<p>在正常模式下输入<code>:</code>会进入命令模式，最基础的命令有</p>
-<ul>
-<li><code>:q</code> quit (close window)</li>
-<li><code>:w</code> save (“write”)</li>
-<li><code>:wq</code> save and quit</li>
-</ul>
-<p>事实上 vim 还有许多十分强大的功能，感兴趣的同学可以自己了解</p>
-<h2><a class="header" href="#tmux" id="tmux">tmux</a></h2>
-<p>我们在使用 ssh 方法登录到服务器的时候是和服务器进行一次会话，而当我们从服务器断开的时候，会话结束，会话中的各个进程也会被终止，而 tmux 是用来解绑会话与打开的终端窗口的，可以让你启动的进程在断开连接之后继续运行</p>
-<p>直接输入 tmux 命令会新建一个只有编号的 tmux 窗口，我们可以这样来新建命名的窗口</p>
-<pre><code class="language-shell">$ tmux new -s &lt;session-name&gt;
-</code></pre>
-<p>在 tmux 窗口中，按下<code>Ctrl+b</code>，然后按<code>d</code>，可以从当前窗口分离，而窗口中的进程仍在后台运行</p>
-<p>可以查看所有 tmux 会话</p>
-<pre><code class="language-shell">$ tmux ls
-# or
-$ tmux list-session
-</code></pre>
-<p>然后使用<code>tmux attach</code>来重新接入会话</p>
-<pre><code class="language-shell"># 使用会话编号
-$ tmux attach -t 0
-
-# 使用会话名称
-$ tmux attach -t &lt;session-name&gt;
-</code></pre>
-<p>可以在会话中直接使用<code>Ctrl+d</code>或者输入<code>exit</code>来关闭，也可以在外部使用<code>tmux kill-session</code>命令杀死某个会话。</p>
-<pre><code class="language-shell"># 使用会话编号
-$ tmux kill-session -t 0
-
-# 使用会话名称
-$ tmux kill-session -t &lt;session-name&gt;
-</code></pre>
-<p>以上为 tmux 的最基础操作，更多可以参考<a href="http://www.ruanyifeng.com/blog/2019/10/tmux.html">这里</a></p>
-<h1><a class="header" href="#docker" id="docker">Docker</a></h1>
-<p><strong>Docker</strong> 使用 <code>Google</code> 公司推出的 <a href="https://golang.org/">Go 语言</a> 进行开发实现，基于 <code>Linux</code> 内核的 <a href="https://zh.wikipedia.org/wiki/Cgroups">cgroup</a>，<a href="https://en.wikipedia.org/wiki/Linux_namespaces">namespace</a>，以及 <a href="https://docs.docker.com/storage/storagedriver/overlayfs-driver/">OverlayFS</a> 类的 <a href="https://en.wikipedia.org/wiki/Union_mount">Union FS</a> 等技术，对进程进行封装隔离，属于 <a href="https://en.wikipedia.org/wiki/Operating-system-level_virtualization">操作系统层面的虚拟化技术</a>。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。最初实现是基于 <a href="https://linuxcontainers.org/lxc/introduction/">LXC</a>，从 0.7 版本以后开始去除 <code>LXC</code>，转而使用自行开发的 <a href="https://github.com/docker/libcontainer">libcontainer</a>，从 1.11 开始，则进一步演进为使用 <a href="https://github.com/opencontainers/runc">runC</a> 和 <a href="https://github.com/containerd/containerd">containerd</a>。</p>
-<img src="https://docs.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/media/docker-on-linux.png" width = "600" height = "400" alt="Docker 架构" align=center />
-<p><strong>Docker</strong> 在容器的基础上，进行了进一步的封装，从文件系统、网络互联到进程隔离等等，极大的简化了容器的创建和维护。使得 <code>Docker</code> 技术比虚拟机技术更为轻便、快捷。</p>
-<p>课件请见<a href="https://github.com/eesast/training2020/blob/master/basic_tool/docker">此处</a></p>
-<h2><a class="header" href="#参考链接-1" id="参考链接-1">参考链接</a></h2>
-<ul>
-<li><a href="https://vuepress.mirror.docker-practice.com/">Docker — 从入门到实践</a></li>
-<li><a href="https://docs.docker.com/">Docker官方文档</a></li>
-</ul>
-<h1><a class="header" href="#operating-system" id="operating-system">Operating System</a></h1>
-<p>本讲主要介绍操作系统的相关知识，帮助大家快速建立操作系统的宏观认识。需要注意的是，操作系统涉及处理机管理、存储管理、文件系统、IO设备等多个方面，而本讲主要涉及处理机管理中的进程间通信、进程的同步与互斥、死锁等内容，较少涉及其它部分。以下为本讲大纲，详细课件参见仓库。</p>
-<h2><a class="header" href="#进程与线程" id="进程与线程">进程与线程</a></h2>
-<h3><a class="header" href="#进程" id="进程">进程</a></h3>
-<p>进程（Process）是具有独立功能的程序在某个数据集合上的一次运行活动，可以理解为操作系统执行的一个程序的实例。</p>
-<p>三状态模型：运行、就绪、阻塞。</p>
-<h3><a class="header" href="#线程" id="线程">线程</a></h3>
-<p>线程（Thread）进一步减小了程序并发执行的时空开销，是轻量级进程。进程是资源分配的单位，线程是处理器调度的单位，同一个进程的多个线程共享资源。</p>
-<p>用户级线程 vs 内核级线程</p>
-<h3><a class="header" href="#处理器" id="处理器">处理器</a></h3>
-<p>处理器状态：核心态（Kernel mode）与用户态（User mode），通过陷入（Trap）与修改程序状态字（PSW）互相切换。</p>
-<p>CPU的一个核心上，同一时间片只能执行一个线程。操作系统在单核上实现并行的方式是通过处理器调度，使得各线程轮流执行，实现宏观并行。操作系统的调度需要陷入核心态，保存寄存器、堆栈，同时cache需要更新，因此有一定时间开销。</p>
-<p>调度的时刻（抢先vs非抢先）：</p>
-<ul>
-<li>创建一个新进程后</li>
-<li>一个进程运行完毕后</li>
-<li>中断</li>
-<li>一个进程被阻塞</li>
-<li>时间片轮转</li>
-</ul>
-<p>对于计算密集型任务，频繁调度不划算；而对于IO密集型任务，调度是有较大收益的。</p>
-<p>原语（primitive）：由若干条指令构成的 “原子操作（atomic operation）” 过程 ，作为一个整体而不可分割——要么全都完成 ，要么全都不做 要么全都不做 要么全都不做 。许多系统调用都是原语。原语可以避免因调度而被打断。</p>
-<p>需要注意的是，C或其它编程语言的一条指令可能由多个汇编语句构成，而处理器执行汇编指令中都可能发生调度，因此同一条指令可能被打断，发生各种情况。</p>
-<h3><a class="header" href="#linux--windows--posix-中的进程与线程" id="linux--windows--posix-中的进程与线程">Linux / Windows / POSIX 中的进程与线程</a></h3>
-<p>Linux无线程概念，但可共享资源的进程可看作线程，相当于内核级线程。</p>
-<p>Windows进程是惰性的，无实际作用，线程是调度单位，内核级线程。</p>
-<p>POSIX未限定用户级/内核级线程。多线程编程接口标准pthread。</p>
-<h2><a class="header" href="#进程同步与互斥" id="进程同步与互斥">进程同步与互斥</a></h2>
-<ul>
-<li>
-<p>禁止中断</p>
-<p>进入临界区前执行关闭中断指令，离开临界区后执行开中断。</p>
-<p>简单但可靠性差，不适合多处理器。</p>
-</li>
-<li>
-<p>严格轮转法
-进程严格轮流进入临界区。
-忙等待，效率较低，且可能在临界区外阻塞别的进程。</p>
-</li>
-<li>
-<p>Petersen算法
-可以正常工作的解决互斥问题的算法，仍使用锁。
-忙等待，效率较低。</p>
-</li>
-<li>
-<p>硬件指令方法
-使用硬件提供不被打断的单条指令读写共享变量。
-适用于任意数目进程，且较简单，但仍有忙等待。</p>
-</li>
-<li>
-<p>信号量
-使用原语访问信号量管理资源。
-不必忙等，效率较高，但信号量的控制分布在整个程序中，正确性难以保证。</p>
-</li>
-<li>
-<p>管程
-信号量及其操作的高级语言封装。
-效率同信号量一样，易于管理开发。</p>
-</li>
-<li>
-<p>消息传递
-用以实现分布式系统的同步、互斥。
-支持分布式系统，但消息传递本身效率较低且不完全可靠。</p>
-</li>
-</ul>
-<p>忙等待不但浪费CPU时间，还会出现优先级反转问题（priority inversion problem）。</p>
-<h2><a class="header" href="#进程间通信" id="进程间通信">进程间通信</a></h2>
-<h3><a class="header" href="#linux进程间通信" id="linux进程间通信">Linux进程间通信</a></h3>
-<ul>
-<li>信号</li>
-<li>管道</li>
-<li>消息队列</li>
-<li>共享内存</li>
-<li>套接字</li>
-</ul>
-<h3><a class="header" href="#windows进程间通信" id="windows进程间通信">Windows进程间通信</a></h3>
-<ul>
-<li>管道</li>
-<li>共享内存</li>
-<li>邮件槽</li>
-<li>套接字</li>
-</ul>
-<h2><a class="header" href="#经典ipc问题" id="经典ipc问题">经典IPC问题</a></h2>
-<ul>
-<li>生产者-消费者问题</li>
-<li>读者-写者问题</li>
-<li>睡眠理发师问题</li>
-<li>哲学家进餐问题</li>
-</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../web/html&amp;css.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="../linux-webserver/linux.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -1265,7 +800,15 @@ $ tmux kill-session -t &lt;session-name&gt;
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="../web/html&amp;css.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a rel="next" href="../linux-webserver/linux.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -1286,26 +829,18 @@ $ tmux kill-session -t &lt;session-name&gt;
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
