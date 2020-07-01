@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Operating System - EESAST Training 2020</title>
+        <title>操作系统 - EESAST Training 2020</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.1.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="../web/html&css.html"><strong aria-hidden="true">3.2.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="../web/js&ts.html"><strong aria-hidden="true">3.3.</strong> JS&amp;TS</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html" class="active"><strong aria-hidden="true">6.</strong> Operating System</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="../web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html" class="active"><strong aria-hidden="true">6.</strong> 操作系统</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -151,8 +151,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#operating-system" id="operating-system">Operating System</a></h1>
-<p>本讲主要介绍操作系统的相关知识，帮助大家快速建立操作系统的宏观认识。需要注意的是，操作系统涉及处理机管理、存储管理、文件系统、IO设备等多个方面，而本讲主要涉及处理机管理中的进程间通信、进程的同步与互斥、死锁等内容，较少涉及其它部分。以下为本讲大纲，详细课件参见仓库。</p>
+                        <h1><a class="header" href="#操作系统" id="操作系统">操作系统</a></h1>
+<p>本讲主要介绍操作系统的相关知识，帮助大家快速建立操作系统的宏观认识。需要注意的是，操作系统涉及处理机管理、存储管理、文件系统、IO设备等多个方面，而本讲主要涉及处理机管理中的进程间通信、进程的同步与互斥、死锁等内容，较少涉及其它部分。以下为本讲大纲，详细课件参见<a href="https://github.com/eesast/training2020/blob/master/OS">仓库</a>。</p>
 <h2><a class="header" href="#进程与线程" id="进程与线程">进程与线程</a></h2>
 <h3><a class="header" href="#进程" id="进程">进程</a></h3>
 <p>进程（Process）是具有独立功能的程序在某个数据集合上的一次运行活动，可以理解为操作系统执行的一个程序的实例。</p>
@@ -239,6 +239,35 @@
 <li>读者-写者问题</li>
 <li>睡眠理发师问题</li>
 <li>哲学家进餐问题</li>
+</ul>
+<h2><a class="header" href="#死锁" id="死锁">死锁</a></h2>
+<p>死锁（Deadlock）是指系统中多个进程无限制地等待永远不会发生的条件。</p>
+<p>死锁发生的必要条件：</p>
+<ul>
+<li>互斥</li>
+<li>请求和保持</li>
+<li>非剥夺</li>
+<li>环路等待</li>
+</ul>
+<p>处理死锁问题的四种方法：</p>
+<ul>
+<li>鸵鸟算法</li>
+<li>死锁预防
+<ul>
+<li>预先静态分配法</li>
+<li>有序资源使用法</li>
+</ul>
+</li>
+<li>死锁检测
+<ul>
+<li>资源分配图算法</li>
+</ul>
+</li>
+<li>死锁避免
+<ul>
+<li>银行家算法</li>
+</ul>
+</li>
 </ul>
 
                     </main>
