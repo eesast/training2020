@@ -1,7 +1,3 @@
-
-
-
-
 # 操作系统
 
 参考资料《现代操作系统》、清华大学电子工程系操作系统课程课件、2018 EESAST软件部培训课件，以及其它注明的资料。
@@ -81,7 +77,7 @@ CPU的一个核心上，同一时间片只能执行一个线程。操作系统�
 
 对于计算密集型任务，频繁调度不划算；而对于IO密集型任务，调度是有较大收益的。
 
-原语（primitive）：由若干条指令构成的 “原子操作（atomic operation）” 过程 ，作为一个整体而不可分割——要么全都完成 ，要么全都不做 要么全都不做 要么全都不做 。许多系统调用都是原语。原语可以避免因调度而被打断。
+原语（primitive）：由若干条指令构成的 “原子操作（atomic operation）” 过程 ，作为一个整体而不可分割——要么全都完成 ，要么全都不做。许多系统调用都是原语。原语可以避免因调度而被打断。
 
 需要注意的是，C或其它编程语言的一条指令可能由多个汇编语句构成，而处理器执行汇编指令中都可能发生调度，因此同一条指令可能被打断，发生各种情况。
 
@@ -150,17 +146,17 @@ main(){
                                 exit(1);
                         }
 
-        if (child == 0)
-        {       // in child process
-                printf("Now it is in child process.\n");
-                if (execl("/test","test",NULL) == -1)
-                {
-                        perror("Error in child process");
-                        exit(1);
+                        if (child == 0)
+                        {       // in child process
+                                printf("Now it is in child process.\n");
+                                if (execl("/test","test",NULL) == -1)
+                                {
+                                        perror("Error in child process");
+                                        exit(1);
+                                }
+                                exit(0);
+                        }
                 }
-                exit(0);
-        }
-}
                 if (i == 3)
                 {
                         pid_t temp;
@@ -312,7 +308,7 @@ Python有multiprocessing库。Python的解释器执行代码时，有一个GIL�
 
 临界资源：多个进程访问时，必须互斥的硬件或软件资源。
 
-临界区——进入区——退出区——剩余区
+进入区——临界区——退出区——剩余区
 
 ![IPC](_images/IPC.png)
 
@@ -479,8 +475,7 @@ V(s)
 	++s.count; // 表示释放一个资源
 	if (s.count <= 0) // 表示有进程处于阻塞状态
 	{
-        // 调用进程进入等待队列 s.queue;
-        // 阻塞调用进程;
+        // 从等待队列 s.queue 取出一个进程并调用;
 	}
 }
 ```
@@ -801,7 +796,7 @@ pthread中信号量类型`sem_t`，通过`sem_init()`，`sem_post()`，`sem_wait
 typedef int semaphore; 
 semaphore mutex = 1;
 semaphore empty= N;
-semaphore full = O;
+semaphore full = 0;
 void producer(void)
 {
 	int item;
@@ -907,8 +902,7 @@ void customer(void)
 
 - 哲学家进餐问题
 
-5个哲学家围绕一张圆桌而坐，桌子上放着5把叉子，每两个哲学家之间放一支；哲学家的动作包括思考和进餐，进餐时需要同时拿起他左边和右边的两把叉
-子，思考时则同时将两把叉子放回原处。
+5个哲学家围绕一张圆桌而坐，桌子上放着5把叉子，每两个哲学家之间放一支；哲学家的动作包括思考和进餐，进餐时需要同时拿起他左边和右边的两把叉子，思考时则同时将两把叉子放回原处。
 
 ![dining_philosophers](_images/dining_philosophers.png)
 
@@ -1014,4 +1008,73 @@ void test(int i)
 1. 一个可容纳2人的卫生间，使用时需要保证不能有不同性别顾客同时进入卫生间，请使用信号量写出男性、女性进程的伪代码。
 2. 一个家庭餐厅，有N个家庭座与M个单人座，家庭顾客只能做家庭座，单人客户二者皆可。店内无座位则等待。另外，进入餐厅时需要登记体温，一次仅能登记一桌顾客。请分别写出家庭顾客和单人客户进程伪代码模拟这一过程。
 
-参考答案之后可能更新。
+参考答案（个人答案，仅供参考）：
+
+```C
+semaphore sex = 1, mutex_m = 1, mutex_f = 1, restroom = 2;
+int m, f;
+
+void male() {
+    P(mutex_m);
+    if (m == 0)
+        P(sex);
+    ++m;
+    V(mutex_m);
+    P(restroom);
+    go_restroom();
+    V(restroom);
+    P(mutex_m);
+    --m;
+    if (m == 0)
+        V(sex);
+    V(mutex_m);
+}
+
+// 女性进程对称
+```
+
+```C
+// 这个代码演示了有可能发生死锁的例子，主要在于剩余一个家庭座时，家庭顾客先请求了family，单人顾客先请求了total，二者都试图继续请求对方持有的资源。正确的代码可以自行考虑修改。
+semaphore total = M+N, family = N, single = M, mutex_reg = 1, mutex_cnt = 1;
+int single_cnt = 0;
+
+void family_customer() {
+    P(family);
+    P(total);
+    P(mutex_reg);
+    register_temp();
+    V(mutex_reg);
+    eat();
+    V(family);
+    V(total);
+}
+
+void single_customer() {
+    int type;
+    P(total);
+    P(mutex_cnt);
+    if (single_cnt < M) {
+        P(single);
+        ++single_cnt;
+        type = 1;
+    } else {
+        P(family);
+        type = 0;
+    }
+    V(mutex_cnt);
+    P(mutex_reg);
+    register_temp();
+    V(mutex_reg);
+    eat();
+    P(mutex_cnt);
+    if (type == 1) {
+        --single_cnt;
+        V(single);
+    } else {
+        V(family);
+    }
+    V(mutex_cnt);
+    V(total);
+}
+```
+
