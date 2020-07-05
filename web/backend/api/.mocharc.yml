@@ -1,0 +1,9 @@
+require:
+  - ./test/babel-register.js
+timeout: 200000
+full-trace: true
+file:
+  - ./test/setup.ts
+  - ./test/users.ts
+ignore:
+  - ./test/variables.ts

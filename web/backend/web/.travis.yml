@@ -1,0 +1,15 @@
+language: node_js
+node_js: "node"
+cache: yarn
+before_install:
+  - npm i -g yarn
+install:
+  - yarn
+script:
+  - yarn lint
+  - yarn typecheck
+  - yarn test
+  - yarn build
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh

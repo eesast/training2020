@@ -1,0 +1,14 @@
+.root {
+  height: calc(100vh - 83px - 48px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.column {
+  width: 50%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 32px 64px;
+}

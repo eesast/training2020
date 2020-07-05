@@ -1,0 +1,9 @@
+.root {
+  height: calc(100vh - 67px - 64px);
+  padding: 48px 10vw;
+  overflow: auto;
+}
+
+.paragraph {
+  font-size: larger;
+}
