@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="OS/OS.html"><strong aria-hidden="true">6.</strong> 操作系统</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li></ol></li><li class="chapter-item expanded "><a href="linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="OS/OS.html"><strong aria-hidden="true">6.</strong> 操作系统</a></li><li class="chapter-item expanded "><a href="CSharp/CS-Learning1-Basic.html"><strong aria-hidden="true">7.</strong> CSharp1</a></li><li class="chapter-item expanded "><a href="CSharp/CS-Learning2-MultiThread.html"><strong aria-hidden="true">8.</strong> CSharp2</a></li><li class="chapter-item expanded "><a href="unity/unity.html"><strong aria-hidden="true">9.</strong> Unity</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1278,6 +1278,1449 @@ $ tmux kill-session -t &lt;session-name&gt;
 </ul>
 </li>
 </ul>
+<h4><a class="header" href="#c概述" id="c概述">C#：概述</a></h4>
+<p>C# 语法高度重视表达，但学习起来也很简单轻松。 任何熟悉 C、C++ 或 Java 的人都可以立即认出 C# 的大括号语法。 通常情况下，了解上述任何一种语言的开发者都可在短时间内就开始使用 C# 高效工作。 C# 语法简化了 C++ 的许多复杂操作，并提供强大功能，如可以为 null 的类型、枚举、委托、lambda 表达式和直接内存访问。 </p>
+<p>作为面向对象的语言，C# 支持封装、继承和多态性这些概念。 所有变量和方法（包括作为应用程序入口点的 <code>Main</code> 方法）都封装在类定义中。 虽然类可能会直接继承一个父类，但可以实现任意数量的接口。 若要用方法重写父类中的虚方法，必须使用 <code>override</code> 关键字，以免发生意外重定义。 在 C# 中，结构就像是轻量级类，是可以实现接口但不支持继承的堆栈分配类型。</p>
+<p>除了这些面向对象的基本原则，使用 C# 还可以通过以下多个创新语言构造更加轻松地开发软件组件：</p>
+<ul>
+<li>封装的方法签名（名为“<em>委托</em>”），可实现类型安全事件通知。</li>
+<li>用作私有成员变量的访问器的属性。</li>
+<li>在运行时提供有关类型的声明性元数据的特性。</li>
+<li>内联的 XML 文档注释。</li>
+<li>语言集成查询 (LINQ)，提供跨各种数据源的内置查询功能。</li>
+</ul>
+<p>C# 生成过程比 C 和 C++ 更简单，比 Java 更灵活。 没有单独的头文件，也不要求按特定顺序声明方法和类型。 C# 源文件可以定义任意数量的类、结构、接口和事件。</p>
+<ul>
+<li><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/">微软官方文档</a></li>
+</ul>
+<h4><a class="header" href="#程序结构" id="程序结构">程序结构</a></h4>
+<p>一个 C# 程序主要包括以下部分：</p>
+<ul>
+<li>命名空间声明（Namespace declaration）
+<ul>
+<li>Class 类声明
+<ul>
+<li>一个 Main 方法
+<ul>
+<li>语句（Statements）&amp; 表达式（Expressions）</li>
+</ul>
+</li>
+<li>其他方法和属性</li>
+</ul>
+</li>
+<li>其他类声明</li>
+</ul>
+</li>
+<li>其他命名空间...</li>
+</ul>
+<pre><code class="language-c#">using System; // 在程序中包含System命名空间
+namespace HelloWorldApplication // 声明命名空间
+{
+   class HelloWorld // 声明一个类
+   {
+      static void Main(string[] args) // 静态方法
+      {
+         /* 我的第一个 C# 程序*/
+         HelloWorld n = new HelloWorld();
+         Console.WriteLine(&quot;Hello World&quot;);  // System.Console.WriteLine
+         /* 定义在 System 命名空间中的 Console 类的一个方法 */
+         Console.ReadKey(); //等待一个按键的动作
+      }
+   }
+}
+</code></pre>
+<h4><a class="header" href="#数据类型-1" id="数据类型-1">数据类型</a></h4>
+<h5><a class="header" href="#值类型" id="值类型">值类型</a></h5>
+<ul>
+<li>bool，char，float(1.0F)，double(1.0D)，short(16)，int(32)，long(64)，uint...
+<ul>
+<li>byte 8位无符号整数</li>
+<li>decimal：128位十进制整数/小数，有效位数28-29位(1.0M)</li>
+<li>结构体(Struct)</li>
+</ul>
+</li>
+<li>传参时进行值传递，拷贝副本</li>
+<li>在栈空间上分配内存，不会给垃圾回收(GC)造成负担</li>
+<li>不能派生其他子类，不能使用线程锁</li>
+</ul>
+<h5><a class="header" href="#引用类型" id="引用类型">引用类型</a></h5>
+<ul>
+<li>
+<p>所有类型的基类object, 字符串string，数组Array，类class，接口interfac，委托delegate..</p>
+</li>
+<li>
+<p>传参和直接赋值时进行引用传递，可以在函数内部改变其值</p>
+<ul>
+<li>
+<p>string类较为特殊，string间赋值被重载为深复制</p>
+<pre><code class="language-c#">string s1 = &quot;Hello, World!&quot;;
+string s2 = s1;
+s2 = &quot;See you!&quot;;
+Console.WriteLine(s1); // &quot;Hello, World!&quot;
+Console.WriteLine(s2); // &quot;See you!&quot;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>在堆空间上分配内存，并由GC机制进行内存管理</p>
+</li>
+<li>
+<p>可以派生，可以使用线程锁等</p>
+</li>
+</ul>
+<h5><a class="header" href="#指针类型" id="指针类型">指针类型</a></h5>
+<ul>
+<li>可以对方法添加unsafe关键字，并使用C，C++中的指针 int*等</li>
+<li>在vs项目中设置允许使用不安全的代码</li>
+<li>由于C#中的GC机制，一个变量（例如一个大数组）有可能在运行过程中被移动到内存中的其他位置，因此不建议使用指针类型(可以使用fixed关键字固定内存位置)</li>
+<li>可以在unsafe环境中使用stackalloc分配栈内存，栈内存不受GC的影响</li>
+</ul>
+<h5><a class="header" href="#可空类型" id="可空类型">可空类型</a></h5>
+<ul>
+<li>定义变量时，在类型后添加?表示该变量可能为null：<code>double? num = null;</code></li>
+<li>使用变量时，在变量后添加 ?? 表示若该变量为null，则使用 ?? 后的替换值
+<ul>
+<li><code>double num2 = num ?? 1.0</code></li>
+</ul>
+</li>
+</ul>
+<h5><a class="header" href="#类型转化" id="类型转化">类型转化</a></h5>
+<ul>
+<li>前加(类型名)，(int)</li>
+<li>调用数据对象的ToString()，ToBoolean()，ToDouble()，Toint32()方法</li>
+<li>调用System空间的Convert类的相应方法 <code>double a=Convert.ToDouble(1)</code></li>
+<li>调用VarType.Parse()方法，参数必须为string，如 <code>Int.Parse(&quot;32&quot;)</code></li>
+<li>使用as关键字，如果转换失败则返回null，只能用于引用类型间转化</li>
+</ul>
+<h5><a class="header" href="#类型判断" id="类型判断">类型判断</a></h5>
+<ul>
+<li>使用 is 关键字 <code>if( x is int)</code></li>
+</ul>
+<h5><a class="header" href="#装箱与拆箱" id="装箱与拆箱">装箱与拆箱</a></h5>
+<ul>
+<li>
+<p>装箱：把值类型转换成引用类型；拆箱：把引用类型转换成值类型</p>
+</li>
+<li>
+<pre><code class="language-c#">//装箱
+int i = 1;
+object obj = (object)i;
+//拆箱
+int j = (int)obj;
+</code></pre>
+</li>
+<li>
+<p>装箱与拆箱的过程会有性能损耗</p>
+</li>
+</ul>
+<h4><a class="header" href="#基本语法" id="基本语法">基本语法</a></h4>
+<h5><a class="header" href="#条件语句" id="条件语句">条件语句</a></h5>
+<ul>
+<li>if else：同C, C++</li>
+<li>?运算符：同C, C++</li>
+<li>switch case default：同C，C++，case需要添加break语句</li>
+</ul>
+<h5><a class="header" href="#循环语句" id="循环语句">循环语句</a></h5>
+<ul>
+<li>for( init; condition; end) 语句，同C, C++</li>
+<li>while循环，do while循环，同C, C++</li>
+<li>foreach语句
+<ul>
+<li>foreach(typename x in Array/Collection) //可迭代对象</li>
+<li>逐一取出可迭代对象内的元素x，语句块内可以读取x的值，但不能改变x的值</li>
+</ul>
+</li>
+</ul>
+<h4><a class="header" href="#string-字符串" id="string-字符串">String 字符串</a></h4>
+<ul>
+<li>String类的对象，用双引号表示字符串</li>
+<li>使用String类的方法多种字符串操作
+<ul>
+<li>Compare, Concat, Contains, Copy, Ends/StartsWith, IndexOf, Insert, Replace, Remove, Split, Trim..</li>
+</ul>
+</li>
+<li>使用ToCharList方法转换为字符数组</li>
+<li>使用@前缀表示转义字符串：<code>@&quot;C:\Windows&quot;</code></li>
+<li>使用$前缀进行字符串内插：</li>
+</ul>
+<pre><code class="language-c#">string name = &quot;Mark&quot;;
+var date = DateTime.Now;
+Console.WriteLine($&quot;Hello, {name}! Today is {date.DayOfWeek}.&quot;);
+// Hello, Mark! Today is Wednesday.
+</code></pre>
+<ul>
+<li>也可使用Format方法插入数值，但较为繁琐</li>
+</ul>
+<p><code>Console.WriteLine(&quot;Hello, {0}! Today is {1}.&quot;, name, date.DayOfWeek);</code></p>
+<h4><a class="header" href="#array-数组" id="array-数组">Array 数组</a></h4>
+<ul>
+<li><code>double[] a = new double[10];</code> <code>double[] b = a;//a和b指向同一内存位置</code> </li>
+<li><code>double[] a = { 2340.0, 4523.69, 3421.0};</code></li>
+<li>数组作为参数传入时，函数体内可修改数组元素的值 </li>
+</ul>
+<h5><a class="header" href="#多维数组" id="多维数组">多维数组</a></h5>
+<ul>
+<li>
+<p>类似矩阵的数据结构</p>
+<pre><code class="language-c#">int [,] a = new int [2,3] 
+{
+ {0, 1, 2} ,
+ {3, 4, 5} ,
+};
+</code></pre>
+</li>
+<li>
+<p>访问元素：<code>int b = a[1,2] \\5</code></p>
+</li>
+<li>
+<p>使用Rank属性获取多维数组的维数，使用GetLength(d)来获取第d维的长度</p>
+</li>
+<li>
+<p>foreach循环会遍历每个元素</p>
+</li>
+</ul>
+<h5><a class="header" href="#交错数组" id="交错数组">交错数组</a></h5>
+<ul>
+<li>类似C，C++中的多维数组，本质是“元素是数组的数组&quot;</li>
+<li><code>int[][] a = new int[2][]{new int[]{92,93,94},new int[]{85,66,87,88}};</code></li>
+<li>获取a的Rank属性，得到结果为1，foreach循环只会遍历各个数组</li>
+</ul>
+<h4><a class="header" href="#struct-结构体" id="struct-结构体">Struct 结构体</a></h4>
+<ul>
+<li>可以定义字段，属性(区别一会儿再说)，方法，构造函数，不能定义析构函数</li>
+<li>可以声明静态成员</li>
+<li>构造函数必须带参数，且在构造函数中必须为每个字段赋值</li>
+<li>作为参数时是值传递，储存在栈空间中，所需空间较小</li>
+<li>不能继承和派生</li>
+</ul>
+<pre><code class="language-c#">struct Books
+{
+   private string title;
+   private string author;
+   public Books(string t, string a)
+   {
+   		title = t;
+        author = a;
+   }
+}; 
+</code></pre>
+<h4><a class="header" href="#enum-枚举" id="enum-枚举">Enum 枚举</a></h4>
+<ul>
+<li>同C, C++，默认为Public，可以显式指定枚举对应的值</li>
+</ul>
+<pre><code class="language-c#">enum Numbers
+{
+    One,
+	Three = 3,
+    Four // 从上一项的值+1
+}
+static void Main()
+{
+	Numbers num = Numbers.Three;
+	Console.WriteLine(num); // &quot;Three&quot;
+	int one = 1;
+	num = (Numbers) one; // Enum和int可以强制类型转换
+	Console.WriteLine(Convert.ToString(num)); // 使用Convert获取枚举字符串
+	string four = &quot;Four&quot;;
+	num = (Numbers)Enum.Parse(typeof(Numbers), four); //由字符串转换为枚举
+	Console.WriteLine((int)num);
+}
+</code></pre>
+<h4><a class="header" href="#class-类" id="class-类">Class 类</a></h4>
+<ul>
+<li>基本定义同C，C++，有构造和析构函数(不支持构造函数的简洁写法)</li>
+<li>作为参数时是引用传递</li>
+<li>静态变量和静态方法：该类的各个对象共享同一个变量，而<strong>静态方法只能使用静态变量，调用静态方法</strong>
+<ul>
+<li>main方法是静态方法，故Program类中的全局变量应该设为静态变量</li>
+<li>可以使用类名.方法名，不实例化类的对象直接调用静态方法</li>
+</ul>
+</li>
+</ul>
+<h5><a class="header" href="#方法" id="方法">方法</a></h5>
+<ul>
+<li>在类中定义方法，每一个 C# 程序至少有一个带有 Main 方法的类。</li>
+</ul>
+<pre><code class="language-c#">   public int Max(int ref num1, int ref num2)
+   {
+       return num1 &gt; num2 ? num1 : num2;
+   }
+</code></pre>
+<ul>
+<li>
+<p>使用非静态方法时必须先实例化类的对象，如在Program类中声明了main函数和以上Max函数，则在main函数中调用Max函数时，需先声明Program对象：<code>Program n = new Program();</code>，再调用相应的方法：<code>n.Max(ref a, ref b)</code></p>
+</li>
+<li>
+<p>参数传递：</p>
+<ul>
+<li>值传递：拷贝值型变量的副本</li>
+<li>引用参数：在方法的参数列表和调用方法时均增加<strong>ref</strong>关键字</li>
+<li>输出参数：在方法的参数列表和调用方法时均增加<strong>out</strong>关键字, out参数必须在方法内赋值，且不能在赋值前被使用</li>
+</ul>
+</li>
+</ul>
+<h5><a class="header" href="#访问控制" id="访问控制">访问控制</a></h5>
+<ul>
+<li>public, private, protected(对该类对象及其子类对象可以访问)</li>
+<li>如果不声明，则默认为private</li>
+</ul>
+<h5><a class="header" href="#继承与派生" id="继承与派生">继承与派生</a></h5>
+<ul>
+<li>继承和派生与C，C++类似，继承后子类可以访问父类中public和protected的字段，属性和方法</li>
+</ul>
+<table><thead><tr><th align="center"></th><th align="center">实方法</th><th align="center">虚方法</th><th align="center">抽象方法</th></tr></thead><tbody>
+<tr><td align="center">修饰符</td><td align="center">/</td><td align="center">virtual</td><td align="center">abstract</td></tr>
+<tr><td align="center">父类要求</td><td align="center">/</td><td align="center">/</td><td align="center">有抽象方法的类也为抽象类</td></tr>
+<tr><td align="center">父类实现</td><td align="center">/</td><td align="center">父类必须给出虚方法的实现</td><td align="center">父类可以只声明抽象方法</td></tr>
+<tr><td align="center">子类实现</td><td align="center">子类可以覆盖实方法</td><td align="center">子类可以重载或覆盖虚方法</td><td align="center">子类必须重载虚方法</td></tr>
+<tr><td align="center">重载(override)</td><td align="center">×</td><td align="center">√</td><td align="center">√</td></tr>
+<tr><td align="center">覆盖(new)</td><td align="center">√</td><td align="center">√</td><td align="center">×</td></tr>
+<tr><td align="center">基类调用(base)</td><td align="center">√</td><td align="center">√</td><td align="center">√</td></tr>
+<tr><td align="center">密封类(sealed)</td><td align="center">√</td><td align="center">√</td><td align="center">×</td></tr>
+</tbody></table>
+<ul>
+<li>覆盖与重载的区别：覆盖后子类的实例可以调用父类被覆盖的方法(强制类型转换)，而重载后则不可以，对于虚方法一般使用重载</li>
+<li>声明密封类：此类不能被继承</li>
+</ul>
+<pre><code class="language-c#">using System;
+
+namespace CSharpLearning
+{
+    abstract class Animal // 有抽象方法的类必须是抽象类
+    {
+        public Animal(){};
+        public void Move() // 实方法
+        {
+            Console.WriteLine(&quot;调用了Animal类的Move方法&quot;);
+        }
+        public virtual void Attack() // 虚方法，必须给出实现
+        {
+            Console.WriteLine(&quot;调用了Animal类的Attack方法&quot;);
+        }
+        public abstract void Name(); // 抽象方法，可以只声明，不实现
+
+    }
+
+    sealed class Cat : Animal // 密封类，不能派生，继承了Animal类
+    {
+        public override void Name() // 若不重载抽象方法则会报错
+        {
+            Console.WriteLine(&quot;调用了Cat类的Name方法&quot;);
+        }
+
+        public override void Attack() // 可以重载父类的虚方法，也可不重载，还可用new覆盖父类的虚方法
+        {
+            Console.WriteLine(&quot;调用了Cat类的Attack方法&quot;);
+        }
+
+        public new void Move() // 使用new覆盖父类的实方法
+        {
+            base.Move(); // 使用base关键字调用父类的同名方法
+            Console.WriteLine(&quot;调用了Cat类的Move方法&quot;);
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Animal animal = new Animal(); 报错：无法创建抽象类Animal的实例
+            Cat cat=new Cat();
+            cat.Name(); // 调用了Cat类的Name方法
+            cat.Move(); // 调用了Animal类的Move方法/n 调用了Cat类的Move方法
+            ((Animal)cat).Move(); // 调用了Animal类的Move方法
+            ((Animal)cat).Attack(); // 调用了Cat类的Attack方法
+            Console.ReadKey();
+        }
+    }
+}
+</code></pre>
+<h5><a class="header" href="#字段与属性" id="字段与属性">字段与属性</a></h5>
+<ul>
+<li><a href="https://www.cnblogs.com/doThing/p/properties-in-csharp.html">更多参考资料</a></li>
+<li>字段又称“成员变量”，一般在类的内部做数据交互使用，命名时通常首字母小写</li>
+<li>属性是外界访问私有字段的入口，负责指定相应字段的读、写方式，命名与对应字段相同且首字母大写</li>
+<li>声明属性时，首先声明相应的私有字段，然后指定属性的get和set访问器</li>
+</ul>
+<pre><code class="language-c#">class Person
+{
+    private int age;
+	public int Age
+	{
+		get { return age; }
+    	set { age = value &gt; 120 ? 120 : value; }
+        // 此处value为关键字，代表用户所赋的值
+	}
+}
+</code></pre>
+<ul>
+<li>在C# 7.0之后也可用类似lambda表达式的方法设置属性</li>
+</ul>
+<pre><code class="language-c#">class Person
+{
+    private int age;
+	public int Age { get =&gt; age; set =&gt; age = value &gt; 120 ? 120 : value; }
+    // 注意set语句中仍需对age赋值
+    // 如果只实现get访问器，则可以进一步简化为 public int Age =&gt; age;
+}
+</code></pre>
+<ul>
+<li>使用属性对应字段的值时，直接对属性读取或赋值：</li>
+</ul>
+<pre><code class="language-c#">Person person = new Person();
+person.Age = 20;
+Console.WriteLine(person.Age);
+</code></pre>
+<ul>
+<li>
+<p>若属性访问器中<strong>不需要任何其他逻辑</strong>时，我们可以使用自动实现的属性，不需要声明相应字段</p>
+<p><code>public int Age { get; set; }</code></p>
+</li>
+<li>
+<p>此时也可进行初始化<code>public string Name { get; set; } = &quot;Jane&quot;;</code></p>
+</li>
+<li>
+<p>若去除set访问器，则属性变为只读的，必须为其指定初始值</p>
+<p><code>public string Name { get; } = &quot;Jane&quot;;</code></p>
+</li>
+</ul>
+<h4><a class="header" href="#运算符重载" id="运算符重载">运算符重载</a></h4>
+<ul>
+<li>基本与C，C++一致，使用operator关键字且应声明为static方法</li>
+</ul>
+<pre><code class="language-c#">public static Student operator +(Student s1, Student s2)
+{
+	return new Student(s1.age + s2.age, s1.name + &quot; And &quot; + s2.name);
+}
+</code></pre>
+<ul>
+<li>重载 == 操作符后也必须重载 != 操作符</li>
+<li>重载 + 操作符后 += 操作符也自动被重载，- , * , / 等类似</li>
+<li>使用Implict/Explict关键字重载隐式/显式类型转换运算符
+<ul>
+<li><code>public static implict operator A(B b)</code> 类型B到类型A的隐式转换</li>
+</ul>
+</li>
+</ul>
+<h4><a class="header" href="#interface-接口" id="interface-接口">Interface 接口</a></h4>
+<ul>
+<li>接口使用 <strong>interface</strong> 关键字声明，它与类的声明类似。接口声明默认是 public 的</li>
+<li>抽象类在某种程度上与接口类似，但是，抽象类大多用于只有少数方法由基类声明而由派生类实现时，接口则指定的其派生类应遵循的标准</li>
+<li>接口通常以大写 I 开头命名，接口的定义与类的定义相似(interface关键字)，其中方法默认为public，接口内也可有属性的声明，但不能有字段</li>
+<li>C#中不允许继承多个类，但可以继承多个接口</li>
+<li>接口可以继承其他接口，而实现该接口的类应该实现所有接口的方法和属性</li>
+</ul>
+<pre><code class="language-c#">interface IPerson
+{
+　　string Name { get; set; }`
+　　void Show(string name);
+}
+
+interface IStudent //也可继承IPerson接口，则Student类只需继承IStudent接口
+{
+　　string Id { get; set; }`
+　　void Show(string id); //若继承IPerson接口，则应加new修饰符覆盖同名方法
+}
+
+class Student: IPerson, IStudent //多继承
+{
+　　public string Name { get; set; }`
+　　public string Id { get; set; }`
+      
+　　void IPerson.Show(string name) //分别实现不同接口的同名方法
+　　{
+    　　Console.WriteLine(&quot;姓名为{0}&quot;, name);
+　　}
+    
+　　void IStudent.Show(string id) //如果指定实现接口的函数，则可以不使用访问控制
+　　{
+    　　Console.WriteLine(&quot;学号为{0}&quot;, id);
+　　}
+    
+	//public void Show(string id) //如果统一实现，则必须指定访问控制符
+    	//{
+        //    Console.WriteLine(&quot;姓名为{name},学号为{id}&quot;);
+        //}
+}
+
+class Program
+{
+　　static void Main()
+　　{
+    　　Student s = new Student();
+    　　Console.WriteLine(&quot;输入姓名&quot;);
+    　　s.Name = Console.ReadLine();
+    　　Console.WriteLine(&quot;输入学号&quot;);
+    　　s.Id = Console.ReadLine();
+    　　IPerson per = s;
+    　　per.Show(s.Name);
+    　　IStudent stu = s;
+    　　stu.Show(s.Id);
+　　}
+}
+</code></pre>
+<ul>
+<li>函数可以使用接口作为参数，在传参时传入不同实现该接口的类的实例</li>
+</ul>
+<h4><a class="header" href="#exception-异常处理" id="exception-异常处理">Exception 异常处理</a></h4>
+<ul>
+<li>类似C++的 try - throw - catch - finally结构</li>
+<li>一个try块至少对应一个catch块或1个finally块</li>
+<li>只会进入从上向下的第一个匹配的代码块，若当前函数中没有匹配的catch块则会搜索外层函数</li>
+</ul>
+<pre><code class="language-c#">static int GetInt(int[] array, int index)
+{
+	try
+	{
+		return array[index];
+	}
+	catch (System.IndexOutOfRangeException ex)  //下标越界的更具体原因在于传递了越界的参数index
+	{
+		Console.WriteLine(ex.Message);
+        // 创建更精确的异常并抛出给外层函数
+		throw new ArgumentException(&quot;index parameter is out of range.&quot;, &quot;index&quot;, ex);
+    }
+}
+static void Main()
+{
+    try
+    {
+        int[] a = {1, 2, 3, 4, 5};
+        GetInt(a, 5);
+    }
+    catch (ArgumentException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    catch (Exception)
+    {
+        Console.WriteLine(&quot;发生未知错误!&quot;);
+    }
+    finally //一般用于释放资源
+    {
+        Console.WriteLine(&quot;Done!&quot;);
+    }
+}
+</code></pre>
+<h4><a class="header" href="#delegate-委托" id="delegate-委托">Delegate 委托</a></h4>
+<ul>
+<li>类似于C, C++的函数指针，可用于引用任何返回值和参数列表相同的方法</li>
+<li>delegate void printString(string s);`</li>
+<li>声明委托后，使用new创建委托对象，并且传入要引用的函数名作为参数
+<ul>
+<li><code>printString ps1 = new printString(WriteToScreen);</code></li>
+</ul>
+</li>
+<li>此后可以使用委托对象调用对应</li>
+</ul>
+<h5><a class="header" href="#多播委托" id="多播委托">多播委托</a></h5>
+<ul>
+<li>作用于参数和返回值相同的委托对象直接</li>
+<li>委托类型重载了 + - 运算符，可用于依次执行一系列任务，再返回值</li>
+</ul>
+<pre><code class="language-c#">using System;
+namespace Program
+{
+	delegate int NumberChanger(int n); // 委托可以直接在命名空间内声明
+    class TestDelegate
+    {
+        public static int Num { get; set; } = 10;
+        public static int AddNum(int p)
+        {
+            Num += p;
+            return Num;
+        }
+
+        public static int MulNum(int q)
+        {
+            Num *= q;
+            return Num;
+        }
+        static void Main(string[] args)
+        {
+            NumChanger fc1 = new NumChanger(AddNum);
+            NumChanger fc2 = new NumChanger(MulNum);
+            NumChanger fc = fc2 + fc1;
+            Console.WriteLine(fc(5)); // 75 = (10 * 5) + 5
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>委托可以接受匿名函数作为参数</li>
+</ul>
+<p><code>NumChanger fc1 = delegate(int p) { Num += p; return p;};</code></p>
+<ul>
+<li>也可以接受一个<strong>lambda表达式</strong>作为参数：</li>
+</ul>
+<p><code>NumChanger fc1 = (int p) =&gt;  { Num += p; return p;};</code> </p>
+<h5><a class="header" href="#lambda表达式" id="lambda表达式">lambda表达式</a></h5>
+<ul>
+<li>表达式lambda，自动返回表达式的值
+<ul>
+<li>(int x, int y) =&gt; x * y 或省略类型声明 (x, y) =&gt; x * y</li>
+<li>只有1个参数时可省略左侧的括号 x =&gt; x * x * x</li>
+</ul>
+</li>
+<li>语句lambda
+<ul>
+<li>(int x, int y) =&gt; { return x * y; }</li>
+<li>右侧用大括号扩起，内部可以有多条语句(不宜过多)，也可没有返回值</li>
+</ul>
+</li>
+</ul>
+<h4><a class="header" href="#generic-泛型" id="generic-泛型">Generic 泛型</a></h4>
+<ul>
+<li>类似C++ 的模板，可以兼容不同的数据类型，但限制更多</li>
+<li>泛型类：<code>class MyArray&lt;T&gt;</code></li>
+<li>泛型方法： <code>static void Swap&lt;T&gt;(ref T x, ref T y)</code></li>
+<li>泛型委托：<code>delegate T NumberChanger&lt;T&gt;(T n);</code></li>
+<li>泛型接口：<code>interface IDictionary&lt;K, V&gt;</code></li>
+<li>继承泛型类或接口时待定类型只能不变或增多</li>
+</ul>
+<h5><a class="header" href="#泛型的类型约束" id="泛型的类型约束">泛型的类型约束</a></h5>
+<ul>
+<li>
+<p>声明泛型时可以给泛型添加一定的约束：<code>class MyArray&lt;T&gt; where T : struct</code></p>
+</li>
+<li>
+<p>where T : struct ：T必须为(不可为空的)值类型</p>
+</li>
+<li>
+<p>where T : class ：T必须为(不可为空的)引用类型</p>
+</li>
+<li>
+<p>where T : notnull ：T必须为不可为空的类型</p>
+</li>
+<li>
+<p>where T : new() ：T必须具有无参数的构造函数，不能与struct合用</p>
+</li>
+<li>
+<p>where T : &lt;interface name&gt; ：T必须实现指定的接口</p>
+</li>
+<li>
+<p>where T : &lt;base class name&gt; ：T必须为指定类或其派生类</p>
+</li>
+<li>
+<p>多个限制并用：用逗号分隔</p>
+</li>
+<li>
+<p>约束多个参数：</p>
+<pre><code class="language-c#">class Base { }
+class Test&lt;T, U&gt;
+    where U : struct
+    where T : Base, new()
+</code></pre>
+</li>
+</ul>
+<h4><a class="header" href="#collections-集合" id="collections-集合">Collections 集合</a></h4>
+<ul>
+<li>包含了一系列基本数据结构的命名空间</li>
+<li>ArrayList, SortedList, Hashtable, Stack, Queue..
+<ul>
+<li>一般包含Add, Clear, Remove等方法</li>
+</ul>
+</li>
+<li>包含一些基本的接口，如 IComparer, IEnumerator(迭代), IList(按索引访问)</li>
+<li>并未指定成员的数据类型，因此全部成员都被转换为object类</li>
+<li>对于值类型，使用Collections意味着频繁的装箱和拆箱，性能不佳</li>
+</ul>
+<h5><a class="header" href="#collectionsgeneric" id="collectionsgeneric">Collections.Generic</a></h5>
+<ul>
+<li>利用泛型值类数据类型的数据结构，拥有更好的类型安全性和性能</li>
+<li>Tuple&lt;T1, T2, T3, ...&gt; ，使用.Item1, .Item2来访问，类似C++的pair
+<ul>
+<li>使用C# 7.0的新特性<strong>元组</strong>实现此功能</li>
+<li>(1, 2)； (&quot;one&quot;, &quot;two&quot;)，...</li>
+<li>可以为每个元组的元素起别名：（x : 1, y : 2)</li>
+<li>元组支持直接赋值和比较</li>
+</ul>
+</li>
+<li>List&lt;T&gt;  类似C++ vector</li>
+<li>Dictionary&lt;T1, T2&gt;</li>
+<li>Queue&lt;T&gt;， Stack&lt;T&gt;</li>
+<li>HashSet&lt;T&gt;</li>
+</ul>
+<h5><a class="header" href="#常用库函数介绍补充" id="常用库函数介绍补充">常用库函数介绍(补充)</a></h5>
+<ul>
+<li>
+<p>System.IO 包含对一系列系统调用的支持，比如各种文件操作</p>
+<ul>
+<li>FileStream</li>
+<li>StreamReader 与 StreamWriter 进行文本文件读写</li>
+<li>BinaryReader 和 BinaryWriter 类用于二进制文件的读写</li>
+<li>DirectoryInfo 类和 FileInfo 类用于进行windows文件系统的操作</li>
+</ul>
+</li>
+<li>
+<p>System.Linq 使用一定格式的语句查询和筛选可迭代对象</p>
+</li>
+<li>
+<p>System.Text 包含一系列编解码相关的功能</p>
+</li>
+<li>
+<p>System.Text.RegularExpressions; 包含正则表达式的基类Regex</p>
+</li>
+<li>
+<p>System.Threading 提供启用多线程的类和接口.</p>
+</li>
+<li>
+<p><strong>事件、异步、多线程... 未完待续</strong></p>
+</li>
+</ul>
+<h1><a class="header" href="#c课程2事件异步多线程" id="c课程2事件异步多线程">C#课程2（事件、异步、多线程）</a></h1>
+<ul>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#c%E8%AF%BE%E7%A8%8B2%E4%BA%8B%E4%BB%B6%E5%BC%82%E6%AD%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B">C#课程2（事件、异步、多线程）</a>
+<ul>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E4%B8%80%E4%BA%8B%E4%BB%B6event">一、事件（event）</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E4%BA%8C%E5%A4%9A%E7%BA%BF%E7%A8%8B">二、多线程</a>
+<ul>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#1-%E7%AE%80%E4%BB%8B">1. 简介</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#2-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">2. 常用方法</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#3-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7">3. 常用属性</a></li>
+</ul>
+</li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E4%B8%89%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B">三、异步编程</a>
+<ul>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#1-%E7%AE%80%E4%BB%8B-1">1. 简介</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#2-task%E4%BB%8B%E7%BB%8D">2. Task介绍</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#3-async-%E5%92%8C-await">3. async 和 await</a></li>
+</ul>
+</li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E5%9B%9B%E9%94%81">四、锁</a>
+<ul>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E8%AF%BB%E5%86%99%E9%94%81">读写锁</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E6%AD%BB%E9%94%81%E7%9A%84%E4%BA%A7%E7%94%9F">死锁的产生</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E5%93%B2%E5%AD%A6%E5%AE%B6%E5%B0%B1%E9%A4%90%E9%97%AE%E9%A2%98">哲学家就餐问题</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E6%AD%BB%E9%94%81%E4%BA%A7%E7%94%9F%E7%9A%84%E6%9D%A1%E4%BB%B6">死锁产生的条件</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E6%AD%BB%E9%94%81%E7%9A%84%E8%A7%A3%E5%86%B3">死锁的解决</a></li>
+</ul>
+</li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E4%BA%94%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C">五、原子操作</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E5%85%ADc-%E5%B9%B6%E5%8F%91%E9%9B%86%E5%90%88">六、C# 并发集合</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E4%B8%83c%E5%AE%9A%E6%97%B6%E5%99%A8">七、C#定时器</a>
+<ul>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#systemthreadingtimer">System.Threading.Timer</a></li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#systemtimerstimer">System.Timers.Timer</a></li>
+</ul>
+</li>
+<li><a href="CSharp/CS-Learning2-MultiThread.html#%E5%85%ABc-%E7%BA%BF%E7%A8%8B%E6%B1%A0">八、C# 线程池</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2><a class="header" href="#一事件event" id="一事件event">一、事件（event）</a></h2>
+<p>通俗来讲，事件是一种广播机制</p>
+<p>比如某个组件订阅了一个事件，那么在这个事件被触发的时候组件会收到通知。</p>
+<p>例：小明家里有一部电话，有一个正在烧水的热水壶，电话响了（这是一个event）就会触发小明接电话（这是一个方法）这个动作。（*注：这部分代码参考Event.cs）</p>
+<p>事件可以实现底层程序集调用高层程序集的方法。并且在调用的时候可以向高层程序集的方法传入参数。</p>
+<p>例：我写了一个库，这个库给出一个Read的事件，这个事件会在控制台输入字符串的时候被调用。（*注：这部分代码参考Event2.cs）</p>
+<hr />
+<h2><a class="header" href="#二多线程" id="二多线程">二、多线程</a></h2>
+<h3><a class="header" href="#1-简介" id="1-简介">1. 简介</a></h3>
+<p>进程是操作系统执行程序的基本单位</p>
+<p>一个进程拥有多个线程，这些线程之间资源共享。</p>
+<p>使用线程进行并发式编程。</p>
+<p>C#提供了完整的多线程库</p>
+<h3><a class="header" href="#2-常用方法" id="2-常用方法">2. 常用方法</a></h3>
+<p>以下代码显示了如何创建一个线程</p>
+<pre><code class="language-csharp">using System.Threading; // 包含多线程需要的库
+
+public static void Function() // 一个需要被线程调用的函数
+{
+    Console.WriteLine(&quot;Function !&quot;);
+}
+
+Thread t = new Thread(Function); // 用Function函数初始化线程
+</code></pre>
+<p>上面的代码并没有让线程运行，如果要让线程开始运行，需要调用 Start() 方法。</p>
+<pre><code class="language-csharp">t.Start();
+</code></pre>
+<p>如果Function的定义修改为如下</p>
+<pre><code class="language-csharp">public static void Function(string str);
+</code></pre>
+<p>那么在Start()方法中就要传入参数。</p>
+<pre><code class="language-csharp">t.Start(&quot;Hello World&quot;);
+</code></pre>
+<p>使用Sleep()方法可以暂停线程一段时间，单位为毫秒。</p>
+<pre><code class="language-csharp">Thread.Sleep(1000) // 线程停顿1秒
+</code></pre>
+<p>使用Join()方法可以阻塞当前线程，等待某一个线程执行完毕后再进行后面的任务。比如下面的代码，展示了Join()方法的阻塞作用</p>
+<pre><code class="language-csharp">public static void Function()
+{
+    for (int i = 0; i &lt; 10; i++)
+    {
+        Thread.Sleep(200);
+        Console.WriteLine(&quot;Function !&quot;);
+    }
+}
+public static void Run()
+{
+    Thread t = new Thread(Function);
+    t.Start();
+    Thread.Sleep(500);
+    t.Join(); // 这里阻塞了Run()方法所在线程，等待t执行完毕
+    Console.WriteLine(&quot;Finish !&quot;);
+}
+</code></pre>
+<p>注意！非常不建议使用Suspend()、Abort()等方法在线程外部暂停或终止一个线程。</p>
+<h3><a class="header" href="#3-常用属性" id="3-常用属性">3. 常用属性</a></h3>
+<ul>
+<li>IsBackground 属性，显示一个线程是否为后台线程。</li>
+<li>如果一个线程为后台线程，那么程序不会等待这个线程执行完毕；如果一个线程是前台线程，程序会等待线程执行完毕再退出。</li>
+<li>IsAlive 属性，显示一个线程是否正在运行。</li>
+<li>IsThreadPoolThread 属性，显示线程是否属于托管线程池。</li>
+</ul>
+<p>下面的代码展示了如何控制一个线程是否为后台线程</p>
+<pre><code class="language-csharp">new Thread(() =&gt;
+{
+    for (int i = 0; i &lt; 10; i++)
+    {
+        Thread.Sleep(300);
+        Console.WriteLine(&quot;Thread1 : &quot; + i);
+    }
+})
+{ IsBackground = true }.Start();
+new Thread(() =&gt;
+{
+for (int i = 0; i &lt; 6; i++)
+{
+    Thread.Sleep(300);
+    Console.WriteLine(&quot;Thread2 : &quot; + i);
+}
+})
+{ IsBackground = false }.Start();
+</code></pre>
+<hr />
+<h2><a class="header" href="#三异步编程" id="三异步编程">三、异步编程</a></h2>
+<h3><a class="header" href="#1-简介-1" id="1-简介-1">1. 简介</a></h3>
+<p>C# 引入了async和await关键字后，异步编程变得十分方便</p>
+<p>实际上异步编程也是多线程的一种，只不过不需要手动创建线程，线程从线程池中被创建</p>
+<p>例：比如我们在处理UI和按钮单击时，需要运行一个长时间运行的方法，比如读取一个大文件，如果采用同步编程，整个程序必须等待这个任务完成才能执行其他任务。</p>
+<h3><a class="header" href="#2-task介绍" id="2-task介绍">2. Task介绍</a></h3>
+<p>使用Task可以很方便地创建一个任务并运行，下面的代码展示了如何创建任务。</p>
+<pre><code class="language-csharp">Task.Run(Method1);
+</code></pre>
+<p>还可以采用其他形式创建任务</p>
+<pre><code class="language-csharp">Task task = new Task(Method1);
+task.Start();
+</code></pre>
+<p>还可以采用Factory创建并运行任务</p>
+<pre><code class="language-csharp">Task.Factory.StartNew(Method1);
+</code></pre>
+<p>Task的生命周期：Task.Status</p>
+<p>Task的生命周期有如下几种状态：</p>
+<ul>
+<li>Created : 已经被创建但还未开始运行</li>
+<li>Running : 正在运行</li>
+<li>RanToCompletion : 执行完毕</li>
+</ul>
+<p>下面的代码展示了Task的生命周期：</p>
+<pre><code class="language-csharp">public static void Method1()
+{
+    for (int i = 0; i &lt; 5; i++)
+    {
+        Thread.Sleep(200);
+        Console.WriteLine(&quot;Method1 : &quot; + i);
+    }
+}
+public static void Run()
+{
+    Task task = new Task(Method1);
+    Console.WriteLine(task.Status);
+    task.Start();
+    for (int i = 0; i &lt; 7; i++)
+    {
+        Thread.Sleep(200);
+        Console.WriteLine(task.Status);
+    }
+}
+</code></pre>
+<p>输出结果如下：</p>
+<pre><code class="language-csharp">Created
+Running
+Method1 : 0
+Method1 : 1
+Running
+Running
+Method1 : 2
+Method1 : 3
+Running
+Running
+Method1 : 4
+RanToCompletion
+RanToCompletion
+</code></pre>
+<p>Task的任务控制，可以控制多个Task的执行顺序</p>
+<p>Task.Wait()方法等待任务执行完毕</p>
+<pre><code class="language-csharp">Task task1 = new Task(Method1);
+task1.Start();
+task.Wait(); // 等待任务执行完毕
+Console.WriteLine(&quot;task Finish&quot;);
+</code></pre>
+<p>Task.WaitAll()等待所有任务执行完毕</p>
+<pre><code class="language-csharp">Task task1 = new Task(Method1);
+task1.Start();
+Task task2 = new Task(Method2);
+task2.Start();
+Task.WaitAll(task1, task2);
+Console.WriteLine(&quot;task Finish&quot;);
+</code></pre>
+<p>Task.WaitAny() 等待任一任务执行完毕</p>
+<pre><code class="language-csharp">Task task1 = new Task(Method1);
+task1.Start();
+Task task2 = new Task(Method2);
+task2.Start();
+Task.WaitAny(task1, task2);
+Console.WriteLine(&quot;task Finish&quot;);
+</code></pre>
+<p>Task 返回值 Task&lt; TResult &gt;</p>
+<p>任何一个异步Task都可以返回一个值，下面的代码展示了如何获取Task的返回值。</p>
+<pre><code class="language-csharp">public static string MethodReturn()
+{
+    for (int i = 0; i &lt; 5; i++)
+    {
+        Thread.Sleep(200);
+        Console.WriteLine(&quot;MethodReturn : &quot; + i);
+    }
+    return &quot;MethodReturn finish&quot;;
+}
+Task&lt;string&gt; taskReturn = new Task&lt;string&gt;(MethodReturn);
+taskReturn.Start();
+Console.WriteLine(&quot;Task finish with : &quot; + taskReturn.Result);
+</code></pre>
+<p>可以看到只需要调用Task.Result就可以获取Task的返回值，并且在尝试获得Task的返回值时会自动阻塞当前线程，直到Task结束。</p>
+<h3><a class="header" href="#3-async-和-await" id="3-async-和-await">3. async 和 await</a></h3>
+<p>await 和字面意思一样，就是等待，下面的代码展示了等待一个任务执行完毕</p>
+<pre><code class="language-csharp">public static async void Run()
+{
+    await Task.Run(Method1);
+    Console.WriteLine(&quot;Task1 finish &quot;);
+}
+</code></pre>
+<p>await 更大的用处是等待一个有返回值的Task，如下代码所示：</p>
+<pre><code class="language-csharp">public static async void Run()
+{
+    Task&lt;string&gt; task = new Task&lt;string&gt;(MethodReturn);
+    task.Start();
+    Console.WriteLine(&quot;Task1 finish with : &quot; + await task);
+}
+</code></pre>
+<p>async 的意思也和字面意思完全一样，就是表明一个方法是异步方法，下面展示了一个异步方法：</p>
+<pre><code class="language-csharp">public static async void TestAsync()
+{
+    await Task.Run(
+        () =&gt;
+        {
+            for (int i = 0; i &lt; 5; i++)
+            {
+                Thread.Sleep(200);
+                Console.WriteLine(&quot;TestAsync : &quot; + i);
+            }
+        });
+}
+public static async void Run()
+{
+    TestAsync();
+    Console.WriteLine(&quot;Task1 finish  &quot;);
+}
+</code></pre>
+<p>可以注意到凡是方法体里出现了await关键字的，方法定义必然要出现async关键字，这是显然的，因为凡是有await关键字的方法必为异步方法。</p>
+<p>需要注意的是如果一个被async修饰的方法里面没有await关键字的话，那么这个方法和同步方法没有区别。</p>
+<p>一个async方法里面的异步操作仅出现在await关键字之后。</p>
+<pre><code class="language-csharp">public static async void TestAsync()
+{
+    for (int i = 0; i &lt; 3; i++)
+    {
+        Thread.Sleep(200);
+        Console.WriteLine(&quot;Sync : &quot; + i);
+    }
+    await Task.Run(
+        () =&gt;
+        {
+            for (int i = 0; i &lt; 5; i++)
+            {
+                Thread.Sleep(200);
+                Console.WriteLine(&quot;TestAsync : &quot; + i);
+            }
+        });
+}
+public static async void Run()
+{
+    TestAsync();
+    Console.WriteLine(&quot;Task1 finish  &quot;);
+}
+</code></pre>
+<p>因为async方法为异步方法，所以调用async方法的时候常常也使用await。</p>
+<pre><code class="language-csharp">public static async Task&lt;string&gt; AsyncReturn()
+{
+    await Task.Run(
+        () =&gt;
+        {
+            for (int i = 0; i &lt; 5; i++)
+            {
+                Thread.Sleep(200);
+                Console.WriteLine(&quot;AsyncReturn : &quot; + i);
+            }
+        });
+    return &quot;AsyncReturn finish&quot;;
+}
+public static async void Run()
+{
+    var str = await AsyncReturn();
+    Console.WriteLine(&quot;Task1 finish with : &quot; + str);
+}
+</code></pre>
+<p>注意：async方法的返回值只能为void、Task、Task&lt; TResult &gt;，不能为其他</p>
+<hr />
+<h2><a class="header" href="#四锁" id="四锁">四、锁</a></h2>
+<p>多线程编程过程中常常会出现多个线程同时访问一个资源的情况，这个时候就需要用到锁，把共享的资源锁起来。</p>
+<p>一个不使用锁的例子：</p>
+<pre><code class="language-csharp">int num = 0;
+Task.Run(
+() =&gt;
+{
+    for (int i = 0; i &lt; 1000; i++)
+    {
+        num++;
+    }
+    Console.WriteLine(&quot;Thread 1 : &quot; + num);
+}
+);
+Task.Run(
+() =&gt;
+{
+    for (int i = 0; i &lt; 1000; i++)
+    {
+        num++;
+    }
+    Console.WriteLine(&quot;Thread 2 : &quot; + num);
+}
+);
+</code></pre>
+<p>锁的使用非常简单，只需要使用 lock 关键字就可以锁住一个对象，一个对象同时只允许一个线程访问，其他线程在这个期间会被阻塞。</p>
+<pre><code class="language-csharp">int num = 0;
+object numlock = new object();
+Task.Run(
+    () =&gt;
+    {
+        for (int i = 0; i &lt; 1000; i++)
+        {
+            lock (numlock)
+                num++;
+        }
+        lock (numlock)
+            Console.WriteLine(&quot;Thread 1 : &quot; + num);
+    }
+);
+Task.Run(
+    () =&gt;
+    {
+        for (int i = 0; i &lt; 1000; i++)
+        {
+            lock (numlock)
+                num++;
+        }
+        lock (numlock)
+            Console.WriteLine(&quot;Thread 2 : &quot; + num);
+    }
+);
+</code></pre>
+<p>下面这段代码展示了锁是如何阻塞线程的：</p>
+<pre><code class="language-csharp">object tasklock = new object();
+Task.Run(() =&gt;
+    {
+        lock (tasklock)
+            for (int i = 0; i &lt; 5; i++)
+            {
+                Thread.Sleep(200);
+                Console.WriteLine(&quot;Thread 1&quot;);
+            }
+    }
+);
+Task.Run(() =&gt;
+    {
+        lock (tasklock)
+            for (int i = 0; i &lt; 5; i++)
+            {
+                Thread.Sleep(200);
+                Console.WriteLine(&quot;Thread 2&quot;);
+            }
+    }
+);
+</code></pre>
+<p>除了使用 lock 关键字，还可以使用 Moniter 来锁定和释放对象。</p>
+<pre><code class="language-csharp">Monitor.Enter(objlock);
+Monitor.Exit(objlock);
+</code></pre>
+<p>注意：</p>
+<ul>
+<li>应避免锁定 public 对象，否则实例将超出代码的控制范围。</li>
+<li>锁定对象应当为 readonly 以免在锁定的过程中发生改变</li>
+<li>不能锁定值类型</li>
+</ul>
+<pre><code class="language-csharp">lock(9) // 错误，不能锁定值类型
+lock(this) // 错误，违反了不能锁定 public 对象的规范
+lock(&quot;Hello World&quot;) // 错误，相同字符串同一程序中只有一个实例对象，相当于锁定 public 对象。
+</code></pre>
+<p>下面是正确示例</p>
+<pre><code class="language-csharp">private static readonly object objlock = new object();
+lock(objlock)
+  ...
+</code></pre>
+<h3><a class="header" href="#读写锁" id="读写锁">读写锁</a></h3>
+<p>允许多个线程同时获取读锁，但同一时间只允许一个线程获得写锁</p>
+<p>当某个线程进入读取模式时，此时其他线程依然能进入读取模式，假设此时一个线程要进入写入模式，那么他不得不被阻塞。</p>
+<p>如果某个线程进入了写入模式，那么其他线程无论是要写入还是读取，都是会被阻塞的。</p>
+<pre><code class="language-csharp">ReaderWriterLockSlim rw = new ReaderWriterLockSlim();
+int num = 5;
+for (int i = 0; i &lt; 5; i++)
+{
+    int tmp = i;
+    Task.Run(() =&gt;
+    {
+        rw.EnterReadLock();
+        for (int j = 0; j &lt; 5; j++)
+        {
+            
+            Thread.Sleep(200);
+            Console.WriteLine(&quot;Thread &quot; + tmp + &quot; is reading&quot;);
+        }
+        rw.ExitReadLock();
+    });
+}
+</code></pre>
+<p>上面的代码展示了多个线程可以同时获取读锁。</p>
+<pre><code class="language-csharp">ReaderWriterLockSlim rw = new ReaderWriterLockSlim();
+int num = 5;
+for (int i = 0; i &lt; 5; i++)
+{
+    int tmp = i;
+    Task.Run(() =&gt;
+    {
+        for (int j = 0; j &lt; 5; j++)
+        {
+            rw.EnterReadLock();
+            Thread.Sleep(200);
+            Console.WriteLine(&quot;Thread &quot; + tmp + &quot; is reading&quot;);
+            rw.ExitReadLock();
+        }
+    });
+}
+Thread.Sleep(400);
+Task.Run(() =&gt;
+{
+    rw.EnterWriteLock();
+    for (int j = 0; j &lt; 5; j++)
+    {
+        Thread.Sleep(200);
+        Console.WriteLine(&quot;Thread is writing&quot;);
+    }
+    rw.ExitWriteLock();
+});
+</code></pre>
+<p>上面的代码展示了当一个线程获取写锁的时候其他线程都被阻塞。</p>
+<h3><a class="header" href="#死锁的产生" id="死锁的产生">死锁的产生</a></h3>
+<p>考虑下面的程序运行过程：</p>
+<p>Thread1 : lock 1 -&gt; attempt to lock 2</p>
+<p>Thread2 : lock 2 -&gt; attempt to lock 1</p>
+<p>这是一个最简单的死锁例子。两个线程都无法继续运行下去，程序产生了死锁。</p>
+<pre><code class="language-csharp">object lock1 = new object();
+object lock2 = new object();
+Task.Run(() =&gt;
+{
+    lock (lock1)
+    {
+        Console.WriteLine(&quot;Thread 1 has lock 1&quot;);
+        Thread.Sleep(1);
+        Console.WriteLine(&quot;Thread 1 attempt to lock 2&quot;);
+        lock (lock2)
+        {
+            Console.WriteLine(&quot;Thread 1 has lock 2&quot;);
+        }
+    }
+});
+Task.Run(() =&gt;
+{
+    lock (lock2)
+    {
+        Console.WriteLine(&quot;Thread 2 has lock 2&quot;);
+        Thread.Sleep(1);
+        Console.WriteLine(&quot;Thread 2 attempt to lock 1&quot;);
+        lock (lock1)
+        {
+            Console.WriteLine(&quot;Thread 2 has lock 1&quot;);
+        }
+    }
+});
+</code></pre>
+<h3><a class="header" href="#哲学家就餐问题" id="哲学家就餐问题">哲学家就餐问题</a></h3>
+<p>有五个哲学家，他们的生活方式是交替地进行思考和进餐。他们共用一张圆桌，分别坐在五张椅子上。</p>
+<p>在圆桌上有五个碗和五支筷子，平时哲学家进行思考，饥饿时便试图取用其左、右最靠近他的筷子，只有在他拿到两支筷子时才能进餐。进餐完毕，放下筷子又继续思考。</p>
+<p>死锁的产生：五位哲学家同时饥饿而各自拿起了左边的筷子，当他们试图去拿起右边的筷子时，都将因无筷子而无限期地等待下去。</p>
+<h3><a class="header" href="#死锁产生的条件" id="死锁产生的条件">死锁产生的条件</a></h3>
+<ol>
+<li>互斥条件。即某个资源在一段时间内只能由一个进程占有</li>
+<li>不可抢占条件。进程所获得的资源在未使用完毕之前，资源申请者不能强行地从资源占有者手中夺取资源</li>
+<li>占有且申请条件。进程至少已经占有一个资源，但又申请新的资源</li>
+<li>循环等待条件。存在一个进程等待序列{P1，P2，...，Pn}，其中P1等待P2所占有的某一资源，P2等待P3所占有的某一源，......</li>
+</ol>
+<h3><a class="header" href="#死锁的解决" id="死锁的解决">死锁的解决</a></h3>
+<ol>
+<li>打破互斥条件，允许进程同时访问某些资源（废话）</li>
+<li>打破不可抢占条件，即允许进程强行从占有者那里夺取某些资源（也是废话）</li>
+<li>打破占有且申请条件。可以实行资源预先分配策略。即进程在运行前一次性地向系统申请它所需要的全部资源（很难满足条件）</li>
+<li>资源编号，线程在申请资源时，必须按顺序申请（实现简单，常用）</li>
+<li>银行家算法（有一定的限制条件）</li>
+</ol>
+<p>资源编号策略：</p>
+<ul>
+<li>1 号哲学家拿起 1 号筷子</li>
+<li>2 号哲学家拿起 2 号筷子</li>
+<li>3 号哲学家拿起 3 号筷子</li>
+<li>4 号哲学家拿起 4 号筷子</li>
+<li>5 号哲学家拿起 ? 号筷子</li>
+</ul>
+<p>“避免死锁的最好办法，就是不要用锁。” 著名哲学家沃尔兹基说。</p>
+<hr />
+<h2><a class="header" href="#五原子操作" id="五原子操作">五、原子操作</a></h2>
+<p>就如其字面意思，原子操作就是计算机中不可再分割的操作。</p>
+<p>C# 提供了一个原子操作库 Interlocked ，可以使用 Interlocked 把常见的操作转化为原子操作。</p>
+<p>常见的操作有 i++ （自增操作），如果使用 lock 则系统开销过大，不值得使用，可以使用原子操作进行改写。</p>
+<pre><code class="language-csharp">int num = 0;
+Task.Run(
+    () =&gt;
+    {
+        for (int i = 0; i &lt; 1000; i++)
+        {
+            Interlocked.Increment(ref num);
+        }
+        Console.WriteLine(&quot;Thread 1 : &quot; + num);
+    }
+);
+Task.Run(
+    () =&gt;
+    {
+        for (int i = 0; i &lt; 1000; i++)
+        {
+            Interlocked.Increment(ref num);
+        }
+        Console.WriteLine(&quot;Thread 2 : &quot; + num);
+    }
+);
+</code></pre>
+<p>除了 Increment 之外，还有许多其他原子操作，比如：</p>
+<pre><code class="language-csharp">Add(ref T a, T b); // a = a + b
+Exchange(ref T a, T b); // a = b
+CompareExchange(ref T a, T b, int c); // if(b == c) a = b;
+Decrement(ref T a); // a--
+</code></pre>
+<hr />
+<h2><a class="header" href="#六c-并发集合" id="六c-并发集合">六、C# 并发集合</a></h2>
+<p>C# 默认的集合并不是线程安全的，当多个线程同时对一个集合作修改时可能会发生异常：</p>
+<pre><code class="language-csharp">List&lt;int&gt; l = new List&lt;int&gt;();
+Task.Run(() =&gt;
+{
+    for (int i = 0; i &lt; 10000; i++)
+    {
+        l.Add(i);
+    }
+    Thread.Sleep(10);
+    Console.WriteLine(l.Count);
+});
+Task.Run(() =&gt;
+{
+    for (int i = 0; i &lt; 10000; i++)
+    {
+        l.Add(i);
+    }
+    Thread.Sleep(10);
+    Console.WriteLine(l.Count);
+});
+</code></pre>
+<p>C# 提供了多个线程安全集合类，这些线程安全集合都是无锁的，能够支持高效的多线程操作</p>
+<p>下面以 ConcurrentQueue&lt; T &gt; 为例展示一下线程安全集合类的用法：</p>
+<pre><code class="language-csharp">ConcurrentQueue&lt;int&gt; q = new ConcurrentQueue&lt;int&gt;(); // 新建一个线程安全队列。
+q.Enqueue(9); // 数字 9 入队
+q.TryDequeue(out int temp); // 从队列头取出一个数
+Console.WriteLine(temp);
+</code></pre>
+<p>注意，Concurrent 集合通常都有 Try 方法，凡是 Try 方法都不一定能执行成功，并且都会返回一个布尔值，用来显示 Try 方法是否执行成功。</p>
+<p>Concurrent 命名空间下没有 HashSet&lt; T &gt; 的对应线程安全集合，但可以用 ConcurrentDictionry&lt; T, byte &gt; 来代替。</p>
+<p>除了 Concurrent 命名空间下的集合，C# 还提供了 BlockingCollection 阻塞集合。这个集合的特点是当集合为空时，想要从集合里取出元素会被阻塞</p>
+<pre><code class="language-csharp">BlockingCollection&lt;int&gt; b = new BlockingCollection&lt;int&gt;();
+Task.Run(() =&gt;
+{
+    for (int i = 0; i &lt; 10; i++)
+    {
+        Thread.Sleep(300);
+        b.Add(i);
+        Console.WriteLine(&quot;Add &quot; + i);
+    }
+});
+Task.Run(() =&gt;
+{
+    for (int i = 0; i &lt; 10; i++)
+    {
+        Console.WriteLine(&quot;Take &quot; + b.Take());
+    }
+});
+</code></pre>
+<p>上面这段代码展示了 BlockingCollection 是如何把线程阻塞的。</p>
+<p>利用 BlockingCollection 可以实现事件队列，强制把所有事件放在同一线程里执行。</p>
+<pre><code class="language-csharp">BlockingCollection&lt;Action&gt; EventQueue = new BlockingCollection&lt;Action&gt;();
+new Thread(() =&gt;
+{
+    while (true)
+        EventQueue.Take()();
+}).Start();
+</code></pre>
+<p>只需要很少的代码就可以实现事件队列的编写。</p>
+<p>我们可以用如下代码测试事件队列：</p>
+<pre><code class="language-csharp">for (int i = 0; i &lt; 10; i++)
+{
+    Thread.Sleep(300);
+    Task.Run(() =&gt;
+    {
+        EventQueue.Add(() =&gt;
+        {
+            Console.WriteLine(DateTime.Now);
+        });
+    });
+}
+</code></pre>
+<hr />
+<h2><a class="header" href="#七c定时器" id="七c定时器">七、C#定时器</a></h2>
+<p>C# 里提供了几种定时器的实现方法。</p>
+<h3><a class="header" href="#systemthreadingtimer" id="systemthreadingtimer">System.Threading.Timer</a></h3>
+<p>下面的代码展示了如何新建一个定时器</p>
+<pre><code class="language-csharp">System.Threading.Timer timer = new Timer(
+    (o) =&gt;
+    {
+        Console.WriteLine(&quot;Timer !&quot;);
+    }, null, 1000, 200);
+</code></pre>
+<p>Timer() 的构造方法第一个参数为定时执行的回调函数，第二个参数为传递给回调的参数，第三个参数为 duetime ，即在开始计时前等待多长时间，第四个参数为 period ，即定时器周期。</p>
+<p>也可以采用如下代码开始一个定时器：</p>
+<pre><code class="language-csharp">System.Threading.Timer timer = new Timer(
+    (o) =&gt;
+    {
+        Console.WriteLine(&quot;Timer !&quot;);
+    });
+timer.Change(1000, 200);
+</code></pre>
+<p>上面的定时器在构造时并没有开始运行，在调用 Change() 方法后才开始运行。</p>
+<p>System.Threading.Timer 在运行过程中随时可以调用 Change() 方法改变定时器的周期。</p>
+<h3><a class="header" href="#systemtimerstimer" id="systemtimerstimer">System.Timers.Timer</a></h3>
+<p>System.Timers.Timer 是比 System.Threading.Timer 更加灵活的一种定时器。</p>
+<p>下面的代码展示了如何使用 System.Timers.Timer</p>
+<pre><code class="language-csharp">System.Timers.Timer timer = new System.Timers.Timer();
+timer.Elapsed += (o, e) =&gt;
+{
+    Console.WriteLine(&quot;Timer !&quot;);
+};
+timer.Interval = 300;
+timer.Enabled = true;
+</code></pre>
+<p>timer.Elapsed 是一个 event ，每个周期都会被调用。</p>
+<p>注意： System.Timers.Timer 比 System.Threading.Timer 更加灵活的地方就在于 Elapsed ，你可以在不重新 new 定时器的情况下改变定时器的回调函数。</p>
+<pre><code class="language-csharp">public static void CallBack(Object o, System.Timers.ElapsedEventArgs e)
+{
+    Console.WriteLine(&quot;Timer !&quot;);
+}
+
+System.Timers.Timer timer = new System.Timers.Timer();
+timer.Elapsed += CallBack;
+timer.Interval = 300;
+timer.Enabled = true;
+Thread.Sleep(1200);
+timer.Elapsed -= CallBack; // 这里把 CallBack 函数剥离 Elapsed
+</code></pre>
+<p>System.Timers.Timer 的一些属性：</p>
+<pre><code class="language-csharp">bool Enabled; // 定时器是否正在运行
+bool AutoReset; // 定时器是否周期执行，若为false，则表明定时器只执行一次。
+int Interval; // 定时器执行的周期
+</code></pre>
+<hr />
+<h2><a class="header" href="#八c-线程池" id="八c-线程池">八、C# 线程池</a></h2>
+<p>线程池的作用是避免重复创建和销毁线程。</p>
+<p>程序里常常会创建大量线程，但这些线程只使用了一小段时间就被挂起或进入休眠，一直等到程序结束都不会再使用。</p>
+<p>C# 提供了线程池用于线程复用，当一个异步方法想要调用线程来运行，可以先到线程池里看看有没有空闲线程</p>
+<p>如果有空闲线程则调用空闲线程完成任务。</p>
+<pre><code class="language-csharp">ThreadPool.QueueUserWorkItem(
+    (o) =&gt;
+    {
+        for (int i = 0; i &lt; 5; i++)
+        {
+            Thread.Sleep(300);
+            Console.WriteLine(&quot;Thread Pool !&quot;);
+        }
+    }
+);
+</code></pre>
+<p>调用线程池非常简单，只要像上面这段代码一样把一个 Callback 塞进线程就行。</p>
+<p>线程池在创建之初会有一个最小线程数，这与计算机的 CPU 核心数有关，可以用 ThreadPool.GetMinThreads() 方法获取。</p>
+<pre><code class="language-csharp">ThreadPool.GetMinThreads(out int workerThreads, out int IOThreads);
+Console.WriteLine(workerThreads + &quot;  &quot; + IOThreads);
+</code></pre>
+<p>需要注意的是，Task 和 Timer 也是默认调用线程池里的线程来完成工作的。</p>
+<p>如果线程池中的线程被用完了怎么办呢？这个时候系统会停顿 1 秒钟，观察线程池中其他线程是否执行完毕，如果有线程执行完毕的话则调用这个线程，如果没有的话则对线程池进行扩容，增加一个线程。</p>
+<pre><code class="language-csharp">for (int i = 0; i &lt; 12; i++)
+{
+    int tmp = i;
+    Task.Run(() =&gt;
+    {
+        Console.WriteLine(&quot;Thread &quot; + tmp);
+        Console.ReadKey();
+    });
+}
+</code></pre>
+<p>上面这段代码展示了线程池是如何进行扩容的。</p>
+<p>我们可以用 SetMinThreads() 方法设置线程池的最小线程数</p>
+<pre><code class="language-csharp">ThreadPool.SetMinThreads(16, 16);
+</code></pre>
+<p>设置了最小线程数后再执行上面的代码则不会出现新的任务要等待 1 秒的情况</p>
+<p>我们也可以用 SetMaxThreads() 方法设置线程池的最小线程数</p>
+<pre><code class="language-csharp">ThreadPool.SetMaxThreads(8, 8);
+</code></pre>
+<p>像这样设置了线程池的最大线程数后，上面的代码中 Thread 8 ~ 11 则永远不会被执行，因为 Thread 8 ~ 11 要等到线程池有空闲时才能执行。</p>
+<p>线程池的其他方法：</p>
+<pre><code class="language-csharp">ThreadPool.GetAvailableThreads(out int workerThreads, out int completionPortThreads); // 获取线程池中的空闲线程。
+ThreadPool.ThreadCount; // 获取线程池中的线程数目
+</code></pre>
+<h1><a class="header" href="#unity3d基础" id="unity3d基础">Unity3D基础</a></h1>
+<h4><a class="header" href="#unity简介" id="unity简介">Unity简介</a></h4>
+<p>Unity是一款由Unity Technoligies开发的跨平台2D/3D游戏引擎，并可以发布到Windows, MacOS, Linux, iOS等诸多平台。</p>
+<p>Unity官网：https://unity.com/</p>
+<p>Unity官方学习资源：https://learn.unity.com/</p>
+<p>Unity官方文档：https://docs.unity3d.com/Manual/index.html</p>
+<p>Google/Unity Forums</p>
+<h4><a class="header" href="#unity开发环境" id="unity开发环境">Unity开发环境</a></h4>
+<p>Unity工程及Unity Editor版本管理：Unity Hub</p>
+<p>图形化编辑界面：Unity Editor</p>
+<p>下载地址：https://unity3d.com/get-unity/download</p>
+<p>需要注册Unity账号。非盈利的个人开发者免费使用。</p>
+<p>代码编辑器：Visual Studio（安装时选择&quot;使用Unity的游戏开发&quot;），VS Code（在Unity Editor中修改默认代码编辑器），其他。</p>
+<h4><a class="header" href="#unity基本知识" id="unity基本知识">Unity基本知识</a></h4>
+<h6><a class="header" href="#scene场景" id="scene场景">Scene（场景）</a></h6>
+<p>Scene包含了若干GameObject，一个游戏可以包含多个场景，不同的场景之间是独立的，并且可以通过脚本切换场景。</p>
+<h6><a class="header" href="#gameobject游戏对象" id="gameobject游戏对象">GameObject（游戏对象）</a></h6>
+<p>一个GameObject就是场景中的一个对象，比如一个球，一个人；它可以独立地活动。GameObject之间存在Parent和Children的关系，即一个对象可以从属于另一个对象，成为其子对象。</p>
+<p>请注意，GameObject之间的父子关系并非继承关系，而只是一种从属关系。</p>
+<h6><a class="header" href="#component组件" id="component组件">Component（组件）</a></h6>
+<p>一个GameObject可以拥有若干个Component，两者之间仍是一种从属关系。每个Component可以独立地实现GameObject需求的某些功能。常用的如Rigid（刚体），Animator（动画）等。</p>
+<h6><a class="header" href="#prefab预设" id="prefab预设">Prefab（预设）</a></h6>
+<p>Prefab与GameObject之间的关系类似于类和对象的关系。即后者是前者的实例。Prefab的使用能够减少不必要的重复工作。当Prefab被修改时，它的所有GameObject实例也会被修改。</p>
+<h6><a class="header" href="#script脚本" id="script脚本">Script（脚本）</a></h6>
+<p>通过编写代码，并将Script添加为某个GameObject的Component，当该GameObject被实例化并且处于活动状态，且该Component也处于活动状态时，它便可以控制GameObject的行为。</p>
+<p>Unity脚本是基于Mono的，所有需要使用Unity引擎的脚本，都应该继承自MonoBehaviour类。换句话说，只有那些完全不依赖于Unity引擎进行初始化和更新，也不调用Unity的API的脚本，比如单纯进行数学计算的类，是不需要继承MonoBehaviour的。</p>
+<h6><a class="header" href="#assets资源" id="assets资源">Assets（资源）</a></h6>
+<p>你的所有Prefab, Script以及Material等资源都在Assets中进行管理。对于规模较大的工程，总应该建立规范的目录结构。</p>
+<h6><a class="header" href="#所以unity是如何工作的" id="所以unity是如何工作的">所以，Unity是如何工作的？</a></h6>
+<p>首先要加载一个场景。当场景被加载时，场景中的所有GameObject都会被加载。当GameObject加载时，其所有Component也随之实例化。当某个Script实例化时，其Awake()方法和Start()方法被先后调用（细节这里不说），当所有Start()方法都被调用完毕后，游戏会进入第一帧，每隔一段时间就会Update一次。</p>
+<h4><a class="header" href="#unity开发实例" id="unity开发实例">Unity开发实例</a></h4>
+<p>我们希望实现如下一个简单的游戏：键盘操纵角色在地图中移动，地图中会刷新得分点，当角色接触到得分点时就可以得分。游戏界面中应显示当前的时间，分数，并有重新开始，退出等按钮。</p>
 
                     </main>
 
