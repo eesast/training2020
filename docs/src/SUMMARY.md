@@ -1,4 +1,4 @@
-# Summary
+Sharp Summary
 
 - [Introduction](./introduction.md)
 - [Git](./git/git.md)
@@ -9,5 +9,6 @@
 - [Linux](./linux-webserver/linux.md)
 - [Docker](./docker/docker.md)
 - [操作系统](./OS/OS.md)
-- [C#](./C#/C# Learning.md)
+- [CSharp1](./CSharp/CS-Learning1-Basic.md)
+- [CSharp2](./CSharp/CS-Learning2-MultiThread.md)
 - [Unity](./unity/unity.md)
