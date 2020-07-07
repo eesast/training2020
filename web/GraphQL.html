@@ -1,0 +1,599 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>GraphQL, Hasura, Apollo - EESAST Training 2020</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="../web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="../web/backend.html"><strong aria-hidden="true">3.4.</strong> 后端技术栈入门（Node.js + Express + MongoDB</a></li><li class="chapter-item expanded "><a href="../web/GraphQL.html" class="active"><strong aria-hidden="true">3.5.</strong> GraphQL, Hasura, Apollo</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html"><strong aria-hidden="true">6.</strong> 操作系统</a></li><li class="chapter-item expanded "><a href="../CSharp/CS-Learning1-Basic.html"><strong aria-hidden="true">7.</strong> CSharp1</a></li><li class="chapter-item expanded "><a href="../CSharp/CS-Learning2-MultiThread.html"><strong aria-hidden="true">8.</strong> CSharp2</a></li><li class="chapter-item expanded "><a href="../unity/unity.html"><strong aria-hidden="true">9.</strong> Unity</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">EESAST Training 2020</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        <a href="https://github.com/eesast/training2020" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#graphql-hasura-postgresql-apollo" id="graphql-hasura-postgresql-apollo">GraphQL, Hasura, PostgreSQL, Apollo</a></h1>
+<blockquote>
+<p>本节介绍 GraphQL、Hasura、PostgreSQL（关系型数据库）、Apollo，这是目前网站主要拉取数据的方案。</p>
+</blockquote>
+<p>四个部分大致是如下图构成数据查询流程。即编写查询相关的 GraphQL 语句，Apollo 会生成相应的 TS 代码，经编译后运行在 Node.js 上，使用 GraphQL 的形式与 Hasura 进行交互，由 Hasura 访问 PostgreSQL 数据库存取数据。</p>
+<p><img src="./images/gql.drawio.svg" alt="GraphQL、Hasura、Apollo、PostgreSQL的架构" /></p>
+<p>接下来，将逐步讲解以下概念：</p>
+<ul>
+<li>什么是“关系型数据库”？SQL 又是什么？</li>
+<li>从 SQL 到 GraphQL</li>
+<li>使用 Hasura+PostgreSQL 来管理数据</li>
+<li>使用 Apollo 编写查、增、删、改</li>
+</ul>
+<p>相关链接：</p>
+<ul>
+<li><a href="https://graphql.org/">GraphQL</a></li>
+<li><a href="https://hasura.io/">Hasura</a></li>
+<li><a href="https://www.apollographql.com/docs/react/v3.0-beta">Apollo Client (React)</a></li>
+</ul>
+<h2><a class="header" href="#关系型数据库与-sql" id="关系型数据库与-sql">关系型数据库与 SQL</a></h2>
+<p>数据库，顾名思义是存储数据的。我们常用实体-联系的方式来对数据进行抽象，其中实体是客观存在并可相互区分的事物，而联系指的是不同（类）实体之间的关系。关系型数据库指的是使用关系模型来存储数据。</p>
+<p><img src="./images/ER.drawio.svg" alt="实体联系例图" /></p>
+<p>不同实体间的联系一般分为“一对一”、“一对多”、“多对多”三种，可以借助三个例子理解：</p>
+<ul>
+<li>一对一：一个班有一个班主任，一个班主任负责一个班</li>
+<li>一对多：一个作者可以写多篇文章</li>
+<li>多对多：一个用户可以关注多个用户，同时被多个用户关注</li>
+</ul>
+<p>而关系模型则是使用一张表来存储数据，比如</p>
+<table><thead><tr><th>用户信息</th><th></th><th></th></tr></thead><tbody>
+<tr><td>id</td><td>用户名</td><td>性别</td></tr>
+<tr><td>1</td><td>张三</td><td>男</td></tr>
+<tr><td>2</td><td>古河渚</td><td>女</td></tr>
+<tr><td>3</td><td>秀吉</td><td>秀吉</td></tr>
+</tbody></table>
+<p>表中每列是一个属性，每行是一个实体的数据（也称元组）。总应有至少一个属性可以唯一标识元组，称为候选码，选其中一个作为主码。部分属性可能是其他关系表中的主码，称为外码。我们会在接下来的例子中看到这些“码”。</p>
+<p>SQL（Structured Query Language，结构化查询语言）是用来对数据进行查询、添加、删除、更改的语言，这里只简单介绍查询功能。假定我们有三个表分别存学生、课程、学生-课程，我们可以使用如下的 SQL 语句进行查询：</p>
+<pre><code class="language-sql">查询全体学生的学号和姓名
+SELECT stu_no, stu_name
+FROM Student;
+
+查选修C1课程的学生的学号和成绩，并按分数降序排列
+SELECT stu_no, grade
+FROM StudentCourse
+WHERE course_no='C1'
+ORDER BY grade DESC;
+</code></pre>
+<blockquote>
+<p>更多有关 SQL 的内容不是培训重点，建议感兴趣的同学自行学习。</p>
+</blockquote>
+<h2><a class="header" href="#graphql" id="graphql">GraphQL</a></h2>
+<p>SQL 较为古老，对于数据量大且关系复杂的查询不够直观，GraphQL 则是一个更为直观的查询语言。</p>
+<p>在 JS / json 中，我们使用类似的结构来表示对象</p>
+<pre><code class="language-json">[
+  {
+    &quot;username&quot;: &quot;Zhang San&quot;,
+    &quot;gender&quot;: &quot;male&quot;
+  },
+  {
+    &quot;username&quot;: &quot;Nagisa&quot;,
+    &quot;gender&quot;: &quot;female&quot;
+  }
+]
+</code></pre>
+<p>我们可以使用极为相似的 GraphQL 语句来查询</p>
+<pre><code class="language-graphql">query {
+  user {
+    username
+  }
+}
+</code></pre>
+<p>得到相应的 json 结果</p>
+<pre><code class="language-json">{
+  &quot;data&quot;: {
+    &quot;user&quot;: [
+      {
+        &quot;username&quot;: &quot;Zhang San&quot;
+      },
+      {
+        &quot;username&quot;: &quot;Nagisa&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+<p>一个更为复杂的例子</p>
+<pre><code class="language-graphql">query GetArticleFeeds(
+  $limit: Int = 2
+  $cursor: timestamptz!
+  $authorId: String
+  $title: String
+  $alias: String
+  $abstract: String
+  $content: String
+) {
+  article_public(
+    limit: $limit
+    where: {
+      _and: [
+        { created_at: { _lte: $cursor } }
+        { authorId: { _eq: $authorId } }
+        { title: { _ilike: $title } }
+        { alias: { _ilike: $alias } }
+        { abstract: { _ilike: $abstract } }
+        { content: { _ilike: $content } }
+      ]
+    }
+    order_by: { created_at: desc }
+  ) {
+    id
+    alias
+    title
+    abstract
+    views
+    created_at
+    author {
+      username
+    }
+    article_tags {
+      tag {
+        tag_name
+      }
+    }
+    article_likers_aggregate {
+      aggregate {
+        count(distinct: true)
+      }
+    }
+  }
+}
+</code></pre>
+<p>这是正在开发的 Weekly 用来获取文章信息的语句（可能会有更改）。最前面的$加字符串表示查询语句中使用的变量，后面加感叹号表示该项必须存在。这些变量在下方的<code>where</code>中使用，用来限制查询结果。最后面的花括号中包含的内容是要得到的数据，其中<code>author</code>、<code>article_tags</code>和<code>articl_likers_aggregate</code>是利用外码获取对应的作者信息、标签信息、喜欢文章的用户的统计信息。</p>
+<p>用于更改（增删）的语句则使用<code>mutation</code>关键字</p>
+<pre><code class="language-graphql">mutation InsertArticle(
+  $abstract: String = &quot;&quot;
+  $alias: String!
+  $content: String!
+  $authorId: String!
+  $title: String!
+  $tags: [article_tag_insert_input!]! = []
+) {
+  insert_article_one(
+    object: {
+      abstract: $abstract
+      alias: $alias
+      content: $content
+      authorId: $authorId
+      title: $title
+      article_tags: {
+        data: $tags
+        on_conflict: { constraint: article_tag_pkey, update_columns: tag_id }
+      }
+    }
+    on_conflict: { constraint: article_alias_key, update_columns: [] }
+  ) {
+    id
+  }
+}
+</code></pre>
+<p>这段语句将基于给定的变量，创建一篇文章，并返回文章的 id。</p>
+<h2><a class="header" href="#hasura-和-postgresql" id="hasura-和-postgresql">Hasura 和 PostgreSQL</a></h2>
+<p>前面讲的 GraphQL 看上去很美化，但要自行实现相应的 API 不是一件容易的事，因此我们选用 Hasura GraphQL Engine。</p>
+<p>Hasura 是开源的 GraphQL 引擎，默认使用 PostgreSQL 数据库存储数据，可以使用其提供的 console 页面创建数据表、增删改数据、设置操作权限、测试 GraphQL 语句。下面将从安装开始“浏览”基本使用。</p>
+<h3><a class="header" href="#安装" id="安装">安装</a></h3>
+<p>参照官方文档，我们使用 docker 进行安装。首先修改官方提供的<code>docker-compose.yaml</code></p>
+<pre><code class="language-yaml">version: &quot;3.6&quot;
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    volumes:
+      - ~/data/postgres:/var/lib/postgresql/data
+    ports:
+      - &quot;5432:5432&quot;
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+  graphql-engine:
+    image: hasura/graphql-engine:latest
+    container_name: hasura
+    ports:
+      - &quot;23333:8080&quot;
+    depends_on:
+      - &quot;postgres&quot;
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: &quot;true&quot; # set to &quot;false&quot; to disable console
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+</code></pre>
+<p>注意其中需要修改的几处地方：</p>
+<ul>
+<li>容器端口绑定宿主机端口是否会冲突</li>
+<li>PostgreSQL 的密码是否需要设置</li>
+<li>Hasura 的密码是否需要设置（默认不设置）</li>
+</ul>
+<p>在修改好后的<code>docker-compose.yaml</code>所在路径使用如下命令拉取镜像并启动容器</p>
+<pre><code class="language-bash">docker-compose up -d
+</code></pre>
+<p>启动后，我们使用<code>docker ps -a</code>可以查看容器状态（类似下方所示）</p>
+<pre><code class="language-bash">CONTAINER ID IMAGE                 ... CREATED STATUS PORTS                        ...
+097f58433a2b hasura/graphql-engine ... 1m ago  Up 1m  0.0.0.0:23333-&gt;8080/tcp      ...
+b0b1aac0508d postgres              ... 1m ago  Up 1m  0.0.0.0:5432-&gt;5432/tcp       ...
+</code></pre>
+<p>现在访问<code>localhost:23333/console</code>可以进入 Hasura 的控制界面</p>
+<p><img src="./images/hasura_console.png" alt="Hasura Console" /></p>
+<p>Hasura 提供许多功能，我们主要使用<code>GRAPHIQL</code>和<code>DATA</code>两个页面的功能</p>
+<h3><a class="header" href="#创建与管理数据" id="创建与管理数据">创建与管理数据</a></h3>
+<p>在<code>DATA</code>页面可以创建“关系表”，比如创建一个<code>user</code>：</p>
+<p><img src="./images/hasura_create_table.png" alt="create table" /></p>
+<p>这里填入了 6 个属性，其中<code>_id</code>为主码，使用数据库的 uuid 生成器得到。<code>username</code>、<code>email</code>、<code>gender</code>皆为字符串，其中<code>username</code>也是不可重复的（我们称为候选码），而<code>email</code>和<code>gender</code>则是可以为空的普通属性。<code>created_at</code>和<code>updated_at</code>则是使用<code>+ Frequently used columns</code>添加的，分别会根据创建和更改时的时间自动添加。</p>
+<p>我们再来创建一个<code>article</code>表，加入作者的<code>_id</code>作为外码：</p>
+<p><img src="./images/hasura_foreign_key.png" alt="foreign key" /></p>
+<p>这里将<code>author</code>的值设为 uuid 类型，并与<code>user._id</code>严格一致。我们点开<code>article</code>的<code>Relationships</code>可以看到推荐的关系设置：</p>
+<p><img src="./images/hasura_relations.png" alt="relationships" /></p>
+<p>这里推荐添加<code>Object relationships</code>，而在<code>user</code>的<code>Relationships</code>可以看到推荐<code>Array relationships</code>。点击添加便是告诉 Hasura 这两个表之间是一对多的关系，即一个<code>user</code>可以有多篇<code>article</code>。我们可以在<code>GRAPHIQL</code>页面试着写一下查询语句：</p>
+<p><img src="./images/hasura_graphiql.png" alt="graphiql" /></p>
+<p>一般限制条件不太复杂的查询或者更改操作，都可以使用最左侧的 Explorer 勾选需要的部分，由 Hasura 生成中间的语句，点击“执行”按钮可以在右边看到结果。这里因为还没有添加数据，所以是空的。</p>
+<p>对于更为复杂的关系，比如“喜欢一篇文章”这种多对多关系，我们需要再创建一个表，只有<code>article_id</code>和<code>user_id</code>两个属性，一起作为主码，又同时是外码。当表中存在这样的数据时，就表明某用户喜欢某篇文章。</p>
+<p>最后我们再看一下“权限控制”。在表的<code>Permissions</code>页面可以设置不同身份用户的插入、查询、更改与删除权限。目前 Hasura 提供的权限设置自由度较小，如果要设置非常复杂的权限，需要通过添加数据表的<code>view</code>再给其设置权限等方法来实现。具体细节可以参看<a href="https://hasura.io/docs/1.0/graphql/manual/auth/authorization/role-multiple-rules.html#role-multiple-rules">Multiple column + row permissions for the same role</a></p>
+<p><img src="./images/hasura_permissions.png" alt="permission" /></p>
+<h2><a class="header" href="#apollo" id="apollo">Apollo</a></h2>
+<p>我们这里说的 Apollo 主要指的是 Apollo Client (React)，实现了拉取并管理数据的功能。Apollo 本身会根据配置好的服务端的数据，将本地写好的<code>GraphQL</code>语句编译为<code>typescript</code>接口。</p>
+<p>目前的前端项目中，我们在<code>src/api</code>文件夹下编写<code>*.graphql</code>文件，即填写在 Hasura 中测试过得到需要结果的<code>query</code>或<code>mutation</code>语句。之后使用 Apollo 的<code>codegen</code>编译为相应的接口，供前端页面拉取数据使用。</p>
+<p><img src="./images/apollo_typests.png" alt="Apollo types.ts" /></p>
+<p>我们使用 Apollo 提供的<code>useQuery</code>和<code>useMutation</code>来进行数据的获取和更改。参考官方文档使用<code>useQuery</code>：</p>
+<pre><code class="language-javascript">const GET_DOG_PHOTO = gql`
+  query Dog($breed: String!) {
+    dog(breed: $breed) {
+      id
+      displayImage
+    }
+  }
+`;
+
+function DogPhoto({ breed }) {
+  const { loading, error, data } = useQuery(GET_DOG_PHOTO, {
+    variables: { breed },
+  });
+
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+
+  return (
+    &lt;img src={data.dog.displayImage} style={{ height: 100, width: 100 }} /&gt;
+  );
+}
+</code></pre>
+<p>观察到有一个变量，存的是 GraphQL 的语句，并将这个变量传入<code>useQuery</code>，返回的是<code>data</code>、<code>loading</code>和<code>error</code>三项。顾名思义，是返回的数据、加载状态与是否错误。迁移到<code>typescript</code>是类似这样的：</p>
+<pre><code class="language-graphql">query GetUser($_id: String!) {
+  user(where: { _id: { _eq: $_id } }) {
+    _id
+    id
+    name
+    username
+    department
+    class
+    phone
+    email
+  }
+}
+</code></pre>
+<pre><code class="language-typescript">import { GetUser as GET_USER } from &quot;../api/user.graphql&quot;;
+import { GetUser, GetUserVariables } from &quot;../api/types&quot;;
+const { data, loading, error } = useQuery&lt;GetUser, GetUserVariables&gt;(GET_USER, {
+  variables: { _id: userData?._id! },
+});
+</code></pre>
+<p>这里从<code>user.graphql</code>中导入了<code>GetUser</code>的片段并起别名叫<code>GET_USER</code>，并从 Apollo 生成的接口中导入<code>GetUser</code>和<code>GetUserVariables</code>，即告诉<code>useQuery</code>要使用<code>GET_USER</code>的形式发送请求。之后每次渲染<code>useQuery</code>所在的组件时，便会执行这个请求拉取用户信息。</p>
+<p>而<code>mutation</code>所用的<code>useMutation</code>则是会创建一个函数，显式调用以进行更改的操作。</p>
+<pre><code class="language-graphql">mutation UpdateUser(
+  $_id: String!
+  $id: bigint!
+  $username: String
+  $phone: String
+  $name: String
+  $department: String
+  $class: String
+  $email: String
+) {
+  update_user(
+    where: { _id: { _eq: $_id } }
+    _set: {
+      id: $id
+      username: $username
+      phone: $phone
+      name: $name
+      department: $department
+      class: $class
+      email: $email
+    }
+  ) {
+    affected_rows
+  }
+}
+</code></pre>
+<pre><code class="language-typescript">import { UpdateUser as UPDATE_USER } from &quot;../api/user.graphql&quot;;
+import { UpdateUser, UpdateUserVariables } from &quot;../api/types&quot;;
+const [
+  updateUser,
+  { data: updateData, loading: updating, error: updateError },
+] = useMutation&lt;UpdateUser, UpdateUserVariables&gt;(UPDATE_USER);
+</code></pre>
+<p>下面我们来看查询和更改的例子。我们在数据库里存了很多文章，现在我们要获取并用一个列表展示它们。当用户点击文章时会跳转到相应页面进行阅读，同时更改数据库中该文章的<code>view</code>属性（加 1）。</p>
+<p><img src="./images/apollo_query.png" alt="query" /></p>
+<pre><code class="language-typescript">const { data, loading, error } = useQuery&lt;
+  GetArticleFeeds,
+  GetArticleFeedsVariables
+&gt;(GET_ARTICLE_FEEDS, {
+  variables: { limit: 5, cursor: cursor },
+});
+
+useEffect(() =&gt; {
+  if (data) {
+    setArticles(
+      data.article_public.map((article) =&gt; {
+        return {
+          title: article.title!,
+          alias: article.alias!,
+          abstract: article.abstract!,
+          author: article.author?.username!,
+          likes: article.article_likers_aggregate.aggregate?.count!,
+          views: article.views!,
+          tags: article.article_tags.map((t) =&gt; t.tag.tag_name),
+        };
+      })
+    );
+  }
+}, [data]);
+
+return (
+  &lt;Row&gt;
+    &lt;Col span={4}&gt;&lt;/Col&gt;
+    &lt;Col span={16}&gt;
+      &lt;List
+        dataSource={articles}
+        renderItem={(item) =&gt; {
+          return (
+            &lt;Link to={`/weekly/explore/${item.alias}`}&gt;
+              &lt;ArticleFeedCard article={item} /&gt;
+            &lt;/Link&gt;
+          );
+        }}
+      &gt;&lt;/List&gt;
+    &lt;/Col&gt;
+    &lt;Col span={4}&gt;&lt;/Col&gt;
+  &lt;/Row&gt;
+);
+</code></pre>
+<p>这里使用<code>useQuery</code>，基于<code>cursor</code>（用来确定获取文章的时间戳，初始化为当前时间）拉取 5 篇文章，并使用<code>map</code>变为<code>&lt;ArticleFeedCard /&gt;</code>组件接收的参数。</p>
+<p><img src="./images/apollo_mutation.png" alt="mutation" /></p>
+<pre><code class="language-typescript">const [
+  viewArticle,
+  { data: articleData, loading: articleLoading, error: articleError },
+] = useMutation&lt;ViewArticle, ViewArticleVariables&gt;(VIEW_ARTICLE);
+
+useEffect(() =&gt; {
+  viewArticle({
+    variables: { alias: alias },
+  });
+}, [alias, viewArticle]);
+
+useEffect(() =&gt; {
+  if (articleData &amp;&amp; !articleError &amp;&amp; articleData.update_article_public) {
+    setArticle(articleData?.update_article_public?.returning[0]);
+    setContentHtml(
+      md2wx.renderHtml(
+        articleData?.update_article_public?.returning[0].content!
+      )
+    );
+  }
+}, [articleData, articleError]);
+</code></pre>
+<p>在文章的阅读页面，则是使用<code>mutation</code>同时修改<code>view</code>并获取文章的内容，再存储到组件的状态中，以备其他功能需要。</p>
+<p>Apollo 的简短介绍到这里就结束了，对于更深内容感兴趣的同学可以自行查阅其文档学习。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../web/backend.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../linux-webserver/linux.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../web/backend.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../linux-webserver/linux.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
