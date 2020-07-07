@@ -39,7 +39,7 @@ DELETE /articles/1
 
 URI应该是资源，不应该是动词，动作（即状态转换）应该在对给定资源的query或payload中完成。
 
-## Express
+## Node.js
 
 - Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。
 - Node.js 使用了一个**事件驱动**、**非阻塞式 I/O**的模型，使其轻量又高效。
@@ -52,3 +52,81 @@ URI应该是资源，不应该是动词，动作（即状态转换）应该在�
     - C/C++/Java 的多线程，需要至少需要 3s\*100/线程数量
     - Node.js 仅需要比 3s 多一点的时间
 - Node.js 的语法就是 JavaScript 的语法。
+
+## Express
+
+- Express 是一种保持最低程度规模的灵活 Node.js Web 应用程序框架，为 Web 和移动应用程序提供一组强大的功能。
+- 简单的来讲，Express 是一个用来做 webapp 脚手架工具。详细请参阅[官方网站](https://expressjs.com/)。
+
+`yarn global add express-generator`可添加项目的generator以快速生成项目（类似create-react-app）。
+
+```javascript
+const express = require("express");
+const app = express();
+
+// middleware
+app.use(async (req, res, next) => {
+  let x = Date.now();
+  await next();
+  console.log(req.url, "-->", res.statusCode, Date.now() - x, "ms");
+});
+
+// "router" in some way
+app.get("/", async (req, res, next) => {
+  console.log("Hello,world!");
+  res.status(200).send("Hello World!");
+});
+
+app.listen(3000, () => {
+  console.log("Example app listening on port 3000!");
+});
+```
+
+```flow
+st=>start: Request
+mid=>operation: Middlewares construction
+cond=>condition: Find app routine
+condx=>condition: Find routine controller
+e=>end: Response
+serv=>operation: Deal with it
+cth=>end: response 404
+
+st->mid->cond
+cond(yes)->condx
+cond(no)->cth
+condx(no)->cth
+condx(yes)->serv->e
+```
+
+## Mongo
+
+> MongoDB is a document database, which means it stores data in JSON-like documents. We believe this is the most natural way to think about data, and is much more expressive and powerful than the traditional row/column model.
+
+> Mongoose is an elegant mongodb object modeling for node.js
+
+- Schema
+- Model
+- Object
+- 异步`find`和`save`
+
+详细文档请参阅[Mongoose官方文档](http://www.mongoosejs.net/docs/guide.html)。
+
+## Postman
+
+> Postman is a collaboration platform for API development. Postman's features simplify each step of building an API and streamline collaboration so you can create better APIs—faster.
+
+HTTP协议：
+
+请求 = 请求行 + 请求头 + 空行 + 其他消息体 （CRLF，下同）
+
+响应 = 状态行 + 响应头 + 空行 + 响应正文
+
+GET、POST、PUT、DELETE……
+
+| 状态码 | 含义                                           |
+| ------ | ---------------------------------------------- |
+| 1xx    | 信息，服务器收到请求，需要请求者继续执行操作   |
+| 2xx    | 成功，操作被成功接收并处理                     |
+| 3xx    | 重定向，需要进一步的操作以完成请求             |
+| 4xx    | 客户端错误，请求包含语法错误或无法完成请求     |
+| 5xx    | 服务器错误，服务器在处理请求的过程中发生了错误 |
