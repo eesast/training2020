@@ -449,6 +449,11 @@ GET、POST、PUT、DELETE……
 | 3xx    | 重定向，需要进一步的操作以完成请求             |
 | 4xx    | 客户端错误，请求包含语法错误或无法完成请求     |
 | 5xx    | 服务器错误，服务器在处理请求的过程中发生了错误 |
-  ```
+## 练习
 
-  ```
+使用本讲学习的知识搭建一个简单后端，实现以下4个API。
+
+- `POST /api/session/ {username:$username,password:$password}` 实现登录功能
+- `POST /api/account {username:$username,password:$password}` 实现注册功能
+- `DELETE /api/session {username:$username}`实现登出功能
+- `get /api/session {username:$username}`实现确认在线功能
