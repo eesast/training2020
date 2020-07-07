@@ -1,0 +1,38 @@
+.footer {
+  height: 64px;
+  text-align: center;
+  background-color: white;
+}
+
+.header {
+  background-color: white;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  height: 67px;
+  z-index: 99;
+  border-bottom: 2px #eee solid;
+}
+
+.logoContainer,
+.toolbar {
+  height: 100%;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.logo {
+  height: 60%;
+  width: auto;
+  margin: auto;
+  margin-right: 0;
+}
+
+.menu {
+  flex: 1;
+  line-height: 64px;
+  border-bottom: 0;
+}
