@@ -1,0 +1,20 @@
+.root {
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.card {
+  padding: 0;
+  max-width: 300px;
+  text-align: center;
+  margin-bottom: 128px;
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+  margin: 24px auto 36px auto;
+}

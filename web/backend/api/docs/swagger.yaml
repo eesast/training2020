@@ -1,0 +1,3676 @@
+openapi: 3.0.0
+
+servers:
+  - url: "https://api.eesast.com"
+    description: Remote API Server
+  - url: "http://localhost:{port}"
+    description: Local API Server
+    variables:
+      port:
+        description: 端口号
+        default: "28888"
+
+info:
+  title: API Backend for EESAST
+  description: |
+    清华大学电子工程系学生科协后端 API。了解更多 EESAST 内容，请访问：[GitHub 主页](https://github.com/eesast/)或 [EESAST 官方网站](https://eesast.com/)。
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: i@raineggplant.com
+
+tags:
+  - name: static
+    description: 静态文件
+  - name: articles
+    description: 文章
+  - name: comments
+    description: 评论
+  - name: users
+    description: 用户
+  - name: teams
+    description: 队伍
+  - name: contests
+    description: 比赛
+  - name: announcements
+    description: 公告
+  - name: emails
+    description: 邮件
+  - name: rooms
+    description: 房间
+  - name: tracks
+    description: 赛道
+  - name: codes
+    description: 代码
+
+paths:
+  "/static/files/:filename":
+    get:
+      tags:
+        - static
+      summary: 下载文件
+      operationId: getFile
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: File does not exist"
+        500:
+          description: Server error
+
+  "/static/images/:filename":
+    get:
+      tags:
+        - static
+      summary: 下载图片
+      description: 下载webp格式或其本身
+      operationId: getImage
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: File does not exist"
+        500:
+          description: Server error
+
+  "/static/thuai/:filename":
+    get:
+      tags:
+        - static
+      summary: 下载thuai相关文件（目前为回放）
+      description: 下载thuai相关文件（目前为回放）
+      operationId: getThuaiFile
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: File does not exist"
+        500:
+          description: Server error
+
+  "/static/{category}":
+    post:
+      tags:
+        - static
+      summary: 上传文件
+      description: 需要已登录用户
+      operationId: uploadFile
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新增文件的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+
+  "/static/{category}/{filename}":
+    delete:
+      tags:
+        - static
+      summary: 删除一个文件
+      description: 需要 `root`, `writer`, `editor`, `keeper`, `organizer` 或 `counselor` 角色
+      operationId: deleteFile
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: category
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: File does not exist"
+        500:
+          description: Server error
+
+  "/v1/articles":
+    get:
+      tags:
+        - articles
+      summary: 返回匹配查询的文章
+      description: 可以通过 query 进行筛选 查看隐藏文章需要是作者、发布者、`root`或`editor`角色
+      operationId: findArticles
+      parameters:
+        - name: title
+          in: query
+          description: 文章标题，采用部分匹配
+          schema:
+            type: string
+        - name: author
+          in: query
+          description: 作者
+          schema:
+            type: string
+        - name: authorId
+          in: query
+          description: 作者的用户id
+          schema:
+            type: number
+        - name: createdBy
+          in: query
+          description: 发布文章的用户的id
+          schema:
+            type: number
+        - name: alias
+          in: query
+          description: 别名，通常是文章的 URL
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: 标签
+          schema:
+            type: string
+        - name: likedBy
+          in: query
+          description: 点赞者 ID
+          schema:
+            type: number
+        - name: begin
+          in: query
+          description: 按时间降序排列，起始文章的位置
+          schema:
+            type: number
+        - name: end
+          in: query
+          description: 按时间降序排列，结束文章的位置
+          schema:
+            type: number
+        - name: noContent
+          in: query
+          description: "设置是否需要获取文章内容。若设置为 `true`, 则响应中不包含 `content` 键值对"
+          schema:
+            type: boolean
+        - name: invisible
+          in: query
+          description: 设置是否查看隐藏的文章
+          schema:
+            type: boolean
+        - name: count
+          in: query
+          description: 设置是否查看对应authorId或createdBy文章的数量
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Article"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - articles
+      summary: 发布一篇新文章
+      description: 需要 `root` 或 `writer` 角色
+      operationId: addArticle
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addArticle"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新发布文章的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        409:
+          description: "Conflict: Alias already exists"
+        422:
+          description: "UnProcessable Entity: Missing contents"
+        500:
+          description: Server error
+
+  "/v1/articles/{articleId}":
+    get:
+      tags:
+        - articles
+      summary: 根据 ID 获取文章
+      operationId: getArticleById
+      parameters:
+        - name: articleId
+          in: path
+          description: 文章 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Article"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: Article does not exist"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - articles
+      summary: 更新已存在的文章
+      description: 需要 `root` 角色，或待更新文章的作者为请求者
+      operationId: updateArticle
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: articleId
+          in: path
+          description: 待更新文章的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateArticle"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新文章的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Article is under review"
+        404:
+          description: "Not Found: Article does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - articles
+      summary: 删除一篇文章
+      description: 需要 `root` 角色
+      operationId: deleteArticle
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: articleId
+          in: path
+          description: 要删除文章的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Article does not exist"
+        500:
+          description: Server error
+
+  "/v1/articles/{articleId}/like":
+    get:
+      tags:
+        - articles
+      summary: 点赞
+      description: 需要已登录用户
+      operationId: likeArticle
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: articleId
+          in: path
+          description: 点赞文章的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Article does not exist"
+        500:
+          description: Server error
+
+  "/v1/articles/{articleId}/unlike":
+    get:
+      tags:
+        - articles
+      summary: 取消点赞
+      description: 需要已登录用户
+      operationId: unlikeArticle
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: articleId
+          in: path
+          description: 取消点赞文章的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Article does not exist"
+        500:
+          description: Server error
+
+  "/v1/comments":
+    get:
+      tags:
+        - comments
+      summary: 返回匹配查询的评论
+      description: 可以通过 query 进行筛选
+      operationId: findComments
+      parameters:
+        - name: replyTo
+          in: query
+          description: 回复的上级评论的 ID, -1 代表一级（独立）评论
+          schema:
+            type: number
+        - name: likedBy
+          in: query
+          description: 点赞者 ID
+          schema:
+            type: number
+        - name: articleId
+          in: query
+          schema:
+            type: number
+        - name: authorId
+          in: query
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comment"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - comments
+      summary: 发布一条新评论
+      description: "需要 `root`, `writer` 或 `reader` 角色"
+      operationId: addComment
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addComment"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新发布评论的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+
+  "/v1/comments/{commentId}":
+    get:
+      tags:
+        - comments
+      summary: 根据 ID 获取评论
+      operationId: getCommentById
+      parameters:
+        - name: commentId
+          in: path
+          description: 评论 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comment"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: Comment does not exist"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - comments
+      summary: 更新已存在的评论
+      description: 需要 `root` 角色，或待更新评论的作者为请求者
+      operationId: updateComment
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: commentId
+          in: path
+          description: 待更新评论的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateComment"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新评论的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Comment does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - comments
+      summary: 删除一条评论
+      description: 需要 `root` 角色
+      operationId: deleteComment
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: commentId
+          in: path
+          description: 待删除评论的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Comment does not exist"
+        500:
+          description: Server error
+
+  "/v1/comments/{commentId}/like":
+    get:
+      tags:
+        - comments
+      summary: 点赞
+      description: 需要已登录用户
+      operationId: likeComment
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: commentId
+          in: path
+          description: 点赞评论的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Comment does not exist"
+        500:
+          description: Server error
+
+  "/v1/comments/{commentId}/unlike":
+    get:
+      tags:
+        - comments
+      summary: 取消点赞
+      description: 需要已登录用户
+      operationId: unlikeComment
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: commentId
+          in: path
+          description: 取消点赞评论的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Comment does not exist"
+        500:
+          description: Server error
+
+  "/v1/contests":
+    get:
+      tags:
+        - contests
+      summary: 返回匹配查询的比赛
+      description: 可以通过 query 进行筛选
+      operationId: findContests
+      parameters:
+        - name: type
+          in: query
+          description: 比赛分类，目前为["电设", "队式", "软设"]
+          schema:
+            type: string
+        - name: year
+          in: query
+          description: 比赛开展的年份
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Contest"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - contests
+      summary: 发布一场新比赛
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: addContest
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addContest"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新发布比赛的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+
+  "/v1/contests/{contestId}":
+    get:
+      tags:
+        - contests
+      summary: 根据 ID 获取比赛
+      description: 同时返回totalTeams
+      operationId: getContestById
+      parameters:
+        - name: contestId
+          in: path
+          description: 比赛 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contest"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: Contest does not exist"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - contests
+      summary: 更新已存在的比赛
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: updateContest
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: contestId
+          in: path
+          description: 待更新比赛的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateContest"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新比赛的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Contest does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - contests
+      summary: 删除一场比赛
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: deleteContest
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: contestId
+          in: path
+          description: 要删除比赛的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Contest does not exist"
+        500:
+          description: Server error
+
+  "/v1/users":
+    get:
+      tags:
+        - users
+      summary: 返回匹配查询的用户
+      description: 需要已登录用户或第三方令牌，可以通过 query 进行筛选
+      operationId: getUsers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: username
+          in: query
+          schema:
+            type: string
+        - name: department
+          in: query
+          schema:
+            type: string
+        - name: class
+          in: query
+          schema:
+            type: string
+        - name: begin
+          in: query
+          description: 按创建时间降序排列，起始用户的位置
+          schema:
+            type: number
+        - name: end
+          in: query
+          description: 按创建时间降序排列，结束用户的位置
+          schema:
+            type: number
+        - name: detailInfo
+          in: query
+          description: >-
+            设置是否需要获取用户具体信息。若设置为 `false`, 则响应中仅包含 `id`, `createdAt`, `createdBy`,
+            `updatedAt` 和 `updatedBy` 键值对
+          schema:
+            type: boolean
+        - name: isTeacher
+          in: query
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - users
+      summary: 新建用户
+      description: "新增用户的默认用户组为 `student`, 角色为 `reader`"
+      operationId: addUser
+      requestBody:
+        $ref: "#/components/requestBodies/addUser"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新增用户的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        422:
+          description: "Unprocessable Entity: Missing form data"
+        500:
+          description: Server error
+
+  "/v1/users/details":
+    post:
+      tags:
+        - users
+      summary: 返回匹配查询的用户
+      description: 需要已登录用户或第三方令牌，可以通过 query 进行筛选
+      operationId: getUsersDetails
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: username
+          in: query
+          schema:
+            type: string
+        - name: department
+          in: query
+          schema:
+            type: string
+        - name: class
+          in: query
+          schema:
+            type: string
+        - name: begin
+          in: query
+          description: 按创建时间降序排列，起始用户的位置
+          schema:
+            type: number
+        - name: end
+          in: query
+          description: 按创建时间降序排列，结束用户的位置
+          schema:
+            type: number
+        - name: detailInfo
+          in: query
+          description: >-
+            设置是否需要获取用户具体信息。若设置为 `false`, 则响应中仅包含 `id`, `createdAt`, `createdBy`,
+            `updatedAt` 和 `updatedBy` 键值对
+          schema:
+            type: boolean
+        - name: isTeacher
+          in: query
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+
+  "/v1/users/login":
+    post:
+      tags:
+        - users
+      summary: 用户登录
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - password
+              properties:
+                username:
+                  type: string
+                id:
+                  type: number
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: >-
+                      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwidXNlcm5hbWUiOiJhZG1pbiIsImdyb3VwIjoiYWRtaW4iLCJyb2xlIjoicm9vdCIsImlhdCI6MTU0OTE2MTI5NiwiZXhwIjoxNTQ5MjA0NDk2fQ.1__SnI_vAeMrIZe6D0mXv4_umQEg53_iUHNeGJOQSoU
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          description: Invalid password supplied
+        404:
+          description: "Not Found: User does not exist"
+        500:
+          description: Server error
+
+  "/v1/users/forgot":
+    get:
+      tags:
+        - users
+      summary: 忘记密码
+      operationId: recoverAccount
+      responses:
+        404:
+          description: Operation not implemented yet
+
+  "/v1/users/reset":
+    post:
+      tags:
+        - users
+      summary: 重设密码
+      operationId: resetPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+              properties:
+                action:
+                  type: string
+                username:
+                  type: string
+                id:
+                  type: number
+                email:
+                  type: string
+                password:
+                  type: string
+                token:
+                  type: string
+      responses:
+        201:
+          description: Successful operation
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          description: Missing token / Wrong token
+        404:
+          description: "Not Found: User does not exist / User does not have an email"
+        422:
+          description: "Unprocessable Entity: Missing essential information"
+        500:
+          description: Server error
+
+  "/v1/users/reset/{token}":
+    get:
+      tags:
+        - users
+      summary: 检查重设密码的token
+      operationId: checkResetToken
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          description: Wrong token
+        500:
+          description: Server error
+
+  "/v1/users/{userId}":
+    get:
+      tags:
+        - users
+      summary: 根据 ID 获取用户
+      description: 需要已登录用户或第三方令牌
+      operationId: getUserById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: number
+        - name: detailInfo
+          in: query
+          description: >-
+            设置是否需要获取用户具体信息。若设置为 `false`, 则响应中仅包含 `id`, `createdAt`, `createdBy`,
+            `updatedAt` 和 `updatedBy` 键值对
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: User does not exist"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - users
+      summary: 更新已存在的用户
+      description: 需要 `root` 角色，或待更新用户为请求者自身
+      operationId: updateUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateUser"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 更新用户的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: User does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - users
+      summary: 删除一个用户
+      description: 需要 `root` 角色
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: User does not exist"
+        500:
+          description: Server error
+
+  "/v1/users/token/apply":
+    post:
+      tags:
+        - users
+      summary: 获得第三方令牌
+      operationId: getPublicToken
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: query
+          description: 用户id
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/getPublicToken"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        403:
+          description: Permission denied
+        500:
+          description: Server error
+
+  "/v1/users/token/validate":
+    post:
+      tags:
+        - users
+      summary: 校验第三方令牌
+      operationId: validatePublicToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        200:
+          description: good Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: userId
+                  allowedEndpoints:
+                    $ref: "#/components/schemas/allowedEndpoints"
+
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          description: Invalid/Expired Token
+        500:
+          description: Server error
+
+  "/v1/users/username/{userId}":
+    summary: 返回`userId`对应的用户名
+    get:
+      tags:
+        - users
+      summary: 返回`userId`对应的用户名
+      description: 对外显示的用户名，不需要权限
+      operationId: getUsername
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+        404:
+          description: "Not Found: User does not exist"
+        500:
+          description: Server error
+
+  "/v1/teams":
+    get:
+      tags:
+        - teams
+      summary: 返回匹配查询的队伍
+      description: 可以通过 query 进行筛选，已登录用户可以查询本队邀请码， `root` 角色可查询所有邀请码
+      operationId: findTeams
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: contestId
+          in: query
+          description: 比赛ID
+          schema:
+            type: number
+        - name: available
+          in: query
+          description: 队伍是否仍具有参赛资格
+          schema:
+            type: boolean
+        - name: self
+          in: query
+          description: 是否只查询含有自身的队伍
+          schema:
+            type: boolean
+        - name: begin
+          in: query
+          description: 按时间降序排列，起始队伍的位置
+          schema:
+            type: number
+        - name: end
+          in: query
+          description: 按时间降序排列，结束队伍的位置
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - teams
+      summary: 新建队伍
+      description: 需要已登录用户
+      operationId: addTeam
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addTeam"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新建队伍的 URL
+              schema:
+                type: string
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- Contest not available / User not in track"
+        409:
+          description: Team name already exists / User is already in a team
+        500:
+          description: Server error
+
+  "/v1/teams/{teamId}":
+    get:
+      tags:
+        - teams
+      summary: 根据 ID 获取队伍
+      description: 本队用户或 `root` 角色可见邀请码
+      operationId: getTeamById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: teamId
+          in: path
+          description: 队伍 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: Team does not exist"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - teams
+      summary: 更新已存在的队伍
+      description: 需要 `root` 角色，或待更新队伍的队长为请求者
+      operationId: updateTeam
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: teamId
+          in: path
+          description: 待更新队伍的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateTeam"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新队伍的 URL
+              schema:
+                type: string
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- Invalid members / Captain is not a member of the team / Contest not available"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Team does not exist"
+        409:
+          description: Team name already exists
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - teams
+      summary: 删除一支队伍
+      description: 需要 `root` 角色，或待删除队伍的队长为请求者
+      operationId: deleteTeam
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: teamId
+          in: path
+          description: 要删除队伍的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- Contest not available"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Team does not exist"
+        500:
+          description: Server error
+
+  "/v1/teams/{teamId}/members":
+    get:
+      tags:
+        - teams
+      summary: 根据队伍 ID 获取队员
+      operationId: getMembersByTeamId
+      parameters:
+        - name: teamId
+          in: path
+          description: 队伍 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: Team does not exist"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - teams
+      summary: 根据队伍 ID 向队伍增加队员
+      description: 需要 `root` 角色，或增加队员为请求者自身且邀请码正确
+      operationId: addMemberToTeamId
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: teamId
+          in: path
+          description: 队伍 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/addTeamMember"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新增队员的 URL
+              schema:
+                type: string
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- Member does not exist / Contest not available / User not in track"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: Team is not available / Incorrect invite code
+        404:
+          description: "Not Found: Team does not exist"
+        409:
+          description: The number of members exceeds / User is already in a team
+        422:
+          description: Missing credentials
+        500:
+          description: Server error
+
+  "/v1/teams/{teamId}/members/{memberId}":
+    delete:
+      tags:
+        - teams
+      summary: 根据ID删除指定队伍中的队员
+      description: 需要 `root` 角色，或队伍队长为请求者自身
+      operationId: deleteMemberFromTeamId
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: teamId
+          in: path
+          description: 队伍 ID
+          required: true
+          schema:
+            type: number
+        - name: memberId
+          in: path
+          description: 队员 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- Leader cannot be deleted / Contest not available"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Team does not exist / Member does not exist"
+        500:
+          description: Server error
+
+  "/v1/teams/scores":
+    put:
+      tags:
+        - teams
+      summary: 根据比赛结果更新多支队伍分数
+      description: 由server发起
+      operationId: updateTeamsScore
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scores
+              properties:
+                scores:
+                  type: array
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新队伍的 URL
+              schema:
+                type: string
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Permission denied"
+        404:
+          description: "Not Found: Team does not exist"
+        422:
+          description: "Unprocessable Entity: Missing form data"
+        500:
+          description: Server error
+
+  "/v1/teams/{teamId}/score":
+    put:
+      tags:
+        - teams
+      summary: 根据id更新队伍分数
+      description: 由server发起
+      operationId: updateTeamScore
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: teamId
+          in: path
+          description: 队伍ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - score
+              properties:
+                score:
+                  type: number
+                replace:
+                  type: boolean
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新队伍的 URL
+              schema:
+                type: string
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Permission denied"
+        404:
+          description: "Not Found: Team does not exist"
+        422:
+          description: "Unprocessable Entity: Missing form data"
+        500:
+          description: Server error
+
+  "/v1/announcements":
+    get:
+      tags:
+        - announcements
+      summary: 返回匹配查询的公告
+      description: 可以通过 query 进行筛选
+      operationId: findAnnouncements
+      parameters:
+        - name: contestId
+          in: query
+          schema:
+            type: number
+          description: 比赛ID
+        - name: priority
+          in: query
+          schema:
+            type: number
+          description: 公告显示优先级
+        - name: begin
+          in: query
+          schema:
+            type: number
+          description: 按时间降序排列，起始公告的位置
+        - name: end
+          in: query
+          schema:
+            type: number
+          description: 按时间降序排列，结束公告的位置
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Announcement"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - announcements
+      summary: 发布一篇新的公告
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: addAnnouncements
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addAnnouncement"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新发布公告的 URL
+              schema:
+                type: string
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+
+  "/v1/announcements/{announcementId}":
+    get:
+      tags:
+        - announcements
+      summary: 根据 ID 获取公告
+      operationId: getAnnouncementById
+      parameters:
+        - name: announcementId
+          description: 公告的 ID
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Announcement"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          description: "Not Found: Announcement does not exist"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - announcements
+      summary: 更新已经存在的公告
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: updateAnnouncement
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: announcementId
+          in: path
+          description: 要更新的公告ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateAnnouncement"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新公告的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Announcement does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - announcements
+      summary: 删除一篇公告
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: deleteAnnouncement
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: announcementId
+          in: path
+          description: 要删除的公告ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Announcement does not exist"
+
+  "/v1/emails":
+    post:
+      tags:
+        - emails
+      summary: 发送邮件
+      # TODO: Complete requestBody
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      operationId: sendEmails
+      responses:
+        200:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          description: Wrong secret
+        404:
+          description: "Not Found: Sender does not exist / Receiver does not exist / Teacher does not exist / Student does not exist"
+        422:
+          description: Missing receiver email / Missing student email / Missing teacher email
+        500:
+          description: Server error
+
+  "/v1/rooms":
+    get:
+      tags:
+        - rooms
+      summary: 返回匹配查询的房间
+      description: 可以通过 query 进行筛选
+      operationId: findRooms
+      parameters:
+        - name: contestId
+          in: query
+          schema:
+            type: number
+          description: 比赛ID
+        - name: status
+          in: query
+          schema:
+            type: number
+            enum: [0, 1, 2]
+          description: 房间是否开启
+        - name: begin
+          in: query
+          schema:
+            type: number
+          description: 按时间降序排列，起始房间的位置
+        - name: end
+          in: query
+          schema:
+            type: number
+          description: 按时间降序排列，结束房间的位置
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Room"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - rooms
+      summary: 开启一个新房间
+      description: 需要已登录用户
+      operationId: addRoom
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addRoom"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新开启房间的 URL
+              schema:
+                type: string
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- Contest not available"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+        503:
+          description: Failed to start docker container
+
+  "/v1/rooms/{roomId}":
+    get:
+      tags:
+        - rooms
+      summary: 根据 ID 获取房间
+      operationId: getRoomById
+      parameters:
+        - name: roomId
+          in: path
+          description: 房间 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Room"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - rooms
+      summary: 更新已存在的房间
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: updateRoom
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: roomId
+          in: path
+          description: 待更新房间的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateRoom"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新比赛的 URL
+              schema:
+                type: string
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Room does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - rooms
+      summary: 删除一个房间
+      description: 需要 `root` 或 `organizer` 角色
+      operationId: deleteRoom
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: roomId
+          in: path
+          description: 要删除房间的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Room does not exist / Docker container does not exist"
+        422:
+          description: "Unprocessable Entity: Missing form data"
+        500:
+          description: Server error
+        503:
+          description: "Service Unavailable: Failed to stop or remove docker container"
+
+  "/v1/rooms/check/{token}":
+    post:
+      tags:
+        - rooms
+      summary: 验证服务器启动的token
+      operationId: checkRoomToken
+      parameters:
+        - name: token
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          description: Wrong token
+        500:
+          description: Server error
+
+  "/v1/rooms/{roomId}/join":
+    post:
+      tags:
+        - rooms
+      summary: 加入房间
+      description: 由server发起，返回更新后队伍数组，header中为server token
+      operationId: joinRoom
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: roomId
+          in: path
+          description: 加入房间的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/changeRoomTeam"
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- User not in team"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Permission denied"
+        404:
+          description: "Not Found: Room does not exist"
+        409:
+          description: Team already in room
+        500:
+          description: Server error
+
+  "/v1/rooms/{roomId}/leave":
+    post:
+      tags:
+        - rooms
+      summary: 退出房间
+      description: 由server发起，返回剩余队伍数组，header中为server token
+      operationId: leaveRoom
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: roomId
+          in: path
+          description: 退出房间的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/changeRoomTeam"
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+        400:
+          # TODO: Solve status code conflict
+          # $ref: "#/components/responses/BadRequest"
+          description: "TODO: Solve status code conflict. --- User not in team"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Permission denied"
+        404:
+          description: "Not Found: Room does not exist"
+        500:
+          description: Server error
+
+  "/v1/rooms/{roomId}/status":
+    put:
+      tags:
+        - rooms
+      summary: 更新房间状态
+      description: 由server发起
+      operationId: updateRoomStatus
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: roomId
+          in: path
+          description: 房间 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: number
+                  enum: [0, 1, 2]
+      responses:
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Permission denied"
+        404:
+          description: "Not Found: Room does not exist / Docker container does not exist"
+        422:
+          description: "Unprocessable Entity: Missing form data"
+        500:
+          description: Server error
+        503:
+          description: "Service Unavailable: Failed to stop or remove docker container"
+
+  "/v1/tracks":
+    get:
+      tags:
+        - tracks
+      description: 需要已登录用户，返回不带有参赛选手的赛道名单，可用query限定
+      operationId: getTracks
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: name
+          in: query
+          description: 赛道名称
+          required: false
+          schema:
+            type: string
+        - name: year
+          in: query
+          description: 赛道年份
+          required: false
+          schema:
+            type: number
+        - name: open
+          in: query
+          description: 赛道开放状态
+          required: false
+          schema:
+            type: boolean
+        - name: preOpen
+          in: query
+          description: 赛道预赛报名开放状态
+          required: false
+          schema:
+            type: boolean
+        - name: playerId
+          in: query
+          description: 参赛选手ID
+          schema:
+            type: number
+        - name: prePlayerId
+          in: query
+          description: 预赛参赛选手ID
+          schema:
+            type: number
+
+      responses:
+        200:
+          description: OK
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        500:
+          description: Server error
+
+    post:
+      tags:
+        - tracks
+      description: 添加赛道，需要管理员权限
+      operationId: createATrack
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addTrack"
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Room does not exist"
+        500:
+          description: Server error
+
+  "/v1/tracks/{trackId}":
+    get:
+      tags:
+        - tracks
+      summary: 需要登录，根据 ID 获取赛道
+      operationId: getTrackById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: trackId
+          in: path
+          description: 赛道 ID
+          required: true
+          schema:
+            type: number
+        - name: playerInfo
+          in: query
+          description: 是否显示参赛选手ID
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: prePlayerInfo
+          in: query
+          description: 是否显示预赛参赛选手ID
+          required: false
+          schema:
+            type: boolean
+            default: false
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Track"
+        404:
+          description: "Not Found: Track does not exist"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - tracks
+      summary: 更新已存在的赛道
+      description: 需要 `root` 或 `admin` 角色
+      operationId: updateTrack
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: trackId
+          in: path
+          description: 待更新赛道的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateTrack"
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Track does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - tracks
+      summary: 删除一个赛道
+      description: 需要 `root` 或 `admin` 角色
+      operationId: deleteTrack
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: trackId
+          in: path
+          description: 要删除赛道的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Track does not exist"
+        500:
+          description: Server error
+
+  "/v1/tracks/{trackId}/players":
+    post:
+      tags:
+        - tracks
+      description: 添加选手，需要管理员权限（无视赛道开放）或本人
+      operationId: addPlayerToTrack
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: trackId
+          in: path
+          description: 要加入的赛道的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - playerId
+              properties:
+                playerId:
+                  type: number
+                  description: 选手ID
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Track is not open"
+        404:
+          description: "Not Found: Track does not exist"
+        409:
+          description: "Conflict: One could not join 2 tracks."
+        500:
+          description: Server error
+
+  "/v1/tracks/{trackId}/players/{playerId}":
+    parameters:
+      - name: trackId
+        in: path
+        description: 赛道 ID
+        required: true
+        schema:
+          type: number
+      - name: playerId
+        in: path
+        description: 选手 ID
+        required: true
+        schema:
+          type: number
+    get:
+      tags:
+        - tracks
+      description: 检验指定选手是否在指定赛道中
+      operationId: checkPlayerInTrack
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: 选手在该赛道中
+        404:
+          description: "Not Found: Track not found or player is not in"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - tracks
+      description: 选手退赛，需要管理员权限（无视赛道开放）或本人
+      operationId: removePlayerFromTrack
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Track is not open"
+        404:
+          description: "Not Found: Track does not exist"
+        500:
+          description: Server error
+
+  "/v1/tracks/{trackId}/prePlayers":
+    post:
+      tags:
+        - tracks
+      description: 添加选手，需要管理员权限（无视赛道开放）或本人
+      operationId: addPrePlayerToTrack
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: trackId
+          in: path
+          description: 要加入的赛道的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - playerId
+              properties:
+                playerId:
+                  type: number
+                  description: 选手ID
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Track is not open"
+        404:
+          description: "Not Found: Track does not exist"
+        409:
+          description: "Conflict: One could not join 2 tracks."
+        500:
+          description: Server error
+
+  "/v1/tracks/{trackId}/prePlayers/{playerId}":
+    parameters:
+      - name: trackId
+        in: path
+        description: 赛道 ID
+        required: true
+        schema:
+          type: number
+      - name: playerId
+        in: path
+        description: 选手 ID
+        required: true
+        schema:
+          type: number
+    get:
+      tags:
+        - tracks
+      description: 检验指定选手是否在指定赛道中
+      operationId: checkPrePlayerInTrack
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: 选手在该赛道中
+        404:
+          description: "Not Found: Track not found or player is not in"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - tracks
+      description: 选手退赛，需要管理员权限（无视赛道开放）或本人
+      operationId: removePrePlayerFromTrack
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: Successful operation
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Track is not open"
+        404:
+          description: "Not Found: Track does not exist"
+        500:
+          description: Server error
+
+  "/v1/codes":
+    get:
+      tags:
+        - codes
+      description: 需要已登录用户
+      operationId: getCodes
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: contestId
+          description: 所属比赛
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: teamId
+          description: 队伍Id
+          required: false
+          schema:
+            type: number
+        - name: begin
+          in: query
+          description: 按时间降序排列，起始代码的位置
+          schema:
+            type: number
+        - name: end
+          in: query
+          description: 按时间降序排列，结束代码的位置
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Code"
+        403:
+          description: 403 Forbidden
+        404:
+          description: 404 Not Found
+        422:
+          description: 422 Missing contents
+        500:
+          description: Server Error
+
+    post:
+      description: 上传代码
+      tags:
+        - codes
+      operationId: addCode
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/addCode"
+      responses:
+        201:
+          description: Successful operation
+          headers:
+            Location:
+              description: 新上传代码的 URL
+              schema:
+                type: string
+        422:
+          description: 422 Missing contents
+        500:
+          description: Server Error
+
+  "/v1/codes/{codeId}":
+    get:
+      tags:
+        - codes
+      description: 通过ID获取代码
+      summary: Describe this route
+      operationId: getCodeById
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: codeId
+          required: true
+          description: 代码Id
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Code"
+        403:
+          description: Forbidden
+        500:
+          description: Server Error
+
+    put:
+      tags:
+        - codes
+      summary: 更新已存在的代码
+      description: 需要 `root` `organizer` 角色，所属队伍成员
+      operationId: updateCode
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: codeId
+          in: path
+          description: 待更新代码的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        $ref: "#/components/requestBodies/updateCode"
+      responses:
+        204:
+          description: Successful operation
+          headers:
+            Location:
+              description: 被更新代码的 URL
+              schema:
+                type: string
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Team / Code does not exist"
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - codes
+      summary: 删除代码
+      description: 需要 `root` 角色，所属队伍成员
+      operationId: deleteCode
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: codeId
+          in: path
+          description: 要删除代码的 ID
+          required: true
+          schema:
+            type: number
+      responses:
+        204:
+          description: Successful operation
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        404:
+          description: "Not Found: Code / Team does not exist"
+        500:
+          description: Server error
+
+  "/v1/codes/{codeId}/compile":
+    post:
+      description: 编译代码
+      tags:
+        - codes
+      operationId: compileCode
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: codeId
+          in: path
+          description: 要编译代码的 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - role
+              properties:
+                role:
+                  type: number
+      responses:
+        200:
+          description: Successful operation
+          headers:
+            Location:
+              description: 编译信息（暂未区分是否成功）
+              schema:
+                type: string
+        400:
+          description: 400 Error (TODO Add info)
+        404:
+          description: 404 Code does not exist
+        409:
+          description: 409 Code is compiling
+        500:
+          description: Server Error
+
+    put:
+      tags:
+        - codes
+      summary: 更新编译信息
+      description: 由server发起
+      operationId: updateCodeCompileInfo
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: codeId
+          in: path
+          description: 代码 ID
+          required: true
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - compileInfo
+              properties:
+                status:
+                  type: string
+      responses:
+        401:
+          $ref: "#/components/responses/UnauthorizedError"
+        403:
+          description: "Forbidden: Permission denied"
+        404:
+          description: "Not Found: Code does not exist / Docker container does not exist"
+        422:
+          description: "Unprocessable Entity: Missing form data"
+        500:
+          description: Server error
+        503:
+          description: "Service Unavailable: Failed to stop or remove docker container"
+
+components:
+  schemas:
+    Article:
+      type: object
+      required:
+        - id
+        - title
+        - alias
+        - authorId
+        - content
+      properties:
+        id:
+          type: number
+          description: 自增值
+        title:
+          type: string
+        alias:
+          type: string
+          description: 用于 SEO 与 URL
+        authorId:
+          type: number
+        content:
+          type: string
+          description: 文章内容(支持 Markdown)
+        abstract:
+          type: string
+          description: 摘要，用于预览功能
+        image:
+          type: string
+          description: 文章标题图片
+        views:
+          type: number
+          default: 0
+        likers:
+          type: array
+          items:
+            type: number
+            description: 点赞用户的 ID
+        tags:
+          type: array
+          items:
+            type: string
+        visible:
+          type: boolean
+          default: false
+          description: 文章可见性，用于审阅功能
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+    Comment:
+      type: object
+      required:
+        - id
+        - authorId
+        - articleId
+        - content
+        - replyTo
+      properties:
+        id:
+          type: number
+          description: 自增值
+        authorId:
+          type: number
+        articleId:
+          type: number
+        content:
+          type: string
+          description: 评论内容(支持 Markdown)
+        replyTo:
+          type: number
+          description: "回复的上级评论的 ID, -1 代表一级（独立）评论"
+        likers:
+          type: array
+          items:
+            type: number
+            description: 点赞用户的 ID
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+    Contest:
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - year
+      properties:
+        id:
+          type: number
+          description: 自增值
+        name:
+          type: string
+          description: 比赛名称
+        type:
+          type: string
+          enum: [电设, 软设, 队式]
+          description: 比赛类别
+        year:
+          type: number
+          description: 比赛开展的年份
+        enrollAvailable:
+          type: boolean
+          default: true
+          description: 当前比赛是否正在进行，允许队伍操作
+        preOpen:
+          type: boolean
+          description: 当前是否在预赛报名期
+        track:
+          type: number
+          description: 赛道ID
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+    User:
+      type: object
+      required:
+        - id
+        - username
+        - group
+        - role
+        - password
+        - name
+        - department
+      properties:
+        id:
+          type: number
+          description: 通常是学号
+        username:
+          type: string
+          description: 字母、数字组合
+        group:
+          type: string
+          enum:
+            - admin
+            - student
+            - teacher
+          description: |
+            用户组:
+             * `admin` - 管理员
+             * `student` - 学生
+             * `teacher` - 教师
+        role:
+          type: string
+          enum:
+            - root
+            - editor
+            - keeper
+            - organizer
+            - counselor
+            - student
+            - writer
+            - teacher
+          description: |
+            用户组:
+             * `root` - 权限：weekly(rwe), resource(rwe), user(rwe)
+             * `editor` - 权限：weekly(rwe), resource(r), user(r)
+             * `keeper` - 权限：weekly(r), resource(rwe), user(r)
+             * `reader` - 权限：weekly(r), resource(r), user(r)
+             * `writer` - 权限：weekly(rw), resource(r), user(r)
+        password:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        department:
+          type: string
+        phone:
+          type: number
+        class:
+          type: string
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+    Counter:
+      type: object
+      required:
+        - _id
+      properties:
+        _id:
+          type: string
+        count:
+          type: number
+          default: 0
+
+    Date:
+      type: string
+      format: date-time
+      description: >-
+        日期对象。使用时采用 ISO
+        格式字符串表示。[更多信息](https://www.iso.org/iso-8601-date-and-time-format.html)
+
+    Team:
+      type: object
+      required:
+        - id
+        - contestId
+        - name
+        - description
+        - leader
+        - members
+        - inviteCode
+      properties:
+        id:
+          type: number
+          description: 自增值
+        contestId:
+          type: number
+          description: 比赛ID
+        name:
+          type: string
+        description:
+          type: string
+          description: 队伍简介
+        leader:
+          type: number
+          description: 队长ID
+        members:
+          type: array
+          items:
+            type: number
+            description: 队员ID
+        inviteCode:
+          type: number
+        available:
+          type: boolean
+          default: true
+          description: 队伍是否仍具有参赛资格
+        score:
+          type: number
+          description: 队伍分数
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+    Announcement:
+      type: object
+      required:
+        - id
+        - contestId
+        - title
+        - content
+        - priority
+      properties:
+        id:
+          type: number
+          description: 自增值
+        contestId:
+          type: number
+          description: 比赛ID
+        title:
+          type: string
+          description: 公告标题
+        content:
+          type: string
+          description: 公告内容
+        priority:
+          type: number
+          default: 1
+          description: 公告显示优先级
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+    Room:
+      type: object
+      required:
+        - id
+        - contestId
+        - teams
+        - ip
+        - port
+      properties:
+        id:
+          type: number
+          description: 自增值
+        contestId:
+          type: number
+          description: 房间ID
+        status:
+          type: number
+          enum: [0, 1, 2]
+          default: 0
+          description: 房间状态，0表示未开启，1表示已开启，2表示已关闭
+        teams:
+          type: array
+          items:
+            type: number
+            description: 队伍ID(机器人可用-1表示)
+        ip:
+          type: string
+          description: ip地址
+        port:
+          type: number
+          description: 端口
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+    allowedEndpoints:
+      type: array
+      items:
+        type: object
+        properties:
+          path:
+            type: string
+            description: 节点路径
+            example: "/v1/users/"
+          methods:
+            type: array
+            items:
+              type: string
+              description: 请求方法
+              example: "GET"
+
+    Track:
+      type: object
+      required:
+        - id
+        - name
+        - players
+        - year
+        - open
+        - description
+        - preOpen
+        - prePlayers
+      properties:
+        id:
+          type: number
+          description: 自增值
+        name:
+          type: string
+          description: 赛道名称
+        description:
+          type: string
+          description: 赛道简介
+        year:
+          type: number
+          description: 赛道年份
+        open:
+          type: boolean
+          default: false
+          description: 赛道是否开放报名
+        preOpen:
+          type: boolean
+          default: false
+          description: 赛道是否开放预赛报名
+        players:
+          type: array
+          description: 赛道选手 ID 数组
+          items:
+            type: number
+        prePlayers:
+          type: array
+          description: 赛道预赛选手 ID 数组
+          items:
+            type: number
+    Code:
+      type: object
+      required:
+        - id
+        - contestId
+        - teamId
+        - name
+        - content
+        - language
+        - createdAt
+        - createdBy
+        - updatedAt
+        - updatedBy
+      properties:
+        id:
+          type: number
+          description: 自增值
+        contestId:
+          type: number
+          description: 对应比赛
+        teamId:
+          type: number
+          description: 归属队伍
+        name:
+          type: string
+          description: 文件名
+        content:
+          type: string
+          description: 代码内容
+        language:
+          type: string
+          description: 代码所用语言
+        createdAt:
+          $ref: "#/components/schemas/Date"
+        createdBy:
+          type: number
+        updatedAt:
+          $ref: "#/components/schemas/Date"
+        updatedBy:
+          type: number
+
+  requestBodies:
+    addArticle:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - title
+              - alias
+              - authorId
+              - content
+            properties:
+              title:
+                type: string
+              alias:
+                type: string
+                description: 用于 SEO 与 URL
+              authorId:
+                type: number
+              content:
+                type: string
+                description: 文章内容(支持 Markdown)
+              abstract:
+                type: string
+                description: 摘要，用于预览功能
+              image:
+                type: string
+                description: 文章标题图片
+              tags:
+                type: array
+                items:
+                  type: string
+              visible:
+                type: boolean
+                default: false
+                description: 文章可见性，用于审阅功能
+      description: 发布文章的提交格式
+      required: true
+
+    updateArticle:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              alias:
+                type: string
+                description: 用于 SEO 与 URL
+              authorId:
+                type: number
+              content:
+                type: string
+                description: 文章内容(支持 Markdown)
+              abstract:
+                type: string
+                description: 摘要，用于预览功能
+              image:
+                type: string
+                description: 文章标题图片
+              views:
+                type: number
+                default: 0
+              likers:
+                type: array
+                items:
+                  type: number
+                  description: 点赞用户的 ID
+              tags:
+                type: array
+                items:
+                  type: string
+              visible:
+                type: boolean
+                default: false
+                description: 文章可见性，用于审阅功能
+      description: 更新文章的提交格式
+      required: true
+
+    addComment:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - authorId
+              - articleId
+              - content
+              - replyTo
+            properties:
+              authorId:
+                type: number
+              articleId:
+                type: number
+              content:
+                type: string
+                description: 评论内容(支持 Markdown)
+              replyTo:
+                type: number
+                description: "回复的上级评论的 ID, -1 代表一级（独立）评论"
+      description: 发布评论的提交格式
+      required: true
+
+    updateComment:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              authorId:
+                type: number
+              articleId:
+                type: number
+              content:
+                type: string
+                description: 评论内容(支持 Markdown)
+              replyTo:
+                type: number
+                description: "回复的上级评论的 ID, -1 代表一级（独立）评论"
+              likers:
+                type: array
+                items:
+                  type: number
+                  description: 点赞用户的 ID
+      description: 更新评论的提交格式
+      required: true
+
+    addContest:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+              - type
+              - year
+            properties:
+              name:
+                type: string
+                description: 比赛名称
+              type:
+                type: string
+                description: 比赛分类，目前为["电设", "队式", "软设"]
+              year:
+                type: number
+                description: 比赛举办的年份
+              preOpen:
+                type: boolean
+                description: 比赛是否在预赛报名期
+              track:
+                type: number
+                description: 赛道ID
+      description: 发布比赛的提交格式
+      required: true
+
+    updateContest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 比赛名称
+              type:
+                type: string
+                description: 比赛分类，目前为["电设", "队式", "软设"]
+              year:
+                type: number
+                description: 比赛举办的年份
+              enrollAvailable:
+                type: boolean
+                description: 当前比赛是否正在进行，允许队伍操作
+              preOpen:
+                type: boolean
+                description: 比赛是否在预赛报名期
+              track:
+                type: number
+                description: 赛道ID
+      description: 更新比赛的提交格式
+      required: true
+
+    addUser:
+      content:
+        application/json:
+          schema:
+            required:
+              - id
+              - username
+              - password
+            properties:
+              id:
+                type: number
+              username:
+                type: string
+              password:
+                type: string
+              email:
+                type: string
+              name:
+                type: string
+              phone:
+                type: number
+              department:
+                type: string
+              class:
+                type: string
+      description: 新增用户的提交格式
+      required: true
+
+    updateUser:
+      content:
+        application/json:
+          schema:
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+              email:
+                type: string
+              name:
+                type: string
+              phone:
+                type: number
+              department:
+                type: string
+              class:
+                type: string
+      description: 更新用户的提交格式
+      required: true
+
+    getPublicToken:
+      content:
+        application/json:
+          schema:
+            properties:
+              allowedEndpoints:
+                $ref: "#/components/schemas/allowedEndpoints"
+      description: 请求使用的节点
+      required: true
+
+    addTeam:
+      content:
+        application/json:
+          schema:
+            required:
+              - contestId
+              - name
+              - description
+            properties:
+              contestId:
+                type: number
+              name:
+                type: string
+              description:
+                type: string
+              leader:
+                type: number
+              members:
+                type: array
+                items:
+                  type: number
+              available:
+                type: boolean
+      description: 新建队伍的提交格式
+      required: true
+
+    updateTeam:
+      content:
+        application/json:
+          schema:
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              leader:
+                type: number
+              members:
+                type: array
+                items:
+                  type: number
+              available:
+                type: boolean
+              score:
+                type: number
+      description: 更新队伍的提交格式
+      required: true
+
+    addTeamMember:
+      content:
+        application/json:
+          schema:
+            required:
+              - id
+              - inviteCode
+            properties:
+              id:
+                type: number
+              inviteCode:
+                type: string
+      description: 增加队员的提交格式
+      required: true
+
+    addAnnouncement:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - contestId
+              - title
+              - content
+            properties:
+              contestId:
+                type: number
+                description: 比赛ID
+              title:
+                type: string
+                description: 公告标题
+              content:
+                type: string
+                description: 文章内容(支持 Markdown)
+              priority:
+                type: number
+                description: 优先级，用于排序
+      description: 发布公告的提交格式
+      required: true
+
+    updateAnnouncement:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              contestId:
+                type: number
+                description: 比赛ID
+              title:
+                type: string
+                description: 公告标题
+              content:
+                type: string
+                description: 公告内容(支持 Markdown)
+              priority:
+                type: number
+                description: 优先级，用于排序
+      description: 更新公告的提交格式
+      required: true
+
+    addRoom:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - contestId
+              - teams
+              - ip
+              - port
+            properties:
+              contestId:
+                type: number
+                description: 比赛ID
+              teams:
+                type: array
+                items:
+                  type: number
+                  description: 队伍ID(机器人可用-1表示)
+              ip:
+                type: string
+                description: ip地址
+              port:
+                type: number
+                description: 端口
+      description: 新建房间的提交格式
+      required: true
+
+    updateRoom:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              contestId:
+                type: number
+                description: 比赛ID
+              teams:
+                type: array
+                items:
+                  type: number
+                  description: 队伍ID(机器人可用-1表示)
+              ip:
+                type: string
+                description: ip地址
+              port:
+                type: number
+                description: 端口
+      description: 更新房间的提交格式
+      required: true
+
+    changeRoomTeam:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                type: string
+                description: 用户token
+      description: 更改房间中队伍的提交格式
+      required: true
+
+    addTrack:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+              - year
+            properties:
+              name:
+                type: string
+                description: 赛道名称
+              description:
+                type: string
+                description: 赛道简介
+              year:
+                type: number
+                description: 赛道年份
+              open:
+                type: boolean
+                description: 赛道开放报名
+              preOpen:
+                type: boolean
+                description: 赛道开放报名
+
+    updateTrack:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 赛道名称
+              description:
+                type: string
+                description: 赛道简介
+              year:
+                type: number
+                description: 赛道年份
+              open:
+                type: boolean
+                description: 赛道是否开放报名
+              preOpen:
+                type: boolean
+                description: 赛道是否开放报名
+
+    addCode:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - name
+              - teamId
+              - contestId
+              - content
+              - language
+            properties:
+              name:
+                type: string
+              contestId:
+                type: number
+              teamId:
+                type: number
+              content:
+                type: string
+                description: 代码内容
+              language:
+                type: string
+                description: 代码语言
+      description: 上传代码的提交格式
+      required: true
+
+    updateCode:
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - name
+              - content
+              - language
+            properties:
+              name:
+                type: string
+              content:
+                type: string
+                description: 代码内容
+              language:
+                type: string
+                description: 代码语言
+
+  responses:
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              errors:
+                type: array
+                description: 错误列表
+                items:
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                      description: 错误位置
+                      example: ".params.articleId"
+                    message:
+                      type: string
+                      description: 错误信息
+                      example: "should be number"
+                    errorCode:
+                      type: string
+                      description: 错误码
+                      example: "type.openapi.validation"
+      description: 包含请求错误信息的 JSON
+
+    UnauthorizedError:
+      description: "Access token is missing, invalid or expired / Permission denied"
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

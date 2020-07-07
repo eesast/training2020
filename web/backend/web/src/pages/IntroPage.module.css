@@ -1,0 +1,101 @@
+.root {
+  height: calc(100vh - 120px - 64px);
+  padding: 48px 10vw;
+  overflow: auto;
+}
+
+.paragraph {
+  font-size: larger;
+}
+
+.logos {
+  /* max-height: 100px; */
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  max-width: 200px;
+  height: auto;
+  width: 20%;
+}
+
+.logoSast {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  max-width: 200px;
+  height: auto;
+  width: 10%;
+}
+
+.logo > img {
+  max-width: 90%;
+  max-height: fit-content;
+}
+
+.logoSast > img {
+  max-width: 90%;
+  max-height: fit-content;
+}
+
+/* Edc Intro Page CSS */
+/* .content {
+  height: calc(100vh - 67px - 64px);
+  padding: 48px 10vw;
+  overflow: auto;
+}
+
+.logos {
+  max-height: 100px;
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo1 {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  max-width: 200px;
+  height: auto;
+  width: 25%;
+}
+
+.logo2 {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  max-width: 200px;
+  height: auto;
+  width: 25%;
+}
+
+.logo3 {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  max-width: 200px;
+  height: auto;
+  width: 25%;
+}
+
+.logo1 > img {
+  width: 90%;
+}
+
+.logo2 > img {
+  width: 90%;
+}
+
+.logo3 > img {
+  width: 90%;
+} */

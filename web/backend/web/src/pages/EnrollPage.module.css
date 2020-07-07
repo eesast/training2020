@@ -1,0 +1,14 @@
+.root {
+  height: calc(100vh - 67px - 64px);
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  padding: 24px;
+  padding-bottom: 0px;
+  width: 60vw;
+  min-width: 350px;
+}

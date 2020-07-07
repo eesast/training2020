@@ -1,0 +1,22 @@
+language: node_js
+node_js: "13"
+dist: bionic
+services:
+  - mongodb
+cache: yarn
+before_install:
+  - curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+install:
+  - yarn
+before_script:
+  - sleep 15
+  - mongo sast-api-test --eval 'db.createUser({user:"travis",pwd:"test",roles:[{role:"root",db:"admin"}]});'
+script:
+  - yarn lint
+  - yarn typecheck
+  - yarn test
+  - yarn build
+deploy:
+  provider: script
+  script: bash scripts/deploy.sh

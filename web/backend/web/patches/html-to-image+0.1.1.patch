@@ -1,0 +1,28 @@
+diff --git a/node_modules/html-to-image/lib/cloneNode.js b/node_modules/html-to-image/lib/cloneNode.js
+index 580f2ed..085ceca 100644
+--- a/node_modules/html-to-image/lib/cloneNode.js
++++ b/node_modules/html-to-image/lib/cloneNode.js
+@@ -34,6 +34,9 @@ function cloneChildren(nativeNode, clonedNode, filter) {
+ function cloneCssStyle(nativeNode, clonedNode) {
+     var source = window.getComputedStyle(nativeNode);
+     var target = clonedNode.style;
++    if (!target) {
++        return;
++    }
+     if (source.cssText) {
+         target.cssText = source.cssText;
+     }
+diff --git a/node_modules/html-to-image/lib/embedImages.js b/node_modules/html-to-image/lib/embedImages.js
+index 37b6b9d..f42ef28 100644
+--- a/node_modules/html-to-image/lib/embedImages.js
++++ b/node_modules/html-to-image/lib/embedImages.js
+@@ -7,6 +7,9 @@ var utils_1 = require("./utils");
+ var getBlobFromURL_1 = __importDefault(require("./getBlobFromURL"));
+ var embedResources_1 = __importDefault(require("./embedResources"));
+ function embedBackground(clonedNode, options) {
++    if (!clonedNode.style) {
++        return Promise.resolve(clonedNode);
++    }
+     var background = clonedNode.style.getPropertyValue('background');
+     if (!background) {
+         return Promise.resolve(clonedNode);

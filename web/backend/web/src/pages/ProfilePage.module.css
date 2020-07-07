@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+}
+
+.card {
+  padding: 24px;
+  padding-bottom: 0px;
+  width: 25vw;
+  min-width: 350px;
+}

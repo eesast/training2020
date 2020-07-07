@@ -1,0 +1,27 @@
+.card {
+  padding: 24px;
+}
+
+.cardImage {
+  max-height: 40vh;
+  object-fit: cover;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftToolbar {
+  display: flex;
+  align-items: center;
+  margin: 36px auto -36px -24px;
+  overflow-x: hidden;
+}
+
+.rightToolbar {
+  display: flex;
+  align-items: center;
+  margin: 36px -24px -36px auto;
+}
