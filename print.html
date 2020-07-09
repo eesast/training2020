@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="web/backend.html"><strong aria-hidden="true">3.4.</strong> 后端技术栈入门（Node.js + Express + MongoDB</a></li><li class="chapter-item expanded "><a href="web/GraphQL.html"><strong aria-hidden="true">3.5.</strong> GraphQL, Hasura, Apollo</a></li></ol></li><li class="chapter-item expanded "><a href="linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="OS/OS.html"><strong aria-hidden="true">6.</strong> 操作系统</a></li><li class="chapter-item expanded "><a href="CSharp/CS-Learning1-Basic.html"><strong aria-hidden="true">7.</strong> CSharp1</a></li><li class="chapter-item expanded "><a href="CSharp/CS-Learning2-MultiThread.html"><strong aria-hidden="true">8.</strong> CSharp2</a></li><li class="chapter-item expanded "><a href="unity/unity.html"><strong aria-hidden="true">9.</strong> Unity</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="web/backend.html"><strong aria-hidden="true">3.4.</strong> 后端技术栈入门（Node.js + Express + MongoDB）</a></li><li class="chapter-item expanded "><a href="web/GraphQL.html"><strong aria-hidden="true">3.5.</strong> GraphQL, Hasura, Apollo</a></li><li class="chapter-item expanded "><a href="web/CI&CD.html"><strong aria-hidden="true">3.6.</strong> Web测试 + CI/CD</a></li></ol></li><li class="chapter-item expanded "><a href="linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="OS/OS.html"><strong aria-hidden="true">6.</strong> 操作系统</a></li><li class="chapter-item expanded "><a href="CSharp/CS-Learning1-Basic.html"><strong aria-hidden="true">7.</strong> CSharp1</a></li><li class="chapter-item expanded "><a href="CSharp/CS-Learning2-MultiThread.html"><strong aria-hidden="true">8.</strong> CSharp2</a></li><li class="chapter-item expanded "><a href="unity/unity.html"><strong aria-hidden="true">9.</strong> Unity</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1430,6 +1430,85 @@ useEffect(() =&gt; {
 <hr />
 <h2><a class="header" href="#写在最后" id="写在最后">写在最后</a></h2>
 <p>GraphQL 整体上是比较新的一种技术，直观是其优势。同时，也因为较新，轮子会相对少一些，有中文文档的轮子就更少了。此外，部分轮子还在迅速的演进，会有较多的<strong>BREAKING CHANGE</strong>，有可能代码刚写完，不小心更新一下依赖就挂掉了（笑）。为了减少这种更新带来的麻烦，我们一般会使用“机器人”来尝试更新依赖，即持续集成。具体内容将在下一节中讲解。</p>
+<h1><a class="header" href="#web测试--cicd" id="web测试--cicd">Web测试 + CI/CD</a></h1>
+<h2><a class="header" href="#mocha--chai" id="mocha--chai">Mocha &amp; Chai</a></h2>
+<p>Mocha是Node.js上的JavaScript测试框架。（参见官方<a href="https://mochajs.org/">文档</a>）</p>
+<p>Chai是断言库。</p>
+<p>测试脚本里面应该包括一个或多个<code>describe</code>块，每个<code>describe</code>块应该包括一个或多个<code>it</code>块。<code>describe</code>块为test suite，<code>it</code>块为test case。</p>
+<p><code>before()</code>, <code>after()</code>, <code>beforeEach()</code>, <code>afterEach()</code>为hooks，<code>done</code>可用于异步回调。<code>only</code>和<code>skip</code>方法。（此处略，可自学）</p>
+<pre><code class="language-typescript">var assert = require('assert');
+describe('Array', function () {
+  describe('#indexOf()', function () {
+    it('should return -1 when the value is not present', function () {
+      assert.equal([1, 2, 3].indexOf(4), -1);
+    });
+  });
+});
+</code></pre>
+<h2><a class="header" href="#cicd" id="cicd">CI/CD</a></h2>
+<p>**CI（持续集成，Continuous Integration）：**是将所有软件工程师对于软件的工作副本持续集成到共享主线（mainline）的一种举措。在测试驱动开发（TDD）的作法中，通常还会搭配自动单元测试。</p>
+<p>（极限编程中，测试驱动开发指先完成测试代码，再快速写代码完成功能。先实现功能，在测试的辅助下，快速实现其功能；再重构，在测试的保护下，通过去除冗余的代码，提高代码质量。）</p>
+<p>在模块化的开发中，各人独立开发不同的模块时，持续集成也起到很大作用。</p>
+<p>**CD（持续交付，Continuous Delivery / 持续部署，Continuous Deployment）：**持续部署指在软件开发流程中，以自动化方式，频繁而且持续性的，将软件部署到生产环境中。持续交付与持续部署的区别在于，持续交付指所有的变更都可以被部署到生产环境中，但是出于业务考虑，可以选择不部署。</p>
+<blockquote>
+<p>Common practices</p>
+<ol>
+<li>Maintain a code repository</li>
+<li>Automate the build</li>
+<li>Make the build self-testing</li>
+<li>Everyone commits to the baseline every day</li>
+<li>Every commit (to baseline) should be built</li>
+<li>Every bug-fix commit should come with a test case</li>
+<li>Keep the build fast</li>
+<li>Test in a clone of the production environment</li>
+<li>Make it easy to get the latest deliverables</li>
+<li>Everyone can see the results of the latest build</li>
+<li>Automate deployment</li>
+</ol>
+</blockquote>
+<p><img src="web/images%5CCD.png" alt="CD" /></p>
+<p>现有的清华电子系学生科协网站的CI/CD方式是：通过GitHub Actions或Travis CI实现持续集成，并将代码编译后推至docker hub，由服务器端的watchtower容器自动检测镜像的更新并自动拉取运行，实现持续部署。</p>
+<p>此讲中我们跟随<a href="https://lab.github.com/githubtraining/github-actions:-continuous-integration">GitHub Learning Lab的一个教程</a>来学习持续集成，<a href="https://github.com/boltma/github-actions-for-ci">实验仓库</a>公开。另外，<a href="web/thu-ai.net">清华大学人工智能挑战赛主网站</a>的github actions workflow如下所示，供参考我们的CI/CD流程（科协官网使用Travis CI，可自行参阅代码）。</p>
+<pre><code class="language-yml">name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+    - run: npm i -g yarn
+    - name: yarn install, build, and test
+      run: |
+        yarn install
+        yarn test
+        yarn build
+      env:
+        CI: true
+    - name: docker build
+      env:
+        CONTAINER_IMAGE_NAME: ${{ secrets.CONTAINER_IMAGE_NAME }}
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+      run:
+        docker build -t $DOCKER_REGISTRY_URL/$CONTAINER_IMAGE_NAME:latest .
+    - name: docker login
+      uses: azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: docker push
+      env:
+        CONTAINER_IMAGE_NAME: ${{ secrets.CONTAINER_IMAGE_NAME }}
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+      run: docker push $DOCKER_REGISTRY_URL/$CONTAINER_IMAGE_NAME:latest
+    - name: docker logout
+      uses: azure/container-actions/docker-logout@master
+
+</code></pre>
 <h1><a class="header" href="#linux-入门实操" id="linux-入门实操">Linux 入门实操</a></h1>
 <blockquote>
 <p>基本上是翻译了下<a href="https://missing.csail.mit.edu/2020">missing-semester</a>的 1、3 讲</p>

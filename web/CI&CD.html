@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Unity - EESAST Training 2020</title>
+        <title>Web测试 + CI/CD - EESAST Training 2020</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="../web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="../web/backend.html"><strong aria-hidden="true">3.4.</strong> 后端技术栈入门（Node.js + Express + MongoDB）</a></li><li class="chapter-item expanded "><a href="../web/GraphQL.html"><strong aria-hidden="true">3.5.</strong> GraphQL, Hasura, Apollo</a></li><li class="chapter-item expanded "><a href="../web/CI&CD.html"><strong aria-hidden="true">3.6.</strong> Web测试 + CI/CD</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html"><strong aria-hidden="true">6.</strong> 操作系统</a></li><li class="chapter-item expanded "><a href="../CSharp/CS-Learning1-Basic.html"><strong aria-hidden="true">7.</strong> CSharp1</a></li><li class="chapter-item expanded "><a href="../CSharp/CS-Learning2-MultiThread.html"><strong aria-hidden="true">8.</strong> CSharp2</a></li><li class="chapter-item expanded "><a href="../unity/unity.html" class="active"><strong aria-hidden="true">9.</strong> Unity</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../git/git.html"><strong aria-hidden="true">2.</strong> Git</a></li><li class="chapter-item expanded "><a href="../web/web.html"><strong aria-hidden="true">3.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../web/html&css.html"><strong aria-hidden="true">3.1.</strong> HTML&amp;CSS</a></li><li class="chapter-item expanded "><a href="../web/js&ts.html"><strong aria-hidden="true">3.2.</strong> JS&amp;TS</a></li><li class="chapter-item expanded "><a href="../web/react.html"><strong aria-hidden="true">3.3.</strong> React + antd 入门</a></li><li class="chapter-item expanded "><a href="../web/backend.html"><strong aria-hidden="true">3.4.</strong> 后端技术栈入门（Node.js + Express + MongoDB）</a></li><li class="chapter-item expanded "><a href="../web/GraphQL.html"><strong aria-hidden="true">3.5.</strong> GraphQL, Hasura, Apollo</a></li><li class="chapter-item expanded "><a href="../web/CI&CD.html" class="active"><strong aria-hidden="true">3.6.</strong> Web测试 + CI/CD</a></li></ol></li><li class="chapter-item expanded "><a href="../linux-webserver/linux.html"><strong aria-hidden="true">4.</strong> Linux</a></li><li class="chapter-item expanded "><a href="../docker/docker.html"><strong aria-hidden="true">5.</strong> Docker</a></li><li class="chapter-item expanded "><a href="../OS/OS.html"><strong aria-hidden="true">6.</strong> 操作系统</a></li><li class="chapter-item expanded "><a href="../CSharp/CS-Learning1-Basic.html"><strong aria-hidden="true">7.</strong> CSharp1</a></li><li class="chapter-item expanded "><a href="../CSharp/CS-Learning2-MultiThread.html"><strong aria-hidden="true">8.</strong> CSharp2</a></li><li class="chapter-item expanded "><a href="../unity/unity.html"><strong aria-hidden="true">9.</strong> Unity</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -151,49 +151,100 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#unity3d基础" id="unity3d基础">Unity3D基础</a></h1>
-<h4><a class="header" href="#unity简介" id="unity简介">Unity简介</a></h4>
-<p>Unity是一款由Unity Technoligies开发的跨平台2D/3D游戏引擎，并可以发布到Windows, MacOS, Linux, iOS等诸多平台。</p>
-<p>Unity官网：https://unity.com/</p>
-<p>Unity官方学习资源：https://learn.unity.com/</p>
-<p>Unity官方文档：https://docs.unity3d.com/Manual/index.html</p>
-<p>Google/Unity Forums</p>
-<h4><a class="header" href="#unity开发环境" id="unity开发环境">Unity开发环境</a></h4>
-<p>Unity工程及Unity Editor版本管理：Unity Hub</p>
-<p>图形化编辑界面：Unity Editor</p>
-<p>下载地址：https://unity3d.com/get-unity/download</p>
-<p>需要注册Unity账号。非盈利的个人开发者免费使用。</p>
-<p>代码编辑器：Visual Studio（安装时选择&quot;使用Unity的游戏开发&quot;），VS Code（在Unity Editor中修改默认代码编辑器），其他。</p>
-<h4><a class="header" href="#unity基本知识" id="unity基本知识">Unity基本知识</a></h4>
-<h6><a class="header" href="#scene场景" id="scene场景">Scene（场景）</a></h6>
-<p>Scene包含了若干GameObject，一个游戏可以包含多个场景，不同的场景之间是独立的，并且可以通过脚本切换场景。</p>
-<h6><a class="header" href="#gameobject游戏对象" id="gameobject游戏对象">GameObject（游戏对象）</a></h6>
-<p>一个GameObject就是场景中的一个对象，比如一个球，一个人；它可以独立地活动。GameObject之间存在Parent和Children的关系，即一个对象可以从属于另一个对象，成为其子对象。</p>
-<p>请注意，GameObject之间的父子关系并非继承关系，而只是一种从属关系。</p>
-<h6><a class="header" href="#component组件" id="component组件">Component（组件）</a></h6>
-<p>一个GameObject可以拥有若干个Component，两者之间仍是一种从属关系。每个Component可以独立地实现GameObject需求的某些功能。常用的如Rigid（刚体），Animator（动画）等。</p>
-<h6><a class="header" href="#prefab预设" id="prefab预设">Prefab（预设）</a></h6>
-<p>Prefab与GameObject之间的关系类似于类和对象的关系。即后者是前者的实例。Prefab的使用能够减少不必要的重复工作。当Prefab被修改时，它的所有GameObject实例也会被修改。</p>
-<h6><a class="header" href="#script脚本" id="script脚本">Script（脚本）</a></h6>
-<p>通过编写代码，并将Script添加为某个GameObject的Component，当该GameObject被实例化并且处于活动状态，且该Component也处于活动状态时，它便可以控制GameObject的行为。</p>
-<p>Unity脚本是基于Mono的，所有需要使用Unity引擎的脚本，都应该继承自MonoBehaviour类。换句话说，只有那些完全不依赖于Unity引擎进行初始化和更新，也不调用Unity的API的脚本，比如单纯进行数学计算的类，是不需要继承MonoBehaviour的。</p>
-<h6><a class="header" href="#assets资源" id="assets资源">Assets（资源）</a></h6>
-<p>你的所有Prefab, Script以及Material等资源都在Assets中进行管理。对于规模较大的工程，总应该建立规范的目录结构。</p>
-<h6><a class="header" href="#所以unity是如何工作的" id="所以unity是如何工作的">所以，Unity是如何工作的？</a></h6>
-<p>首先要加载一个场景。当场景被加载时，场景中的所有GameObject都会被加载。当GameObject加载时，其所有Component也随之实例化。当某个Script实例化时，其Awake()方法和Start()方法被先后调用（细节这里不说），当所有Start()方法都被调用完毕后，游戏会进入第一帧，每隔一段时间就会Update一次。</p>
-<h4><a class="header" href="#unity开发实例" id="unity开发实例">Unity开发实例</a></h4>
-<p>我们希望实现如下一个简单的游戏：键盘操纵角色在地图中移动，地图中会刷新得分点，当角色接触到得分点时就可以得分。游戏界面中应显示当前的时间，分数，并有重新开始，退出等按钮。</p>
+                        <h1><a class="header" href="#web测试--cicd" id="web测试--cicd">Web测试 + CI/CD</a></h1>
+<h2><a class="header" href="#mocha--chai" id="mocha--chai">Mocha &amp; Chai</a></h2>
+<p>Mocha是Node.js上的JavaScript测试框架。（参见官方<a href="https://mochajs.org/">文档</a>）</p>
+<p>Chai是断言库。</p>
+<p>测试脚本里面应该包括一个或多个<code>describe</code>块，每个<code>describe</code>块应该包括一个或多个<code>it</code>块。<code>describe</code>块为test suite，<code>it</code>块为test case。</p>
+<p><code>before()</code>, <code>after()</code>, <code>beforeEach()</code>, <code>afterEach()</code>为hooks，<code>done</code>可用于异步回调。<code>only</code>和<code>skip</code>方法。（此处略，可自学）</p>
+<pre><code class="language-typescript">var assert = require('assert');
+describe('Array', function () {
+  describe('#indexOf()', function () {
+    it('should return -1 when the value is not present', function () {
+      assert.equal([1, 2, 3].indexOf(4), -1);
+    });
+  });
+});
+</code></pre>
+<h2><a class="header" href="#cicd" id="cicd">CI/CD</a></h2>
+<p>**CI（持续集成，Continuous Integration）：**是将所有软件工程师对于软件的工作副本持续集成到共享主线（mainline）的一种举措。在测试驱动开发（TDD）的作法中，通常还会搭配自动单元测试。</p>
+<p>（极限编程中，测试驱动开发指先完成测试代码，再快速写代码完成功能。先实现功能，在测试的辅助下，快速实现其功能；再重构，在测试的保护下，通过去除冗余的代码，提高代码质量。）</p>
+<p>在模块化的开发中，各人独立开发不同的模块时，持续集成也起到很大作用。</p>
+<p>**CD（持续交付，Continuous Delivery / 持续部署，Continuous Deployment）：**持续部署指在软件开发流程中，以自动化方式，频繁而且持续性的，将软件部署到生产环境中。持续交付与持续部署的区别在于，持续交付指所有的变更都可以被部署到生产环境中，但是出于业务考虑，可以选择不部署。</p>
+<blockquote>
+<p>Common practices</p>
+<ol>
+<li>Maintain a code repository</li>
+<li>Automate the build</li>
+<li>Make the build self-testing</li>
+<li>Everyone commits to the baseline every day</li>
+<li>Every commit (to baseline) should be built</li>
+<li>Every bug-fix commit should come with a test case</li>
+<li>Keep the build fast</li>
+<li>Test in a clone of the production environment</li>
+<li>Make it easy to get the latest deliverables</li>
+<li>Everyone can see the results of the latest build</li>
+<li>Automate deployment</li>
+</ol>
+</blockquote>
+<p><img src="images%5CCD.png" alt="CD" /></p>
+<p>现有的清华电子系学生科协网站的CI/CD方式是：通过GitHub Actions或Travis CI实现持续集成，并将代码编译后推至docker hub，由服务器端的watchtower容器自动检测镜像的更新并自动拉取运行，实现持续部署。</p>
+<p>此讲中我们跟随<a href="https://lab.github.com/githubtraining/github-actions:-continuous-integration">GitHub Learning Lab的一个教程</a>来学习持续集成，<a href="https://github.com/boltma/github-actions-for-ci">实验仓库</a>公开。另外，<a href="thu-ai.net">清华大学人工智能挑战赛主网站</a>的github actions workflow如下所示，供参考我们的CI/CD流程（科协官网使用Travis CI，可自行参阅代码）。</p>
+<pre><code class="language-yml">name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+    - run: npm i -g yarn
+    - name: yarn install, build, and test
+      run: |
+        yarn install
+        yarn test
+        yarn build
+      env:
+        CI: true
+    - name: docker build
+      env:
+        CONTAINER_IMAGE_NAME: ${{ secrets.CONTAINER_IMAGE_NAME }}
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+      run:
+        docker build -t $DOCKER_REGISTRY_URL/$CONTAINER_IMAGE_NAME:latest .
+    - name: docker login
+      uses: azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: docker push
+      env:
+        CONTAINER_IMAGE_NAME: ${{ secrets.CONTAINER_IMAGE_NAME }}
+        DOCKER_REGISTRY_URL: ${{ secrets.DOCKER_REGISTRY_URL }}
+      run: docker push $DOCKER_REGISTRY_URL/$CONTAINER_IMAGE_NAME:latest
+    - name: docker logout
+      uses: azure/container-actions/docker-logout@master
+
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../CSharp/CS-Learning2-MultiThread.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../web/GraphQL.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
+                        
+                            <a rel="next" href="../linux-webserver/linux.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -203,11 +254,15 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../CSharp/CS-Learning2-MultiThread.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../web/GraphQL.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
+                
+                    <a rel="next" href="../linux-webserver/linux.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
