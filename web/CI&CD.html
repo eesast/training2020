@@ -157,7 +157,7 @@
 <p>Chai是断言库。</p>
 <p>测试脚本里面应该包括一个或多个<code>describe</code>块，每个<code>describe</code>块应该包括一个或多个<code>it</code>块。<code>describe</code>块为test suite，<code>it</code>块为test case。</p>
 <p><code>before()</code>, <code>after()</code>, <code>beforeEach()</code>, <code>afterEach()</code>为hooks，<code>done</code>可用于异步回调。<code>only</code>和<code>skip</code>方法。（此处略，可自学）</p>
-<pre><code class="language-typescript">var assert = require('assert');
+<pre><code class="language-javascript">var assert = require('assert');
 describe('Array', function () {
   describe('#indexOf()', function () {
     it('should return -1 when the value is not present', function () {
@@ -187,7 +187,7 @@ describe('Array', function () {
 <li>Automate deployment</li>
 </ol>
 </blockquote>
-<p><img src="images%5CCD.png" alt="CD" /></p>
+<p><img src="./images/CD.png" alt="CD" /></p>
 <p>现有的清华电子系学生科协网站的CI/CD方式是：通过GitHub Actions或Travis CI实现持续集成，并将代码编译后推至docker hub，由服务器端的watchtower容器自动检测镜像的更新并自动拉取运行，实现持续部署。</p>
 <p>此讲中我们跟随<a href="https://lab.github.com/githubtraining/github-actions:-continuous-integration">GitHub Learning Lab的一个教程</a>来学习持续集成，<a href="https://github.com/boltma/github-actions-for-ci">实验仓库</a>公开。另外，<a href="thu-ai.net">清华大学人工智能挑战赛主网站</a>的github actions workflow如下所示，供参考我们的CI/CD流程（科协官网使用Travis CI，可自行参阅代码）。</p>
 <pre><code class="language-yml">name: CI
