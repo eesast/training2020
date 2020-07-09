@@ -10,7 +10,7 @@ Chai是断言库。
 
 `before()`, `after()`, `beforeEach()`, `afterEach()`为hooks，`done`可用于异步回调。`only`和`skip`方法。（此处略，可自学）
 
-```typescript
+```javascript
 var assert = require('assert');
 describe('Array', function () {
   describe('#indexOf()', function () {
@@ -45,7 +45,7 @@ describe('Array', function () {
 > 10. Everyone can see the results of the latest build
 > 11. Automate deployment
 
-![CD](images\CD.png)
+![CD](./images/CD.png)
 
 现有的清华电子系学生科协网站的CI/CD方式是：通过GitHub Actions或Travis CI实现持续集成，并将代码编译后推至docker hub，由服务器端的watchtower容器自动检测镜像的更新并自动拉取运行，实现持续部署。
 

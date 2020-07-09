@@ -57,7 +57,7 @@ URI应该是资源，不应该是动词，动作（即状态转换）应该在�
 
 #### map，reduce与filter
 
-`reduceer`函数接收4个参数:
+`reducer`函数接收4个参数:
 
 1. Accumulator (acc) (累计器)
 2. Current Value (cur) (当前值)
