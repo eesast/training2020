@@ -29,7 +29,7 @@
     "mongoose": "5.9.9",
     "morgan": "1.10.0",
     "multer": "1.4.2",
-    "nodemailer": "6.4.6",
+    "nodemailer": "6.4.16",
     "utf8": "3.0.0",
     "uuid": "7.0.3"
   },
