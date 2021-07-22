@@ -30,7 +30,7 @@
     "redux-thunk": "2.3.0",
     "swagger-ui-react": "3.25.0",
     "typesafe-actions": "5.1.0",
-    "xlsx": "0.15.6"
+    "xlsx": "0.17.0"
   },
   "devDependencies": {
     "@types/clipboard": "2.0.1",
